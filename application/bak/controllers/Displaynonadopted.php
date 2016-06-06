@@ -1,0 +1,53 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class DisplayNonAdopted extends CI_Controller {
+ 
+ function __construct()
+ {
+   parent::__construct();
+   $this->load->model('animal','',TRUE);
+ }
+ 
+
+
+ function index()
+ {
+
+    $allanimals = $this->animal->getAllNonAdoptedAnimals();
+
+          $i = 0;
+       foreach($allanimals as $animal) {
+         $colors[$i] = $this->animal->getAnimalRunColor($animal['id']);
+         $i++;
+       }
+              $z = 0;
+       foreach($allanimals as $animal) {
+         $run_names[$z] = $this->animal->getRun($animal['run_num']);
+         $z++;
+       }
+    $data['run_names'] = $run_names;
+
+    $data['allanimals'] = $allanimals;
+    $data['animalcolors'] = $colors;
+
+   if($this->session->userdata('logged_in'))
+   {
+     $session_data = $this->session->userdata('logged_in');
+     $data['username'] = $session_data['username'];
+   }
+   else
+   {
+     redirect('login', 'refresh');
+   }
+
+     $data['title'] = 'Display All Non-Adopted Animals';
+     $this->load->template('displaynonadopted_view', $data);
+
+
+ }
+ 
+
+ 
+}
+ 
+?>
