@@ -19,6 +19,12 @@ class ChangeUserPassword extends CI_Controller {
    }else{
          redirect('login', 'refresh');
    }
+
+   if($data['username'] === 'demo'){
+      $this->form_validation->set_message('check_database', 'There was a problem changing your password.');
+      $data['title'] = 'Change Password';
+      $this->load->template('changeuserpassword_view', $data);
+   }
  
    $this->form_validation->set_rules('username', 'Username', 'trim|required');
    $this->form_validation->set_rules('password', 'Password', 'trim|required');

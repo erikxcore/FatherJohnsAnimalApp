@@ -57,7 +57,9 @@
                <li><a href="<?php echo site_url('displayhistory') ?>">View Event Log</a></li>
                <li><a href="<?php echo site_url('displayusers') ?>">View All Users</a></li>
                <?php } ?>
+               <?php if( $username !="demo" ) { ?>
                <li><a href="<?php echo site_url('changeuserpassword') ?>">Change Your Password</a></li>
+               <?php } ?>
               </ul>
             </li>
             <li class="dropdown">
