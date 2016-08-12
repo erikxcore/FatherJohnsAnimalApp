@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-Codeigniter Simplicity
-=============
-http://www.grocerycrud.com/codeigniter-simplicity
-=======
-# FatherJohnsAnimalApp
->>>>>>> 854eb30a2d1d5de6657180c0aa40198ece030d13
+Web app using Code Igniter and Bootstrap. Currently in testing and unstyled.
+Demo located at 66.150.214.52/garret2/home.
+Login with 'demo/demo'
