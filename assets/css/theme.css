@@ -101,7 +101,7 @@ body {
 
 .custom_homepage_row{
     border:1px solid;
-    height:150px;
+    min-height:150px;
     width:100%;
     display:block;
 }
@@ -123,6 +123,7 @@ body {
     padding:10px;
     text-align:center;
     width:100%;
+    min-height:150px;
     height:100%;
     overflow:hidden;
     display:block;

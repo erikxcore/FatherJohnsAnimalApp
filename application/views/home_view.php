@@ -16,7 +16,7 @@
 
           <?php
             foreach($emergencyanimals as $animal) {?>
-            <p style="width:50%;float:left;">
+            <p style="width:100%;">
             <?php echo $animal['name']; ?> - <?php echo $animal['chart_num']; ?><br/>
             Medication <?php echo $animal['medication_name']; ?> due on <?php echo $animal['date_due'] ?></br>
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
@@ -26,7 +26,7 @@
 
           <?php
             foreach($emergencyvaccinationanimals as $animal) { ?>
-            <p style="width:50%;float:left;">
+            <p style="width:100%;">
             <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
             Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>

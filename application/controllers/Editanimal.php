@@ -93,7 +93,9 @@ class EditAnimal extends CI_Controller {
      $this->load->template('editanimal_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
+    /*
     if($this->input->post('run_num') != null && $this->input->post('run_num') != ""){
+
         $animalInRun = $this->animal->getAnimalByRunId($this->input->post('run_num'));
         if($animalInRun){
           if($animalInRun[0]['chart_num'] != $this->input->post('chart_num')){
@@ -107,6 +109,7 @@ class EditAnimal extends CI_Controller {
         }
       }
     }
+    */
 
     $config = array(
     'upload_path' => "uploads/",

@@ -81,7 +81,7 @@ class AddAnimal extends CI_Controller {
    {
 
     $taken = false;
-    
+    /*
     $takenruns = $this->run->getTakenRuns();
     foreach($takenruns as $taken_run){
       if($this->input->post('run_num') == $taken_run['run_num']){
@@ -91,7 +91,8 @@ class AddAnimal extends CI_Controller {
      $this->load->template('addanimal_view', $data);
     }
     }
-
+    */
+    
     $takencharts = $this->animal->getUsedChartNumbers();
     foreach($takencharts as $taken_chart){
       if($this->input->post('chart_num') == $taken_chart['chart_num']){
