@@ -1,7 +1,7 @@
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
-        <h1>Content</h1>
+        <h1>Vaccination History</h1>
     </div>
       <div class="well">
 

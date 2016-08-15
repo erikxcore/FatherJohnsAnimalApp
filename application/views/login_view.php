@@ -8,7 +8,7 @@
     <meta name="author" content="Eric Barber">
     <link rel="icon" href="<?php echo base_url("assets/favicon.ico");?>">
    <title>Login</title>
-   <link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.css"); ?>" />
+   <link rel="stylesheet" href="<?php echo base_url("assets/css/bootstrap.min.css"); ?>" />
    <link rel="stylesheet" href="<?php echo base_url("assets/css/theme.css"); ?>" />
 
    <script type="text/javascript" src="<?php echo base_url("assets/js/jQuery-1.10.2.js"); ?>"></script>

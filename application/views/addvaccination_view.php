@@ -1,7 +1,7 @@
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
-      <!--  <h1>Add A Vaccination Record</h1>  -->
+      <h1>Add A Vaccination Record</h1>
     </div>
     
     <a href="<?=site_url();?>editanimal/<?=$animal[0]['chart_num']?>">Go Back to Edit page</a></br>

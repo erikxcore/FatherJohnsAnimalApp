@@ -3,7 +3,7 @@
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
-      <!--  <h1>Modify Homepage</h1>  -->
+      <h1>Modify Homepage</h1>
     </div>
     
     <?php if(!empty($this->session->flashdata('results'))){ ?>

@@ -8,7 +8,7 @@
     <meta name="author" content="Eric Barber">
     <link rel="icon" href="<?php echo asset_url("favicon.ico");?>">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="<?php echo asset_url("css/bootstrap.css"); ?>" />
+    <link rel="stylesheet" href="<?php echo asset_url("css/bootstrap.min.css"); ?>" />
     <link rel="stylesheet" href="<?php echo asset_url("css/theme.css"); ?>" />
     <link rel="stylesheet" href="<?php echo asset_url("css/bootstrap-datepicker.css"); ?>" />
     <script type="text/javascript" src="<?php echo asset_url("js/jQuery-1.10.2.js"); ?>"></script>
