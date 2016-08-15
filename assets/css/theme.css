@@ -100,10 +100,11 @@ body {
 }
 
 .custom_homepage_row{
-    border:1px solid;
-    min-height:150px;
+    /*border:1px solid;*/
+    /*min-height:150px;*/
     width:100%;
     display:block;
+    border: 1px solid #c3bdbd;
 }
 
 .custom_homepage_table{
@@ -120,10 +121,10 @@ body {
 }
 
 .custom_homepage_cell{
-    padding:10px;
+    /*padding:10px;*/
     text-align:center;
     width:100%;
-    min-height:150px;
+    /*min-height:150px;*/
     height:100%;
     overflow:hidden;
     display:block;

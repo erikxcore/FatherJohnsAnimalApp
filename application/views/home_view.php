@@ -1,6 +1,3 @@
-    
-
-
 
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
@@ -102,23 +99,23 @@
                   foreach( $runs as $run) {
                     if($run['order_num'] == $current_section_count){
                   ?>
-                  <td class="custom_homepage_cell" style="<?php foreach($colorandstatus as $color){if($run['id'] == $color['animal_run_num']){ echo 'background-color:'.$color['color'].';color:white;'; }}?>">
-                <!--  <span>#<?=$z?></span> -->
-                  <span> <?= $run['name']?></span>
-                  
+                  <td class="custom_homepage_cell">
+                  <span style="width:100%;display:block;background-color: #d2d2d2;color: black;font-weight: bold;text-transform: uppercase;padding: 5px;"> <?= $run['name']?></span>
                   <?php
                     foreach($allanimals as $animal){
                       if($animal['run_num'] == $run['id']){
-                  ?>
-                      <br/>
-                      <span><?=$animal['name']?> - <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a></span>
-                      <br/>
-                      <span>Status : <?=$animal['status']?></span>
-                      <br/>
-                      <span>Chart Number : <?=$animal['chart_num']?></span>
+                  ?>   
+                      <div style="<?php foreach($colorandstatus as $color){if($run['id'] == $color['animal_run_num'] && $animal['chart_num'] == $color['animal_chart_num']){ echo 'background-color:'.$color['color'].';color:white;'; }}?>">
+                        <span><?=$animal['name']?> - <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a></span>
+                        <br/>
+                        <span>Status : <?=$animal['status']?></span>
+                        <br/>
+                        <span>Chart Number : <?=$animal['chart_num']?></span>
+                      </div>
                   <?php
                       }
                     }
+
                   ?>
                   </td>
                   <?php
