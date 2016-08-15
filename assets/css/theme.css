@@ -22,7 +22,9 @@ body {
     background-color: #e07d17;
     border-bottom: 2px solid #3d3698;
 }
-
+caption{
+    color:white;
+}
 .form-signin
 {
     max-width: 330px;
