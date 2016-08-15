@@ -1,5 +1,5 @@
 body {
-  padding-top: 100px;
+  padding-top: 30px;
   padding-bottom: 30px;
 }
 
@@ -12,9 +12,15 @@ body {
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
-
+.jumbotron{
+    background-color:transparent;
+}
 .theme-showcase .navbar .container {
   width: auto;
+}
+.navbar-inverse {
+    background-color: #e07d17;
+    border-bottom: 2px solid #3d3698;
 }
 
 .form-signin
@@ -40,6 +46,9 @@ body {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.form-control{
+    border-radius:5px;
 }
 .form-signin .form-control:focus
 {
