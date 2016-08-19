@@ -35,7 +35,7 @@
             } ?>
             </tbody>
         </table>
-   <p><?php echo $links; ?></p>
+   <div class="paged_links"><?php echo $links; ?></div>
 
       </div>
 

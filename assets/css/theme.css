@@ -22,6 +22,13 @@ body {
     background-color: #e07d17;
     border-bottom: 2px solid #3d3698;
 }
+.well{
+    overflow:auto;
+}
+.paged_links a,.paged_links strong{
+    padding:5px;
+    float:left;
+}
 caption{
     color:white;
 }
