@@ -1,8 +1,5 @@
     <div class="container theme-showcase" role="main">
-      <div class="jumbotron">
-         <h1>Home</h1>
-         <h2>Welcome <?php echo $username; ?>!</h2>
-    </div>
+
 
     <div class="page-header">
         <h1>Change A User's Password</h1>

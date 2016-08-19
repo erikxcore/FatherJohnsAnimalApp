@@ -29,7 +29,7 @@
         </select> 
       </div>
 
-     <input class="btn btn-submit" type="submit" value="Search"/>
+     <input class="btn btn-success" type="submit" value="Search"/>
 
    </div>
 

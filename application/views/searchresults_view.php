@@ -1,5 +1,6 @@
     <div class="container theme-showcase" role="main">
 
+<br/>
       <a href="<?php echo site_url('search') ?>">Go Back to Search</a></br>
       
     <div class="page-header">
