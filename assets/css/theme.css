@@ -25,6 +25,20 @@ body {
 caption{
     color:white;
 }
+.datepicker table tr td.day:hover, .datepicker table tr td.day.focused {
+    background: #eeeeee;
+    cursor: pointer;
+    color: black;
+}
+.datepicker table tr td span:hover {
+    background: #eeeeee;
+    color: black;
+}
+.nav-tabs>li>a{
+background-color:orange;
+border-color:orange;
+}
+
 .form-signin
 {
     max-width: 330px;

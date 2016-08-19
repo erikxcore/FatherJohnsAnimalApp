@@ -1,3 +1,9 @@
+    <script type="text/javascript">
+      $('#vacTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+      })
+    </script>
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
@@ -22,33 +28,50 @@
            <input readonly type="text" size="20" id="name" name="name" class="form-control" value="<?=$animal[0]['name']?>"/>
       </div>
 
+  <ul class="nav nav-tabs" role="tablist">
+    <?php  foreach($vaccinations as $vaccination) {
+        $name = str_replace(' ', '_', $vaccination['name']);
+    ?>
+      <li role="presentation"><a href="#<?php echo $name; ?>" aria-controls="<?php echo $name; ?>" role="tab" data-toggle="tab"><?php echo $vaccination['name']; ?></a></li>
+    <?php } ?>
+  </ul>
+
+  <div class="tab-content">
           <?php
              $i = 0;
-            foreach($vaccinations as $vaccination) { ?>
+            foreach($vaccinations as $vaccination) { 
+              $name = str_replace(' ', '_', $vaccination['name']);
+            ?>
+               <div role="tabpanel" class="tab-pane" id="<?php echo $name; ?>">
 
-        <div class="form-group">
-             <label for="vac_name_<?=$i?>">Vaccination Name:</label>
-             <input readonly type="text" size="20" id="vac_name_<?=$i?>" name="vac_name_<?=$i?>" class="form-control" value="<?php echo $vaccination['name']; ?>"/>
-        </div>
+                  <div class="form-group">
+                       <label for="vac_name_<?=$i?>">Vaccination Name:</label>
+                       <input readonly type="text" size="20" id="vac_name_<?=$i?>" name="vac_name_<?=$i?>" class="form-control" value="<?php echo $vaccination['name']; ?>"/>
+                  </div>
 
-        <div class="checkbox">
-            <label>
-              <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Enabled?
-            </label>
-        </div>
+                  <div class="checkbox">
+                      <label>
+                        <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Enabled?
+                      </label>
+                  </div>
 
-        <div class="form-group">
-             <label for="date_given_<?=$i?>">Date Given:</label>
-             <input value="<?php echo set_value('date_given_<?=$i?>'); ?>" type="text" size="20" id="date_given_<?=$i?>" name="date_given_<?=$i?>" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
-        </div>
+                  <div class="form-group">
+                       <label for="date_given_<?=$i?>">Date Given:</label>
+                       <input value="<?php echo set_value('date_given_<?=$i?>'); ?>" type="text" size="20" id="date_given_<?=$i?>" name="date_given_<?=$i?>" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
+                  </div>
 
-        <div class="form-group">
-             <label for="date_completed_<?=$i?>">Date Due:</label>
-             <input value="<?php echo set_value('date_completed_<?=$i?>'); ?>" type="text" size="20" id="date_completed_<?=$i?>" name="date_completed_<?=$i?>" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
-        </div>
+                  <div class="form-group">
+                       <label for="date_completed_<?=$i?>">Date Due:</label>
+                       <input value="<?php echo set_value('date_completed_<?=$i?>'); ?>" type="text" size="20" id="date_completed_<?=$i?>" name="date_completed_<?=$i?>" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
+                  </div>
+
+              </div>
 
         <?php $i++; } ?>
-
+</div>
+  
+  <br/>
+  <br/>
      <input class="btn btn-success" type="submit" value="Add Vaccination"/>
    </form>
 
