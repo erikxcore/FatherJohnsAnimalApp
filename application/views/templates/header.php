@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Father John's Adoption Private Manager">
+    <meta name="description" content="Father John's Animal Adoption Private Manager">
     <meta name="author" content="Eric Barber">
     <link rel="icon" href="<?php echo asset_url("favicon.ico");?>">
     <title><?php echo $title; ?></title>
@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Father John's Animal Database</a>
+          <a class="navbar-brand" href="#">Father John's Animal Database <img class="paw" src="<?php echo asset_url("images/paw.png");?>"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

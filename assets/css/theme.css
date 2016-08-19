@@ -2,6 +2,12 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.paw{
+    height:25px;
+    width:25px;
+    display: inline !important;
+    margin-left:5px;
+}
 
 .theme-dropdown .dropdown-menu {
   position: static;
