@@ -40,11 +40,12 @@
 <div class="form-group">
         <label for="status">Run Number:</label>
         <select readonly name="run_num" id="run_num" class="form-control">
-          <option value="">N/A</option>
           <?php
-            foreach($runs as $run) { ?>
-              <option  value="<?= $run['id'] ?>" <?php if($animal[0]['run_num'] == $run['id']) { ?>selected<?php } ?> ><?= $run['name'] ?></option>
+            foreach($runs as $run) { 
+              if($animal[0]['run_num'] == $run['id']) { ?>
+              <option  value="<?= $run['id'] ?>" selected ><?= $run['name'] ?></option>
           <?php
+              }
             } ?>
         </select> 
 </div>
@@ -53,11 +54,12 @@
 <div class="form-group">
      <label for="species">Species:</label>
         <select readonly name="species" id="species" class="form-control">
-          <option value="">Choose a species</option>
           <?php
-            foreach($allspecies as $specie) { ?>
-              <option <?php if($animal[0]['species'] == $specie['name']){?>selected="selected"<?php }?> value="<?= $specie['name'] ?>"><?= $specie['name'] ?></option>
+            foreach($allspecies as $specie) { 
+              if($animal[0]['species'] == $specie['name']){ ?>
+              <option selected="selected" value="<?= $specie['name'] ?>"><?= $specie['name'] ?></option>
           <?php
+              }
             } ?>
         </select> 
 </div>
@@ -69,18 +71,19 @@
 
 <div class="form-group">
      <label for="date_of_arrival">Date Of Arrival:</label>
-     <input readonly value="<?php $timestamp = strtotime($animal[0]['date_of_arrival']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>
+     <input disabled readonly value="<?php $timestamp = strtotime($animal[0]['date_of_arrival']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>
  "type="text" size="20" id="date_of_arrival" name="date_of_arrival" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
 </div>
 
 <div class="form-group">
      <label for="acquired">Acquired By:</label>
         <select readonly name="acquired" id="acquired" class="form-control">
-          <option value="">How was this animal acquired?</option>
           <?php
-            foreach($acquired_method as $method) { ?>
-              <option <?php if($animal[0]['acquired'] == $method['name']){?>selected="selected"<?php }?> value="<?= $method['name'] ?>"><?= $method['name'] ?></option>
+            foreach($acquired_method as $method) { 
+               if($animal[0]['acquired'] == $method['name']){?>
+              <option selected="selected" value="<?= $method['name'] ?>"><?= $method['name'] ?></option>
           <?php
+              }
             } ?>
         </select> 
 </div>
@@ -97,41 +100,44 @@
 
 <div class="form-group">
      <label for="age">Date of Birth or Age:</label>
-     <input readonly value="<?=$animal[0]['age']?>"type="text" size="20" id="age" name="age" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
+     <input disabled readonly value="<?=$animal[0]['age']?>"type="text" size="20" id="age" name="age" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
 </div>
 
 <div class="form-group">
       <label for="sex">Sex:</label>
         <select readonly name="sex" id="sex" class="form-control">
-          <option value="">Sex</option>
           <?php
-            foreach($genders as $gender) { ?>
-              <option <?php if($animal[0]['sex'] == $gender['name']){?>selected="selected"<?php }?>value="<?= $gender['name'] ?>"><?= $gender['name'] ?></option>
+            foreach($genders as $gender) { 
+              if($animal[0]['sex'] == $gender['name']){?>
+              <option selected="selected" value="<?= $gender['name'] ?>"><?= $gender['name'] ?></option>
           <?php
+              }
             } ?>
         </select>
 </div>
 
 <div class="form-group">
      <label for="feeding_instructions">Feeding Instructions:</label>
-     <textarea rreadonly ows="5" size="100" id="feeding_instructions" name="feeding_instructions" class="form-control"><?=$animal[0]['feeding_instructions']?></textarea>
+     <textarea readonly ows="5" size="100" id="feeding_instructions" name="feeding_instructions" class="form-control"><?=$animal[0]['feeding_instructions']?></textarea>
 </div>
 
 <div class="form-group">
         <label for="status">Status:</label>
         <select readonly name="status" id="status" class="form-control">
-          <option value="">Select a Status</option>
           <?php
-            foreach($statuses as $status) { ?>
-              <option <?php if($animal[0]['status'] == $status['name']){?>selected="selected"<?php }?> value="<?= $status['name'] ?>"><?= $status['name'] ?></option>
+            foreach($statuses as $status) { 
+              if($animal[0]['status'] == $status['name']){?>
+            ?>
+              <option selected="selected" value="<?= $status['name'] ?>"><?= $status['name'] ?></option>
           <?php
+              }
             } ?>
         </select> 
 </div>
 
 <div class="form-group">
      <label for="status_date">Status Date:</label>
-     <input readonly value="<?php $timestamp = strtotime($animal[0]['status_date']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>" type="text" size="20" id="status_date" name="status_date" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
+     <input disabled readonly value="<?php $timestamp = strtotime($animal[0]['status_date']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>" type="text" size="20" id="status_date" name="status_date" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
 </div>
 
 <div class="form-group">

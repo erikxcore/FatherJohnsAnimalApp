@@ -8,7 +8,12 @@ body {
     display: inline !important;
     margin-left:5px;
 }
-
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #b7b7b7;
+    opacity: 1;
+    color: black;
+    font-weight: bold;
+}
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
