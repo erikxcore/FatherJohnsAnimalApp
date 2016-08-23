@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Father John's Animal Adoption Private Manager">
     <meta name="author" content="Eric Barber">
-    <link rel="icon" href="<?php echo asset_url("favicon.ico");?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo asset_url("favicon.ico");?>"/>
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="<?php echo asset_url("css/bootstrap.min.css"); ?>" />
     <link rel="stylesheet" href="<?php echo asset_url("css/theme.css"); ?>" />

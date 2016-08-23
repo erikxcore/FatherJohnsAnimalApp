@@ -1,3 +1,89 @@
+<script type="text/javascript">
+$( document ).ready(function() { 
+  $("#add_animal").on("submit", function(e){
+    var isValid = false;
+    var tab1Valid = false;
+    var tab2Valid = false;
+
+    $('.errors').html('');
+
+    var nameLength = $('#name').val().length;
+    var chartLength = $('#chart_num').val().length;
+    var speciesLength = $('#species').val().length;
+    var dateOfArrivalLength = $('#date_of_arrival').val().length;
+    var acquiredLength = $('#acquired').val().length;
+    var sexLength = $('#sex').val().length;
+    var statusLength = $('#status').val().length;
+    var statusDateLength = $('#status_date').val().length;
+
+    if(nameLength == 0){
+      $('.errors').append('<p>Please enter a name.</p>');
+    }
+
+    if(chartLength == 0){
+      $('.errors').append('<p>Please enter a chart number.</p>');
+    }
+
+    if(speciesLength == 0){
+      $('.errors').append('<p>Please select a species.</p>');
+    }
+
+    if (nameLength > 0 && chartLength > 0 && speciesLength > 0) tab1Valid = true;
+
+    if(dateOfArrivalLength == 0){
+      $('.errors').append('<p>Please enter the date of arrival.</p>');
+    }
+
+    if(acquiredLength == 0){
+      $('.errors').append('<p>Please select an acquired by method.</p>');
+    }
+
+    if(sexLength == 0){
+      $('.errors').append('<p>Please select a gender.</p>');
+    }
+
+    if(statusLength == 0){
+      $('.errors').append('<p>Please select a status.</p>');
+    }
+
+    if(statusDateLength == 0){
+      $('.errors').append('<p>Please select a status date.</p>');
+    }
+
+    if (dateOfArrivalLength > 0 &&  acquiredLength > 0 && sexLength > 0 && statusLength > 0 && statusDateLength > 0) tab2Valid = true;
+
+    if(tab1Valid && !tab2Valid){
+      $('.nav li').removeClass('active');
+      $('.tab-content .tab-pane').removeClass('active');
+
+      $('.nav li a[href=#rescue]').parent('li').addClass('active');
+      $('#rescue').addClass("active");
+
+    }else if(!tab1Valid && tab2Valid){
+      $('.nav li').removeClass('active');
+      $('.tab-content .tab-pane').removeClass('active');
+
+      $('.nav li a[href=#general]').parent('li').addClass('active');
+      $('#general').addClass("active");
+
+    }else if(!tab1Valid && !tab2Valid){
+      $('.nav li').removeClass('active');
+      $('.tab-content .tab-pane').removeClass('active');
+
+      $('.nav li a[href=#general]').parent('li').addClass('active');
+      $('#general').addClass("active");
+    }
+
+    if(nameLength > 0 && chartLength > 0 && speciesLength > 0 && dateOfArrivalLength > 0 &&  acquiredLength > 0 && sexLength > 0 && statusLength > 0 && statusDateLength > 0){
+      isValid = true;
+    }
+
+
+    if (!isValid) $("html, body").animate({ scrollTop: 0 }, "slow"); return false;
+  });
+});
+</script>
+
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
@@ -7,8 +93,20 @@
     <?php if(!empty($this->session->flashdata('results'))){ ?>
         <?php echo $this->session->flashdata('results'); ?>
     <?php } ?>
+    <div class="errors">
     <?php echo validation_errors(); ?>
-    <?php echo form_open_multipart('addanimal'); ?>
+    </div>
+    <?php $attributes = array('id' => 'add_animal'); ?>
+    <?php echo form_open_multipart('addanimal', $attributes); ?>
+
+      <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="#general"  aria-controls="general" role="tab" data-toggle="tab">Basic Info</a></li>
+      <li role="presentation"><a href="#rescue" aria-controls="rescue" role="tab" data-toggle="tab">Rescue Info</a></li>
+      <li role="presentation"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes, Behavior, &amp; SAFER Info</a></li>
+      </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="general">      
     
 <div class="form-group">
      <label for="name"><span class="required">*</span>Name:</label>
@@ -52,6 +150,9 @@
      <label for="breed">Breed:</label>
      <input type="text" size="20" id="breed" name="breed" class="form-control"  value="<?php echo set_value('breed'); ?>"/>
 </div>
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="rescue">
 
 <div class="form-group">
      <label for="date_of_arrival"><span class="required">*</span>Date Of Arrival:</label>
@@ -119,6 +220,10 @@
      <input type="text" size="20" id="status_date" name="status_date" class="datepicker form-control" data-date-format="mm/dd/yyyy"  value="<?php echo set_value('status_date'); ?>"/>
 </div>
 
+
+        </div>
+        <div role="tabpanel" class="tab-pane" id="notes">
+
 <div class="form-group">
      <label for="behavior_strategy">Behavior Strategy:</label>
      <textarea rows="5" size="100" id="behavior_strategy" name="behavior_strategy" class="form-control"><?php echo set_value('behavior_strategy'); ?></textarea>
@@ -148,7 +253,11 @@
      <textarea rows="5" size="100" id="medical_notes" name="medical_notes"  class="form-control"><?php echo set_value('medical_notes'); ?></textarea>
 </div>
 
+        </div>
+      </div>
+
      <p>Note - To add weight history and vaccination history please first add the animal and edit their entry later.</p>
+     <p>Be sure to click on Rescue information and fill out the required fields!</p>
 
     <input class="btn btn-success" type="submit" value="Add Animal"/>
    </form>

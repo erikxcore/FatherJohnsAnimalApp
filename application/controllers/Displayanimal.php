@@ -57,7 +57,7 @@ class DisplayAnimal extends CI_Controller {
      redirect('login', 'refresh');
    }
 
-     $data['title'] = 'Display An Animals';
+     $data['title'] = 'Display An Animal';
      $this->load->template('displayanimal_view', $data);
     
    }

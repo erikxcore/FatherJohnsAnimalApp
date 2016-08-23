@@ -2,6 +2,14 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.nav-pills>li>a {
+    color: #ebebeb;
+    font-weight: bold;
+    border: 1px solid #757575;
+}
+.errors{
+    color: #e43939;
+}
 .paw{
     height:25px;
     width:25px;
