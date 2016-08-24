@@ -206,4 +206,6 @@ border-color:orange;
 
 }
 
-
+@media (max-width:350px){
+  .navbar-brand{font-size:15px;}
+}
