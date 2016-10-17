@@ -21,11 +21,11 @@
       <div class="form-group">
         <span> by </span>
         <select name="search_type" id="search_type">
-          <option selected="selected" value="">Choose a search type</option>
-              <option value="id" <?php echo set_select('search_type', 'id'); ?>>By Chart Number</option>
-              <option value="name" <?php echo set_select('search_type', 'name'); ?>>By Name</option>
-              <option value="run" <?php echo set_select('search_type', 'run'); ?>>By Run Name</option>
-              <option value="status" <?php echo set_select('search_type', 'status'); ?>>By Status</option>
+          <option selected="selected" value="" style="color:black;">Choose a search type</option>
+              <option style="color:black;" value="id" <?php echo set_select('search_type', 'id'); ?>>By Chart Number</option>
+              <option style="color:black;" value="name" <?php echo set_select('search_type', 'name'); ?>>By Name</option>
+              <option style="color:black;" value="run" <?php echo set_select('search_type', 'run'); ?>>By Run Name</option>
+              <option style="color:black;" value="status" <?php echo set_select('search_type', 'status'); ?>>By Status</option>
         </select> 
       </div>
 

@@ -209,3 +209,9 @@ border-color:orange;
 @media (max-width:350px){
   .navbar-brand{font-size:15px;}
 }
+
+.other_runs{
+    float:left;
+    clear:both;
+    width:100%;
+}

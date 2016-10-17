@@ -41,6 +41,7 @@ class Home extends CI_Controller {
       $data['custom_homepage_sections'] = $this->homepage->getSectionsAmount();
       $data['custom_homepage_json'] = $this->homepage->getSectionsJson();
       $data['runs'] = $this->run->getAllRunsByOrder();
+      $data['other_runs'] = $this->run->getAllUnassignedRuns();
     }
 
 

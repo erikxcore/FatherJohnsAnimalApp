@@ -136,18 +136,33 @@
         }
       }
         ?>
-
-        <!-- Cat Addition -->
-        <?php 
-        ?>
+       
+        <!-- Cat/Other Run Addition -->
+        <?php if(isset($custom_homepage_details)) { ?>
         <div class="other_runs">
           <?php
-
+            foreach( $other_runs as $run){
           ?>
+          <h4><?=$run['name']?></h4>
+          <div class="table-responsive">
+            <table class="table">
+          <?php
+                foreach($allanimals as $animal){
+                  if($animal['run_num'] == $run['id']){
+          ?>
+                      <tr colspan="5" style="text-align:center;">
+                        <td colspan="2" ><?=$animal['name']?></td>
+                        <td colspan="1" style="<?php foreach($colorandstatus as $color){if($run['id'] == $color['animal_run_num'] && $animal['chart_num'] == $color['animal_chart_num']){ echo 'background-color:'.$color['color'].';color:white;'; }}?>">Status : <?=$animal['status']?></td>
+                        <td colspan="1" >Chart Number : <?=$animal['chart_num']?></td>
+                        <td colspan="1" ><a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a></td>
+                      </tr>
+          <?php 
+                  }
+                }
+           ?> </table> </div>
+           <?php } ?>
         </div>
-        <?php
-
-        ?>
+        <?php } ?>
 
       </div>
    </div>

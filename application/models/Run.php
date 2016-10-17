@@ -24,6 +24,15 @@ function getAllRuns(){
    return $query->result_array(); 
  }
 
+ function getAllUnassignedRuns(){
+  $this -> db -> from('run');
+   //mysql specific
+   $where = "order_num IS NULL";
+   $this -> db -> where($where);
+   $query = $this -> db -> get();
+   return $query->result_array(); 
+ }
+
  function getColorAndStatus(){
   $query = $this -> db -> query('select status.color , animals.run_num as animal_run_num, animals.chart_num as animal_chart_num, animals.status as animal_status from animals JOIN status on status.name = animals.status where animals.run_num != "" order by animal_run_num ASC');
   return $query->result_array();

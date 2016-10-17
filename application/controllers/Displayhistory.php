@@ -12,9 +12,6 @@ class DisplayHistory extends CI_Controller {
 
  function index()
  {
-  //$data['allhistory'] = $this->history->getAllHistory();
-
-
    if($this->session->userdata('logged_in'))
    {
      $session_data = $this->session->userdata('logged_in');
