@@ -81,12 +81,14 @@ class EditMedication extends CI_Controller {
  }
 
  function edit_medication($id,$name,$date_given,$date_due,$notes,$chart_num){
+    $session_data = $this->session->userdata('logged_in');
+
     $date_converted1 = date('Y-m-d', strtotime($date_given));
     $date_converted2 = date('Y-m-d', strtotime($date_due));
 
     $result = $this->medication->editMedication($id,$date_converted1,$date_converted2,$name,$notes);
 
-    $entry = "Medication " . $name . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2;
+    $entry = "Medication " . $name . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . " by " . $session_data['username'];
 
 
     if($result){

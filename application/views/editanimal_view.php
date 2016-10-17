@@ -16,6 +16,8 @@ $( document ).ready(function() {
     var statusLength = $('#status').val().length;
     var statusDateLength = $('#status_date').val().length;
 
+
+
     if(nameLength == 0){
       $('.errors').append('<p>Please enter a name.</p>');
     }
@@ -79,7 +81,10 @@ $( document ).ready(function() {
     }
 
 
-    if (!isValid) $("html, body").animate({ scrollTop: 0 }, "slow"); return false;
+    if (!isValid){
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+       return false;
+    } 
   });
 });
 </script>
@@ -344,6 +349,7 @@ if(!empty($vaccinations)){
     <thead>
       <tr>
         <th>Name</th>
+        <th>Serial</th>
         <th>Date Given</th>
         <th>Date Due</th>
         <th>&nbsp;</th>
@@ -354,6 +360,7 @@ if(!empty($vaccinations)){
   foreach($vaccinations as $vaccination) { ?>
   <tr>
     <td><?=$vaccination['name']?></td>
+    <td><?=$vaccination['serial_num']?></td>
     <td><?php $timestamp = strtotime($vaccination['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
     <td><?php if($vaccination['date_completed'] != null){$timestamp = strtotime($vaccination['date_completed']);$dmy = date("m/d/Y", $timestamp);echo $dmy;}?></td>
     <td><a href="<?php echo site_url('editvaccination').'/'.$animal[0]['chart_num'] .'/'.$vaccination['id']?>">Edit</a></td>

@@ -28,6 +28,7 @@
             </tbody>
         </table>
 
+   <div class="paged_links"><?php echo $links; ?></div>
 
       </div>
 

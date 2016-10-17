@@ -1,7 +1,7 @@
     <script type="text/javascript">
       $('#vacTabs a').click(function (e) {
         e.preventDefault()
-        $(this).tab('show')
+        $(this).tab('show');
       })
     </script>
     <div class="container theme-showcase" role="main">
@@ -47,6 +47,11 @@
                   <div class="form-group">
                        <label for="vac_name_<?=$i?>">Vaccination Name:</label>
                        <input readonly type="text" size="20" id="vac_name_<?=$i?>" name="vac_name_<?=$i?>" class="form-control" value="<?php echo $vaccination['name']; ?>"/>
+                  </div>
+
+                  <div class="form-group">
+                       <label for="serial_num_<?=$i?>">Serial Number:</label>
+                       <input type="text" size="20" id="serial_num_<?=$i?>" name="serial_num_<?=$i?>" class="form-control" value="<?php if( isset($vaccination['serial_num'])){echo $vaccination['serial_num'];} ?>"/>
                   </div>
 
                   <div class="checkbox">

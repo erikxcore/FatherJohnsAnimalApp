@@ -44,7 +44,7 @@ class DisplayHistory extends CI_Controller {
       $page = ($this->uri->segment(2)) ;
       }
       else{
-      $page = 1;
+      $page = 0;
       }
 
     $data["allhistory"] = $this->history

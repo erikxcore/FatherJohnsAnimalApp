@@ -125,6 +125,19 @@ function getAllAnimals(){
    return $query->result_array();
  }
 
+function get_all_animals_paged($limit, $start) {
+    $this->db->limit($limit, $start);
+    $query = $this->db->get("animals");
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
+
  function getUsedChartNumbers(){
    $this -> db -> select('chart_num');
    $this -> db -> from('animals');
@@ -164,12 +177,42 @@ function getAllAnimals(){
    return $query->result_array();
  }
 
+ function get_all_dogs_paged($limit, $start) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('animals');
+    $this -> db -> where('species', "Dog");
+    $query = $this -> db -> get(); 
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
+
  function getAllCats(){
    $this -> db -> from('animals');
    $this -> db -> where('species', "Cat");
    $query = $this -> db -> get();
    return $query->result_array();
  }
+
+  function get_all_cats_paged($limit, $start) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('animals');
+    $this -> db -> where('species', "Cat");
+    $query = $this -> db -> get(); 
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
 
 function getAllAdoptedAnimals(){
    $this -> db -> from('animals');
@@ -178,12 +221,78 @@ function getAllAdoptedAnimals(){
    return $query->result_array();
  }
 
+  function get_all_adopted_paged($limit, $start) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('animals');
+    $this -> db -> where('status', 'Adopted');
+    $query = $this -> db -> get(); 
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
+
+  function record_count_adopted() {
+        $this -> db -> from('animals');
+        $this -> db -> where('status','Adopted');
+        $query = $this -> db -> get();
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+  function record_count_non_adopted() {
+        $this -> db -> from('animals');
+        $this -> db -> where('status !=','Adopted');
+        $query = $this -> db -> get();
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+  function record_count_dogs() {
+        $this -> db -> from('animals');
+        $this -> db -> where('species','Dog');
+        $query = $this -> db -> get();
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+  function record_count_cats() {
+        $this -> db -> from('animals');
+        $this -> db -> where('species','Cat');
+        $query = $this -> db -> get();
+        $rowcount = $query->num_rows();
+        return $rowcount;
+    }
+
+  function record_count_animals() {
+        return $this->db->count_all("animals");
+    }
+
  function getAllNonAdoptedAnimals(){
    $this -> db -> from('animals');
    $this -> db -> where('status !=', "Adopted");
    $query = $this -> db -> get();
    return $query->result_array();
  }
+
+   function get_all_non_adopted_paged($limit, $start) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('animals');
+    $this -> db -> where('status!=', "Adopted");
+    $query = $this -> db -> get(); 
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
 
  function getAnimalByID($chart_num){
    $this -> db -> from('animals');

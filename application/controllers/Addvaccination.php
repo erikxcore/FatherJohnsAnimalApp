@@ -60,6 +60,7 @@ class AddVaccination extends CI_Controller {
    foreach($data['vaccinations'] as $vaccination) { 
      $this->form_validation->set_rules('vac_name_'.$i, 'Vaccination Name', 'trim');
      $this->form_validation->set_rules('vac_check_'.$i, 'Vaccination Check', 'trim');
+     $this->form_validation->set_rules('serial_num_'.$i, 'Serial Number', 'trim');
      $this->form_validation->set_rules('date_given_'.$i, 'Date Given', 'trim');
      $this->form_validation->set_rules('date_completed_'.$i, 'Date Completed', 'trim');
      $i++;
@@ -77,7 +78,7 @@ class AddVaccination extends CI_Controller {
      foreach($data['vaccinations'] as $vaccination) { 
      if($this->input->post('vac_check_'.$i) == "enabled"){
       $vac = array();
-      array_push($vac,$this->input->post('date_given_'.$i),$this->input->post('date_completed_'.$i),$this->input->post('vac_name_'.$i));
+      array_push($vac,$this->input->post('date_given_'.$i),$this->input->post('date_completed_'.$i),$this->input->post('vac_name_'.$i),$this->input->post('serial_num_'.$i));
       array_push($vac_to_add,$vac);
      }
       $i++;
@@ -95,6 +96,7 @@ class AddVaccination extends CI_Controller {
  }
 
  function add_vaccination($chart_num,$vac_to_add){
+    $session_data = $this->session->userdata('logged_in');
 
     $result = true;
     $entry = null;
@@ -107,16 +109,16 @@ class AddVaccination extends CI_Controller {
           $date_converted2 = date('Y-m-d', strtotime($vaccination['1']));
         }
         try{
-        $this->vaccination->addVaccination($chart_num,$date_converted1,$date_converted2,$vaccination['2']);
+        $this->vaccination->addVaccination($chart_num,$date_converted1,$date_converted2,$vaccination['2'],$vaccination['3']);
 
-        $entry = $entry . "Vaccination " . $vaccination['2'] . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . '<br/>';
+        $entry = $entry . "Vaccination " . $vaccination['2'] . " / Serial Number: " . $vaccination['3'] . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . '<br/>' . " by " . $session_data['username'];
 
 
         }catch(Exception $e){
           $result = false;
           goto return_results;
         }
-      //2 = name  0 = date given, 1 = date completed
+      //3 = serial number, 2 = name  0 = date given, 1 = date completed
     }
 
 

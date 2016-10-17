@@ -28,6 +28,11 @@
            <input readonly type="text" size="20" id="vac_name" name="vac_name" class="form-control" value="<?=$vaccination[0]['name']?>"/>
       </div>
 
+      <div class="form-group">
+           <label for="serial_num">Serial Number:</label>
+           <input type="text" size="20" id="serial_num" name="serial_num" class="form-control" value="<?php echo $vaccination[0]['serial_num']; ?>"/>
+      </div>
+
         <div class="form-group">
              <label for="date">Date Given:</label>
              <input value="<?php $timestamp = strtotime($vaccination[0]['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>" type="text" size="20" id="date_given" name="date_given" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>

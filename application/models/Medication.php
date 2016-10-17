@@ -9,6 +9,21 @@ Class Medication extends CI_Model
    return $query->result_array();
  }
 
+ function get_all_medication_paged($limit, $start, $chart_num) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('medication');
+    $this -> db -> where('chart_num', $chart_num);
+    $query = $this -> db -> get(); 
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
+
   function addMedication($chart_num,$date_given,$date_due,$name,$notes){
   $data = array(
   'chart_num' => $chart_num,

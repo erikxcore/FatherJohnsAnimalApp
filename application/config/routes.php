@@ -54,4 +54,10 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['editanimal/(:any)'] = "editanimal/$1";
 $route['displayhistory/(:any)'] = "displayhistory";
+$route['displayanimals/(:any)'] = "displayanimals";
+$route['displayadopted/(:any)'] = "displayadopted";
+$route['displaynonadopted/(:any)'] = "displaynonadopted";
+$route['displaycats/(:any)'] = "displaycats";
+$route['displaydogs/(:any)'] = "displaydogs";
+
 

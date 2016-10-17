@@ -59,6 +59,7 @@ class EditVaccination extends CI_Controller {
    $this->form_validation->set_rules('id', 'ID', 'trim|required');
    $this->form_validation->set_rules('chart_num', 'Chart Number', 'trim|required');
    $this->form_validation->set_rules('vac_name', 'Vaccination Name', 'trim|required');
+   $this->form_validation->set_rules('serial_num', 'Serial Number', 'trim');
    $this->form_validation->set_rules('date_given', 'Date Given', 'trim|required');
    $this->form_validation->set_rules('date_completed', 'Date Completed', 'trim');
 
@@ -69,7 +70,7 @@ class EditVaccination extends CI_Controller {
      $this->load->template('editvaccination_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->edit_vaccination($this->input->post('id'),$this->input->post('vac_name'),$this->input->post('date_given'),$this->input->post('date_completed'),$this->input->post('chart_num'));
+     $this->edit_vaccination($this->input->post('id'),$this->input->post('vac_name'),$this->input->post('date_given'),$this->input->post('date_completed'),$this->input->post('chart_num'),$this->input->post('serial_num'));
      $this->session->set_flashdata('results', 'Vaccination succesfully modified!');
      redirect('/editanimal/'.$chart_num, 'refresh');
    }else{
@@ -80,7 +81,10 @@ class EditVaccination extends CI_Controller {
 
  }
 
- function edit_vaccination($id,$name,$date_given,$date_completed,$chart_num){
+ function edit_vaccination($id,$name,$date_given,$date_completed,$chart_num,$serial_num){
+    $session_data = $this->session->userdata('logged_in');
+
+
     $date_converted1 = date('Y-m-d', strtotime($date_given));
     if($date_completed == null){
     $date_converted2 = null;
@@ -88,9 +92,9 @@ class EditVaccination extends CI_Controller {
     $date_converted2 = date('Y-m-d', strtotime($date_completed));
     }
 
-    $result = $this->vaccination->editVaccination($id,$date_converted1,$date_converted2,$name);
+    $result = $this->vaccination->editVaccination($id,$date_converted1,$date_converted2,$name,$serial_num);
 
-    $entry = "Vaccination " . $name . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2;
+    $entry = "Vaccination " . $name . " / Serial Number : " . $serial_num . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . " by " . $session_data['username'];
 
     if($result){
       $this->vaccination_history->addVaccinationHistory($chart_num,$entry);

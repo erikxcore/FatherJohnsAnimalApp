@@ -76,11 +76,13 @@ class AddMedication extends CI_Controller {
 
 
  function add_medication($chart_num,$name,$date_given,$date_due,$notes){
+      $session_data = $this->session->userdata('logged_in');
+
     $date_converted1 = date('Y-m-d', strtotime($date_given));
     $date_converted2 = date('Y-m-d', strtotime($date_due));
     $result = $this->medication->addMedication($chart_num,$date_converted1,$date_converted2,$name,$notes);
     
-        $entry = "Medication " . $name . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . '<br/>';
+        $entry = "Medication " . $name . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . '<br/>'. ' by ' . $session_data['username'];
 
     if($result){
                   $this->medication_history->addMedicationHistory($chart_num,$entry);

@@ -9,14 +9,30 @@ Class Vaccination extends CI_Model
    return $query->result_array();
  }
 
+  function get_all_vaccination_paged($limit, $start, $chart_num) {
+    $this -> db ->limit($limit, $start);
+    $this -> db -> from('vaccination');
+    $this -> db -> where('chart_num', $chart_num);
+    $query = $this -> db -> get(); 
 
- function addVaccination($chart_num,$date_given,$date_completed,$name){
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        return $data;
+    }
+    return false;
+}
+
+
+ function addVaccination($chart_num,$date_given,$date_completed,$name,$serial_num){
 
    $data = array(
     'chart_num' => $chart_num,
     'date_given' => $date_given,
     'date_completed' => $date_completed,
     'name' => $name,
+    'serial_num' => $serial_num,
     ); 
 
     return $this -> db ->insert('vaccination', $data);
@@ -38,12 +54,13 @@ Class Vaccination extends CI_Model
    return $query->result_array();
  }
 
- function editVaccination($id,$date_given,$date_completed,$name){
+ function editVaccination($id,$date_given,$date_completed,$name,$serial_num){
 
   $data = array(
     'date_given' => $date_given,
     'date_completed' => $date_completed,
     'name' => $name,
+    'serial_num' => $serial_num,
     ); 
 
     $this -> db -> from('vaccination');
