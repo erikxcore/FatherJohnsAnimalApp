@@ -68,6 +68,7 @@
                 <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
                <li><a href="<?php echo site_url('addanimal') ?>">Add an animal</a></li>
                <li><a href="<?php echo site_url('displayvaccinations') ?>">Display/Adjust Vaccination Types</a></li>
+               <li><a href="<?php echo site_url('displaytests') ?>">Display/Adjust Preventative Tests</a></li>
                <li><a href="<?php echo site_url('displaygenders') ?>">Display/Adjust Gender Types</a></li>
                <li><a href="<?php echo site_url('displaystatuses') ?>">Display/Adjust Statuses</a></li>
                <li><a href="<?php echo site_url('displayacquiredmethods') ?>">Display/Adjust Acquired Methods</a></li>
