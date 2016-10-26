@@ -146,7 +146,7 @@ function getcompleteinfo($chart_num){
    $animal = $this->animal->getAnimalById($chart_num[0]);
     $vaccinations = $this->vaccination->getAllVaccination($chart_num[0]);
     $tests = $this->test->getAllTest($chart_num[0]);
-
+    $weights = $this->weight->getAllWeights($chart_num[0]);
 
    if( strtoupper($animal[0]['species']) === "CAT"){
    $cat = true;
@@ -233,9 +233,13 @@ function getcompleteinfo($chart_num){
                 <td>".$animal[0]['breed']."</td>
               </tr>
               <tr>
-                <td>Color:</td>
-                <td></td>
-              </tr>
+                <td>Last Recorded Weight:</td>";
+              if(!empty($weights)){
+                $html .= "<td>" . end($weights)['weight'] . "</td>";
+              }else{
+                $html .= "<td>N/A</td>";
+              }
+              $html .= "</tr>
               <tr>
                 <td>Sex:</td>
                 <td>".$animal[0]['sex']."</td>
