@@ -79,7 +79,11 @@ $( document ).ready(function() {
     }
 
 
-    if (!isValid) $("html, body").animate({ scrollTop: 0 }, "slow"); return false;
+    if (!isValid){ 
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+      return false;
+    }
+       
   });
 });
 </script>

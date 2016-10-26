@@ -96,15 +96,14 @@ class DisplayAnimal extends CI_Controller {
 
     $pagecount = $pdf->SetSourceFile("uploads/AdoptionContractTemplate.pdf");
 
-    $pdfFilePath = "uploads/Adoption_Contract_" . $animal[0]['name'] . "_" .date('m-d-Y-His').".pdf";
+    $pdfFilePath = "uploads/Adoption_Contract_" . $animal[0]['name'] . ".pdf";
 
     for ($i=1; $i<=($pagecount); $i++) {
         $pdf->AddPage();
         $import_page = $pdf->ImportPage($i);
         $pdf->UseTemplate($import_page);
      
-          if (file_exists($pdfFilePath) == FALSE)
-          {
+
               ini_set('memory_limit','32M');      
               $pdf->WriteText(130,191, $animal[0]['name'] . " / " . $animal[0]['chart_num'] );
               $pdf->WriteText(130,199, $animal[0]['breed'] ); 
@@ -118,7 +117,6 @@ class DisplayAnimal extends CI_Controller {
               //Microchip - 505, 859
 
               $pdf->Output($pdfFilePath, 'F');
-          }
         
     }
    redirect($pdfFilePath);
@@ -167,7 +165,7 @@ function getcompleteinfo($chart_num){
     $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Dogs_Template.pdf");
   }
 
-    $pdfFilePath = "uploads/Adoption_Contract_Info_" . $animal[0]['name'] . "_" .date('m-d-Y-His').".pdf";
+    $pdfFilePath = "uploads/Adoption_Contract_Info_" . $animal[0]['name'] .".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -175,9 +173,7 @@ function getcompleteinfo($chart_num){
         $pdf->AddPage();
         $import_page = $pdf->ImportPage($i);
         $pdf->UseTemplate($import_page);
-        //Only write this data to first page
-          if (file_exists($pdfFilePath) == FALSE)
-          {
+
               ini_set('memory_limit','32M');
 
               $html = "<style>
@@ -291,7 +287,6 @@ function getcompleteinfo($chart_num){
               $pdf->WriteHTML($html);
 
               $pdf->Output($pdfFilePath, 'F');
-          }
 
     }
 
@@ -326,7 +321,7 @@ function getmedicalinfo($chart_num){
 
     $pagecount = $pdf->SetSourceFile("uploads/MedicalTreatmentTemplate.pdf");
 
-    $pdfFilePath = "uploads/Medical_Info_" . $animal[0]['name'] . "_" .date('m-d-Y-His').".pdf";
+    $pdfFilePath = "uploads/Medical_Info_" . $animal[0]['name'] .".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -335,8 +330,7 @@ function getmedicalinfo($chart_num){
         $import_page = $pdf->ImportPage($i);
         $pdf->UseTemplate($import_page);
 
-          if (file_exists($pdfFilePath) == FALSE)
-          {
+
               ini_set('memory_limit','32M');
 
               $html = "<div align='center'><img style='display:block;margin:0 auto;text-align:center;' src='uploads/FatherJohnsHeader.png' width='414' height='120' /></div><br/>";
@@ -408,7 +402,7 @@ function getmedicalinfo($chart_num){
               $pdf->WriteHTML($html);
 
               $pdf->Output($pdfFilePath, 'F');
-          }
+
     }
 
    redirect($pdfFilePath);
