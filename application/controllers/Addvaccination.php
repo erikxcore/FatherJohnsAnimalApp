@@ -111,7 +111,7 @@ class AddVaccination extends CI_Controller {
         try{
         $this->vaccination->addVaccination($chart_num,$date_converted1,$date_converted2,$vaccination['2'],$vaccination['3']);
 
-        $entry = $entry . "Vaccination " . $vaccination['2'] . " / Serial Number: " . $vaccination['3'] . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . '<br/>' . " by " . $session_data['username'];
+        $entry = $entry . "Vaccination " . $vaccination['2'] . " / Serial Number: " . $vaccination['3'] . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . '<br/>' . " by " . $session_data['username'] . "<br/>";
 
 
         }catch(Exception $e){

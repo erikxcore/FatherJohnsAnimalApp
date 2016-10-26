@@ -94,7 +94,7 @@ class EditVaccination extends CI_Controller {
 
     $result = $this->vaccination->editVaccination($id,$date_converted1,$date_converted2,$name,$serial_num);
 
-    $entry = "Vaccination " . $name . " / Serial Number : " . $serial_num . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . " by " . $session_data['username'];
+    $entry = "Vaccination " . $name . " / Serial Number : " . $serial_num . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . "<br/> by " . $session_data['username'] . "</br>";
 
     if($result){
       $this->vaccination_history->addVaccinationHistory($chart_num,$entry);
