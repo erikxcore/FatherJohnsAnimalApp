@@ -114,12 +114,16 @@ $( document ).ready(function() {
   <p>Last modified by <?=$animal[0]['user']?> on <?=$animal[0]['user_date']?> </p>
 <?php } ?>
 
-<div class="form-group" style="display:none;">
-     <a href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a><br/>
+<div class="form-group">
+     <a href="<?php echo site_url('displayanimal/getcontract').'/'.$animal[0]['chart_num']; ?>" target="_blank">Adoption Contract PDF</a><br/>
 </div>
 
 <div class="form-group">
-     <a href="getinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a><br/>
+     <a href="<?php echo site_url('displayanimal/getcompleteinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Information PDF</a><br/>
+</div>
+
+<div class="form-group">
+     <a href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a><br/>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -307,6 +311,34 @@ if(!empty($weights)){
 <?php
 } ?>
 
+<?php
+if(!empty($tests)){
+?>
+  <p>Preventative Tests</p>
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date Tested</th>
+        <th>Results</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+  <?php
+  foreach($tests as $test) { ?>
+  <tr>
+    <td><?=$test['name']?></td>
+    <td><?php $timestamp = strtotime($test['date_tested']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
+    <td><?php if($test['results']){echo "PASS";}else{ echo "FAIL";} ?></td>
+    <td><a href="<?php echo site_url('edittest').'/'.$animal[0]['chart_num'] .'/'.$test['id']?>">Edit</a></td>
+  </tr>
+  <?php }
+  ?>
+  </tbody>
+  </table>
+<?php
+} ?>
 
 <?php
 if(!empty($medications)){
@@ -404,6 +436,13 @@ if(!empty($vaccinations)){
 
 <a href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a><br/>
 
+<a href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a><br/>
+
+<?php
+if(!empty($tests)){
+?>
+<a href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a><br/>
+<?php }?>
 
 <?php
 if(!empty($medications)){
@@ -414,6 +453,7 @@ if(!empty($medications)){
 
 <a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
 <a href="<?php echo site_url('displayvaccinationhistory').'/'.$animal[0]['chart_num']; ?>">View Vaccination History</a><br/>
+<a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
 
 
 <!--

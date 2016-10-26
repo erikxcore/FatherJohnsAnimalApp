@@ -21,7 +21,7 @@
            <label for="species">Species:</label>
               <select name="species" id="species" class="form-control">
                 <option selected="selected" value="">Choose a species</option>
-                <option value="ALL">All</option>
+                <!--<option value="ALL">All</option>-->
                 <?php
                   foreach($allspecies as $specie) { ?>
                     <option value="<?= $specie['name'] ?>" <?php echo set_select('species', $specie['name']); ?> > <?= $specie['name']?></option>

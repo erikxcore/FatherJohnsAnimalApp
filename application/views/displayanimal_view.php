@@ -19,12 +19,16 @@
   <p>Last modified by <?=$animal[0]['user']?> on <?=$animal[0]['user_date']?> </p>
 <?php } ?>
 
-<div class="form-group" style="display:none;">
+<div class="form-group">
      <a href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a><br/>
 </div>
 
 <div class="form-group">
-     <a href="getinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a><br/>
+     <a href="getcompleteinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a><br/>
+</div>
+
+<div class="form-group">
+     <a href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a><br/>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -217,6 +221,32 @@ if(!empty($weights)){
 <?php
 } ?>
 
+<?php
+if(!empty($tests)){
+?>
+  <p>Preventative Tests</p>
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date Tested</th>
+        <th>Results</th>
+      </tr>
+    </thead>
+    <tbody>
+  <?php
+  foreach($tests as $test) { ?>
+  <tr>
+    <td><?=$test['name']?></td>
+    <td><?php $timestamp = strtotime($test['date_tested']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
+    <td><?php if($test['results']){echo "PASS";}else{ echo "FAIL";} ?></td>
+  </tr>
+  <?php }
+  ?>
+  </tbody>
+  </table>
+<?php
+} ?>
 
 <?php
 if(!empty($medications)){
@@ -279,6 +309,7 @@ if(!empty($vaccinations)){
 
 <a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
 <a href="<?php echo site_url('displayvaccinationhistory').'/'.$animal[0]['chart_num']; ?>">View Vaccination History</a><br/>
+<a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
 
 
 <!--

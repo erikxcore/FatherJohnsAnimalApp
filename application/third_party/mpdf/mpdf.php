@@ -63,6 +63,11 @@ require_once(_MPDF_PATH.'classes/myanmar.php');	// mPDF 6.0
 require_once(_MPDF_PATH.'classes/sea.php');	// mPDF 6.0
 /*-- END OTL --*/
 
+/*ERIC FIX*/
+	require_once(_MPDF_PATH."mpdfi/pdf_context.php");
+	require_once(_MPDF_PATH."mpdfi/pdf_parser.php");
+	require_once(_MPDF_PATH."mpdfi/fpdi_pdf_parser.php");
+/*END ERIC FIX*/
 
 if (!defined('_JPGRAPH_PATH')) define("_JPGRAPH_PATH", _MPDF_PATH.'jpgraph/'); 
 

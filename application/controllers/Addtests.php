@@ -43,7 +43,7 @@ class AddTests extends CI_Controller {
      $this->session->set_flashdata('results', 'Test succesfully added!');
      redirect('/displaytests', 'refresh');
    }else{
-     $data['title'] = 'Add a Vaccination';
+     $data['title'] = 'Add a Test';
      $this->load->template('addtests_view', $data);
     }
 

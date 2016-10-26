@@ -56,7 +56,7 @@ Class Test extends CI_Model
  function editAnimalTest($id,$date_tested,$name,$results){
 
   $data = array(
-    'date_tested' => $date_given,
+    'date_tested' => $date_tested,
     'name' => $name,
     'results' => $results,
     ); 
@@ -80,6 +80,21 @@ Class Test extends CI_Model
    $query = $this -> db -> get();
    return $query->result_array();
  }
+
+   function getTestsForCats(){
+    $this -> db -> from('test');
+    $this -> db -> where('species', "Cat");
+   $query = $this -> db -> get();
+   return $query->result_array();
+ }
+
+   function getTestsForDogs(){
+    $this -> db -> from('test');
+    $this -> db -> where('species', "Dog");
+   $query = $this -> db -> get();
+   return $query->result_array();
+ }
+
 
  function addTest($name,$species){
    $data = array(

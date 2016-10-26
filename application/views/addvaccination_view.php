@@ -30,7 +30,8 @@
 
   <ul class="nav nav-tabs" role="tablist">
     <?php  foreach($vaccinations as $vaccination) {
-        $name = str_replace(' ', '_', $vaccination['name']);
+        $name = str_replace(array('.', ' ', '/'), '_', $vaccination['name']);
+
     ?>
       <li role="presentation"><a href="#<?php echo $name; ?>" aria-controls="<?php echo $name; ?>" role="tab" data-toggle="tab"><?php echo $vaccination['name']; ?></a></li>
     <?php } ?>
@@ -40,7 +41,8 @@
           <?php
              $i = 0;
             foreach($vaccinations as $vaccination) { 
-              $name = str_replace(' ', '_', $vaccination['name']);
+            $name = str_replace(array('.', ' ', '/'), '_', $vaccination['name']);
+
             ?>
                <div role="tabpanel" class="tab-pane" id="<?php echo $name; ?>">
 
@@ -56,7 +58,7 @@
 
                   <div class="checkbox">
                       <label>
-                        <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Enabled?
+                        <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Given?
                       </label>
                   </div>
 
