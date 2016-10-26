@@ -96,7 +96,7 @@ class DisplayAnimal extends CI_Controller {
 
     $pagecount = $pdf->SetSourceFile("uploads/AdoptionContractTemplate.pdf");
 
-    $pdfFilePath = "uploads/Adoption_Contract_" . $animal[0]['name'] . ".pdf";
+    $pdfFilePath = "uploads/Adoption_Contract_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
 
     for ($i=1; $i<=($pagecount); $i++) {
         $pdf->AddPage();
@@ -165,7 +165,7 @@ function getcompleteinfo($chart_num){
     $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Dogs_Template.pdf");
   }
 
-    $pdfFilePath = "uploads/Adoption_Contract_Info_" . $animal[0]['name'] .".pdf";
+    $pdfFilePath = "uploads/Adoption_Contract_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -321,7 +321,7 @@ function getmedicalinfo($chart_num){
 
     $pagecount = $pdf->SetSourceFile("uploads/MedicalTreatmentTemplate.pdf");
 
-    $pdfFilePath = "uploads/Medical_Info_" . $animal[0]['name'] .".pdf";
+    $pdfFilePath = "uploads/Medical_Info_" . $animal[0]['name'] . "_" . $chart_num[0] .".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
