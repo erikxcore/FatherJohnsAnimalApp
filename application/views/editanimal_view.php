@@ -330,7 +330,7 @@ if(!empty($tests)){
   <tr>
     <td><?=$test['name']?></td>
     <td><?php $timestamp = strtotime($test['date_tested']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
-    <td><?php if($test['results']){echo "PASS";}else{ echo "FAIL";} ?></td>
+    <td><?php if($test['results']){echo "POSITIVE";}else{ echo "NEGATIVE";} ?></td>
     <td><a href="<?php echo site_url('edittest').'/'.$animal[0]['chart_num'] .'/'.$test['id']?>">Edit</a></td>
   </tr>
   <?php }
@@ -363,7 +363,7 @@ if(!empty($medications)){
     <td><a href="<?php echo site_url('editmedication').'/'.$animal[0]['chart_num'] .'/'.$medication['id']?>">Edit</a></td>
   </tr>
   <tr>
-      <td>Notes:<?=$medication['notes']?></td>
+      <td colspan="4">Notes:<?=$medication['notes']?></td>
   </tr>
   <?php }
   ?>
@@ -436,18 +436,18 @@ if(!empty($vaccinations)){
 
 <a href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a><br/>
 
+<?php
+if(!empty($medications)){
+?>
+<a href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a><br/>
+<?php }?>
+
 <a href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a><br/>
 
 <?php
 if(!empty($tests)){
 ?>
 <a href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a><br/>
-<?php }?>
-
-<?php
-if(!empty($medications)){
-?>
-<a href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a><br/>
 <?php }?>
 
 

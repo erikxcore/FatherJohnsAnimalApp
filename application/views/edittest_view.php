@@ -37,8 +37,8 @@
                <label for="result">Result:</label>
                 <select id="result" name="result" class="form-control" required>
                   <option value="">Choose Test Result</option>
-                  <option <?php if( $test[0]['results'] == true){ ?> selected="selected" <?php }?> value="TRUE">PASS</option>
-                  <option <?php if( $test[0]['results'] == false){ ?> selected="selected" <?php }?>  value="FALSE">FAIL</option>
+                  <option <?php if( $test[0]['results'] == true){ ?> selected="selected" <?php }?> value="TRUE">POSITIVE</option>
+                  <option <?php if( $test[0]['results'] == false){ ?> selected="selected" <?php }?>  value="FALSE">NEGATIVE</option>
                 </select> 
         </div>
 

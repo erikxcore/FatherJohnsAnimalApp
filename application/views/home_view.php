@@ -13,7 +13,7 @@
 
           <?php
             foreach($emergencyanimals as $animal) {?>
-            <p style="width:100%;">
+            <p style="width:100%;display:none;">
             <?php echo $animal['name']; ?> - <?php echo $animal['chart_num']; ?><br/>
             Medication <?php echo $animal['medication_name']; ?> due on <?php echo $animal['date_due'] ?></br>
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
@@ -23,15 +23,44 @@
 
           <?php
             foreach($emergencyvaccinationanimals as $animal) { ?>
-            <p style="width:100%;">
+            <p style="width:100%;display:none;">
             <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
             Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
             </p>
           <?php
             } ?>
-          
-        <div class="table-responsive">  
+
+        <div class="full_width" style="width:100%;float:left;clear:both;">
+              <div class="dog_vac" style="width:50%;float:left;">
+              <?php if( !empty($emergencyvaccinationdogs) ){ ?>
+              <p style="font-style:bold;">Dog Vaccinations Due</p> 
+              <?php }
+              foreach($emergencyvaccinationdogs as $animal) { ?>
+              <p style="width:100%;">
+              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
+              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
+              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
+              </p>
+            <?php
+              } ?>
+              </div>
+
+              <div class="cat_vac" style="width:50%;float:right;">
+              <?php if( !empty($emergencyvaccinationcats) ){ ?>
+              <p style="font-style:bold;">Cat Vaccinations Due</p>
+              <?php }
+              foreach($emergencyvaccinationcats as $animal) { ?>
+              <p style="width:100%;">
+              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
+              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
+              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
+              </p>
+            <?php
+              } ?>
+            </div>
+        </div> 
+        <div class="table-responsive" style="clear:both;">  
         <table class="table table-striped">
           <caption>Latest Additions</caption>
           <thead>

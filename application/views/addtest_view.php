@@ -69,8 +69,8 @@
                        <label for="result_<?=$i?>">Result:</label>
                         <select id="result_<?=$i?>" name="result_<?=$i?>" class="form-control">
                           <option value="">Choose Test Result</option>
-                          <option value="TRUE">PASS</option>
-                          <option value="FALSE">FAIL</option>
+                          <option value="TRUE">POSITIVE</option>
+                          <option value="FALSE">NEGATIVE</option>
                         </select> 
                 </div>
 

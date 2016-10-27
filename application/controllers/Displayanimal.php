@@ -259,9 +259,9 @@ function getcompleteinfo($chart_num){
                   $html .= "<td>". $dmy . "</td>";
                   $html .= "<td>" . $test['name'];
                   if(isset($test['results']) &&  $test['results'] ){
-                    $html .= " - PASS";
+                    $html .= " - POSITIVE";
                   }else if( isset($test['results']) &&  !$test['results'] ){
-                    $html .= " - FAIL";
+                    $html .= " - NEGATIVE";
                   }
                   $html .= "</td></tr>";
                 }
@@ -273,10 +273,10 @@ function getcompleteinfo($chart_num){
                   $html .= "<td>" . $dmy . "</td>";
                   $html.= "<td>" . $vaccination['name'];
                   if(isset($vaccination['date_completed'])){
-                    $html .= " Date Completed - " . $vaccination['date_completed'];
+                    $html .= " - Date Due - " . $vaccination['date_completed'];
                   }
                   if(isset($vaccination['serial_num'])){
-                    $html .= " Serial Number - " . $vaccination['serial_num'];
+                    $html .= " - Serial Number - " . $vaccination['serial_num'];
                   }
                   $html .= "</td></tr>";
                 }

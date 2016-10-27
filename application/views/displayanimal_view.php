@@ -239,7 +239,7 @@ if(!empty($tests)){
   <tr>
     <td><?=$test['name']?></td>
     <td><?php $timestamp = strtotime($test['date_tested']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
-    <td><?php if($test['results']){echo "PASS";}else{ echo "FAIL";} ?></td>
+    <td><?php if($test['results']){echo "POSITIVE";}else{ echo "NEGATIVE";} ?></td>
   </tr>
   <?php }
   ?>
@@ -269,7 +269,7 @@ if(!empty($medications)){
     <td><?php $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
   </tr>
   <tr>
-      <td>Notes:<?=$medication['notes']?></td>
+      <td colspan="3">Notes:<?=$medication['notes']?></td>
   </tr>
   <?php }
   ?>
