@@ -33,6 +33,16 @@
            <textarea rows="5" size="100" id="med_notes" name="med_notes"  class="form-control"><?php echo $medication[0]['notes'] ?></textarea>
       </div>
 
+      <div class="form-group">
+           <label for="med_dose">Dose:</label>
+           <input type="text" size="20" id="med_dose" name="med_dose" class="form-control" value="<?=$medication[0]['dose']?>"/>
+      </div>
+
+      <div class="form-group">
+           <label for="med_duration">Duration:</label>
+           <input type="text" size="20" id="med_duration" name="med_duration" class="form-control" value="<?=$medication[0]['duration']?>"/>
+      </div>
+
         <div class="form-group">
              <label for="date_given">Date Given:</label>
              <input value="<?php $timestamp = strtotime($medication[0]['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>" type="text" size="20" id="date_given" name="date_given" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>

@@ -24,13 +24,15 @@ Class Medication extends CI_Model
     return false;
 }
 
-  function addMedication($chart_num,$date_given,$date_due,$name,$notes){
+  function addMedication($chart_num,$date_given,$date_due,$name,$notes,$duration,$dose){
   $data = array(
   'chart_num' => $chart_num,
   'date_given' => $date_given,
   'date_due' => $date_due,
   'name' => $name,
   'notes' => $notes,
+  'duration' => $duration,
+  'dose' => $dose,
   );
   return $this -> db ->insert('medication', $data);
  }
@@ -51,13 +53,15 @@ Class Medication extends CI_Model
    return $query->result_array();
  }
 
-  function editMedication($id,$date_given,$date_due,$name,$notes){
+  function editMedication($id,$date_given,$date_due,$name,$notes,$duration,$dose){
         $data = array(
         'id' => $id,
         'date_given' => $date_given,
         'date_due' => $date_due,
         'name' => $name,
         'notes' => $notes,
+        'duration' => $duration,
+        'dose' => $dose,
       );
     $this -> db -> from('medication');
     $this -> db -> where('id', $id);

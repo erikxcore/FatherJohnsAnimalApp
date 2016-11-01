@@ -253,7 +253,7 @@ $( document ).ready(function() {
 </div>
 
 <div class="form-group">
-     <label for="medical_notes">Medical Notes:</label>
+     <label for="medical_notes">Vet Notes:</label>
      <textarea rows="5" size="100" id="medical_notes" name="medical_notes"  class="form-control"><?php echo set_value('medical_notes'); ?></textarea>
 </div>
 

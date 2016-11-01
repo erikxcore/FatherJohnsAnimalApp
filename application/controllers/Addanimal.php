@@ -54,7 +54,7 @@ class AddAnimal extends CI_Controller {
      $this->form_validation->set_rules('behavior_strategy', 'Behavior Strategy', 'trim');
      $this->form_validation->set_rules('safer_complete', 'SAFER Complete', 'trim');
      $this->form_validation->set_rules('notes', 'Notes', 'trim');
-     $this->form_validation->set_rules('medical_notes', 'Medical Notes', 'trim');
+     $this->form_validation->set_rules('medical_notes', 'Vet Notes', 'trim');
 
 
     $config = array(

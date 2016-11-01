@@ -15,6 +15,7 @@
               <th>ID</th>
               <th>Name</th>
               <th>Species Type</th>
+              <th>Group ID</th>
               <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
@@ -26,11 +27,14 @@
               <td>
             <?=$test['id']?>
               </td>
-            <td>
+               <td>
             <?=$test['name']?>
               </td>
             <td>
             <?=$test['species']?>
+              </td>
+               <td>
+            <?=$test['group_num']?>
               </td>
               <td>
                 <a href="<?php echo site_url('edittests').'/'.$test['id'] ?>">Edit</a>

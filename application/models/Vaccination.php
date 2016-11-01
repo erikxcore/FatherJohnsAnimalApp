@@ -26,6 +26,9 @@ Class Vaccination extends CI_Model
 
 
  function addVaccination($chart_num,$date_given,$date_completed,$name,$serial_num){
+  if($serial_num == ""){
+    $serial_num = null;
+  }
 
    $data = array(
     'chart_num' => $chart_num,
@@ -55,7 +58,10 @@ Class Vaccination extends CI_Model
  }
 
  function editVaccination($id,$date_given,$date_completed,$name,$serial_num){
-
+  if($serial_num == ""){
+    $serial_num = null;
+  }
+  
   $data = array(
     'date_given' => $date_given,
     'date_completed' => $date_completed,

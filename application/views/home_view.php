@@ -10,8 +10,8 @@
         <?php if(!empty($this->session->flashdata('results'))){ ?>
             <?php echo $this->session->flashdata('results') . '</br>';?>
         <?php } ?>
-
-          <?php
+<!--
+          <?php /*
             foreach($emergencyanimals as $animal) {?>
             <p style="width:100%;display:none;">
             <?php echo $animal['name']; ?> - <?php echo $animal['chart_num']; ?><br/>
@@ -19,9 +19,9 @@
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
             </p>
           <?php
-            }?>
+            } */?>
 
-          <?php
+          <?php /*
             foreach($emergencyvaccinationanimals as $animal) { ?>
             <p style="width:100%;display:none;">
             <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
@@ -29,8 +29,8 @@
             <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
             </p>
           <?php
-            } ?>
-
+            } */?>
+-->
         <div class="full_width" style="width:100%;float:left;clear:both;">
               <div class="dog_vac" style="width:50%;float:left;">
               <?php if( !empty($emergencyvaccinationdogs) ){ ?>

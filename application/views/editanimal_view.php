@@ -126,6 +126,10 @@ $( document ).ready(function() {
      <a href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a><br/>
 </div>
 
+<div class="form-group">
+     <a href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a><br/>
+</div>
+
   <ul class="nav nav-pills" role="tablist">
       <li role="presentation" class="active"><a href="#general"  aria-controls="general" role="tab" data-toggle="tab">Basic Info</a></li>
       <li role="presentation"><a href="#rescue" aria-controls="rescue" role="tab" data-toggle="tab">Rescue Info</a></li>
@@ -277,7 +281,7 @@ $( document ).ready(function() {
 <?php } ?>
 
 <div class="form-group">
-     <label for="medical_notes">Medical Notes:</label>
+     <label for="medical_notes">Vet Notes:</label>
      <textarea rows="5" size="100" id="notes" name="medical_notes"  class="form-control"><?=$animal[0]['medical_notes']?></textarea>
 </div>
 
@@ -348,8 +352,10 @@ if(!empty($medications)){
     <thead>
       <tr>
         <th>Name</th>
-        <th>Date Given</th>
+        <th>Date Started</th>
         <th>Date Due</th>
+        <th>Dose</th>
+        <th>Duration</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -360,10 +366,12 @@ if(!empty($medications)){
     <td><?=$medication['name']?></td>
     <td><?php $timestamp = strtotime($medication['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
     <td><?php $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
+    <td><?=$medication['dose']?></td>
+    <td><?=$medication['duration']?></td>
     <td><a href="<?php echo site_url('editmedication').'/'.$animal[0]['chart_num'] .'/'.$medication['id']?>">Edit</a></td>
   </tr>
   <tr>
-      <td colspan="4">Notes:<?=$medication['notes']?></td>
+      <td colspan="6">Notes:<?=$medication['notes']?></td>
   </tr>
   <?php }
   ?>

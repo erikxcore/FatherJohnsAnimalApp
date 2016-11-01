@@ -37,6 +37,8 @@
     <?php } ?>
   </ul>
 
+  <p>Note - you can enable multiple vaccinations at once by clicking on the given check box and selecting another test.</p>
+
   <div class="tab-content">
           <?php
              $i = 0;
@@ -58,7 +60,7 @@
 
                   <div class="checkbox">
                       <label>
-                        <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Given?
+                        <input value="enabled" type="checkbox" name="vac_check_<?=$i?>" id="vac_check_<?=$i?>"> Given to Animal?
                       </label>
                   </div>
 

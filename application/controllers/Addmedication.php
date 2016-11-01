@@ -56,6 +56,8 @@ class AddMedication extends CI_Controller {
    $this->form_validation->set_rules('date_given', 'Date Given', 'trim|required');
    $this->form_validation->set_rules('date_due', 'Date Due', 'trim|required');
    $this->form_validation->set_rules('med_notes', 'Medication Notes', 'trim');
+   $this->form_validation->set_rules('med_duration', 'Duration', 'trim');
+   $this->form_validation->set_rules('med_dose', 'Dose', 'trim');
 
 
    if($this->form_validation->run() == FALSE)
@@ -64,7 +66,7 @@ class AddMedication extends CI_Controller {
      $this->load->template('addmedication_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->add_medication($this->input->post('chart_num'),$this->input->post('med_name'),$this->input->post('date_given'),$this->input->post('date_due'),$this->input->post('med_notes'));
+     $this->add_medication($this->input->post('chart_num'),$this->input->post('med_name'),$this->input->post('date_given'),$this->input->post('date_due'),$this->input->post('med_notes'),$this->input->post('med_duration'),$this->input->post('med_dose'));
      $this->session->set_flashdata('results', 'Medication succesfully added!');
       redirect('/editanimal/'.$chart_num, 'refresh');
    }else{
@@ -75,14 +77,14 @@ class AddMedication extends CI_Controller {
 
 
 
- function add_medication($chart_num,$name,$date_given,$date_due,$notes){
+ function add_medication($chart_num,$name,$date_given,$date_due,$notes,$duration,$dose){
       $session_data = $this->session->userdata('logged_in');
 
     $date_converted1 = date('Y-m-d', strtotime($date_given));
     $date_converted2 = date('Y-m-d', strtotime($date_due));
-    $result = $this->medication->addMedication($chart_num,$date_converted1,$date_converted2,$name,$notes);
+    $result = $this->medication->addMedication($chart_num,$date_converted1,$date_converted2,$name,$notes,$duration,$dose);
     
-        $entry = "Medication " . $name . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . '<br/>'. ' by ' . $session_data['username'];
+        $entry = "Medication " . $name . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . '<br/> Dose is now ' . $dose . '<br/> Duration is now ' . $duration . '<br/>'. ' by ' . $session_data['username'];
 
     if($result){
                   $this->medication_history->addMedicationHistory($chart_num,$entry);

@@ -9,6 +9,12 @@ Class Test extends CI_Model
    return $query->result_array();
  }
 
+ function getTotalTest(){
+   $this -> db -> from('test');
+   $query = $this -> db -> get();
+  return $query->num_rows();
+}
+
   function get_all_test_paged($limit, $start, $chart_num) {
     $this -> db ->limit($limit, $start);
     $this -> db -> from('tests');
@@ -96,18 +102,28 @@ Class Test extends CI_Model
  }
 
 
- function addTest($name,$species){
+ function addTest($name,$species,$group_num){
+    if($group_num == "" || $group_num == "0"){
+    $group_num = null;
+  }
+
    $data = array(
     'name' => $name,
-    'species' => $species
+    'species' => $species,
+    'group_num' => $group_num,
     ); 
     return $this -> db ->insert('test', $data);
  }
 
- function editTest($id,$name,$species){
+ function editTest($id,$name,$species,$group_num){
+      if($group_num == "" || $group_num == "0"){
+    $group_num = null;
+  }
+  
  $data = array(
     'name' => $name,
-    'species' => $species
+    'species' => $species,
+    'group_num' => $group_num,
     ); 
     $this -> db -> from('test');
     $this -> db -> where('id', $id);

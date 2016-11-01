@@ -33,9 +33,19 @@
            <textarea rows="5" size="100" id="med_notes" name="med_notes"  class="form-control"><?php echo set_value('med_notes'); ?></textarea>
       </div>
 
+      <div class="form-group">
+           <label for="med_dose">Dose:</label>
+           <input type="text" size="20" id="med_dose" name="med_dose" class="form-control" value="<?php echo set_value('med_dose'); ?>"/>
+      </div>
+
+      <div class="form-group">
+           <label for="med_duration">Duration:</label>
+           <input type="text" size="20" id="med_duration" name="med_duration" class="form-control" value="<?php echo set_value('med_duration'); ?>"/>
+      </div>
+
 
         <div class="form-group">
-             <label for="date_given">Date Given:</label>
+             <label for="date_given">Date Started:</label>
              <input value="<?php echo set_value('date_given'); ?>" type="text" size="20" id="date_given" name="date_given" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
         </div>
 

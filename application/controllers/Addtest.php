@@ -33,6 +33,7 @@ class AddTest extends CI_Controller {
       show_404();
     }
 
+    
     $data['animal'] = $this->animal->getAnimalById($chart_num);
     //echo $data['animal'];
 
@@ -71,7 +72,7 @@ class AddTest extends CI_Controller {
      $i++;
    }
 
-
+   $processed = false;
    if($this->form_validation->run() == FALSE)
    {
      $data['title'] = 'Add an Animal\'s Preventative Test';
@@ -80,8 +81,10 @@ class AddTest extends CI_Controller {
    {
      $i = 0;
      $test_to_add = array();
+     
      foreach($data['tests'] as $test) { 
      if($this->input->post('test_check_'.$i) == "enabled"){
+      $processed = true;
       $test = array();
       if($this->input->post('result_'.$i) == "TRUE"){
         $results = true;
@@ -94,10 +97,17 @@ class AddTest extends CI_Controller {
       $i++;
      }
 
+     if(!$processed){
+           $data['title'] = 'Add an Animal\'s Preventative Test';
+          $this->session->set_flashdata('results', 'Please enable at least one test!');
+           $this->load->template('addtest_view', $data);
+     }else{
+
      $this->add_test($this->input->post('chart_num'),$test_to_add);
      $this->session->set_flashdata('results', 'Preventative test succesfully added!');
 
      redirect('/editanimal/'.$chart_num, 'refresh');
+    }
    }else{
      $data['title'] = 'Add an Animal\'s Preventative Test';
      $this->load->template('addtest_view', $data);

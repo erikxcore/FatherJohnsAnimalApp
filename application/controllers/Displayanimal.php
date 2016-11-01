@@ -141,10 +141,12 @@ function getcompleteinfo($chart_num){
    $dog = false;
    //Explicit due to the ability to add new genders; this functionality is specifically requested for dogs/cats
    //and generates forms based on that species selection.
-   $animal = $this->animal->getAnimalById($chart_num[0]);
+    $animal = $this->animal->getAnimalById($chart_num[0]);
     $vaccinations = $this->vaccination->getAllVaccination($chart_num[0]);
     $tests = $this->test->getAllTest($chart_num[0]);
+    $all_tests = $this->test->getTest();
     $weights = $this->weight->getAllWeights($chart_num[0]);
+    $totaltest = $this->test->getTotalTest();
 
    if( strtoupper($animal[0]['species']) === "CAT"){
    $cat = true;
@@ -153,9 +155,9 @@ function getcompleteinfo($chart_num){
    }
 
 
-     $this->load->library('pdf');
+    $this->load->library('pdf');
 
-     $pdf =  $this->pdf->load();
+    $pdf =  $this->pdf->load();
     $pdf->allow_output_buffering = true;
     $pdf->debug = true;
 
@@ -246,24 +248,74 @@ function getcompleteinfo($chart_num){
               </tr>                       
               </table>";
 
-              $html .= "<h2>Preventative Care</h2>
-              <table style='width:100%;'>
+              $html .= "<h2>Preventative Care</h2>";
+                
+                $grouped_test = null;
+                $grouphtml = null;
+                foreach($tests as $test){
+                  //Bad implementation...
+                  foreach($all_tests as $atest){
+                    
+                    if($atest['name'] == $test['name']){
+
+                      if(!isset($atest['group_num'])){
+                        $grouphtml.= "<tr>";
+                        $timestamp = strtotime($test['date_tested']);
+                        $dmy = date("m/d/Y", $timestamp);
+                        $grouphtml .= "<td>". $dmy . "</td>";
+                        $grouphtml .= "<td>" . $test['name'];
+                        
+                        if(isset($test['results']) &&  $test['results'] ){
+                          $grouphtml .= " - POSITIVE";
+                        }else if( isset($test['results']) &&  !$test['results'] ){
+                          $grouphtml .= " - NEGATIVE";
+                        }
+                        
+                        $grouphtml .= "</td></tr>";
+                      }else{
+                        $timestamp = strtotime($test['date_tested']);
+                        $dmy = date("m/d/Y", $timestamp);
+                        $grouped_test[$test['date_tested']]['date_given'] = $dmy;
+                        $grouped_test[$test['date_tested']]['group_num'] = $test['group_num'];
+                        $grouped_test[$test['date_tested']]['details'] .= ' ' . $test['name'];
+                        
+                        if(isset($test['results']) &&  $test['results'] ){
+                          $grouped_test[$test['date_tested']]['details'] .= " - POSITIVE ";
+                        }else if( isset($test['results']) &&  !$test['results'] ){
+                          $grouped_test[$test['date_tested']]['details'] .= " - NEGATIVE ";
+                        }
+                      }
+                    }
+                  }
+
+                }
+
+                if(!empty($grouped_test)){
+                  $html .= "<table style='width:100%;'>
               <thead>
+              <tr><td colspan='2'>Combination Tests (If Applicable)</td></tr>
               <tr><td>Date Given/Tested</td><td>Details</td></tr>
               </thead><tbody>";
-                
-                foreach($tests as $test){
-                  $html.= "<tr>";
-                  $timestamp = strtotime($test['date_tested']);
-                  $dmy = date("m/d/Y", $timestamp);
-                  $html .= "<td>". $dmy . "</td>";
-                  $html .= "<td>" . $test['name'];
-                  if(isset($test['results']) &&  $test['results'] ){
-                    $html .= " - POSITIVE";
-                  }else if( isset($test['results']) &&  !$test['results'] ){
-                    $html .= " - NEGATIVE";
+
+                  foreach($grouped_test as $group){
+                    $html .= "<tr>";
+                    $html .= "<td>".$group['date_given']."</td>";
+                    $html .= "<td>".$group['details']. "</td>";
+                    $html .= "</tr>";
                   }
-                  $html .= "</td></tr>";
+
+                  $html .= "</table>";
+                }
+
+
+                  $html .= "<br/><table style='width:100%;'>
+                  <thead>
+                  <tr><td colspan='2'>Other Tests/Vaccinations</td></tr>
+                  <tr><td>Date Given/Tested</td><td>Details</td></tr>
+                  </thead><tbody>";
+
+                if(!empty($grouphtml)){
+                  $html .= $grouphtml;
                 }
 
                 foreach($vaccinations as $vaccination){
@@ -381,16 +433,29 @@ function getmedicalinfo($chart_num){
               $html .= "<h2>Medications</h2>
               <table style='width:100%;'>
               <thead>
-              <tr><td>Date Given</td><td>Medication Name & Notes</td></tr>
+              <tr>
+                <td>Date Started</td>
+                <td>Date Due (If Applicable)</td>
+                <td>Medication Name & Notes</td>
+              </tr>
               </thead><tbody>";
               
                 foreach($medications as $medication){
                   $timestamp = strtotime($medication['date_given']);
                   $dmy = date("m/d/Y", $timestamp);
                   $html .= "<tr><td>". $dmy . "</td>";
+                  $timestamp2 = strtotime($medication['date_due']);
+                  $dmy2 = date("m/d/Y", $timestamp2);
+                  $html .= "<td>". $dmy2 . "</td>";
                   $html .= "<td>" . $medication['name'];
                   if(isset($medication['notes'])){
                     $html .= " - " . $medication['notes'];
+                  }
+                  if(isset($medication['dose'])){
+                     $html .= " </br> Dose: " . $medication['dose'];
+                  }
+                  if(isset($medication['duration'])){
+                     $html .= " </br> Duration:" . $medication['duration'];
                   }
                   $html .= "</td></tr>";
                 }
@@ -475,6 +540,98 @@ $animal = $this->animal->getAnimalById($chart_num[0]);
     $pdf->Output($pdfFilePath, 'F');
 
 redirect($pdfFilePath);
+
+}
+
+
+function getnotes($chart_num){
+    if($chart_num == null){
+      show_404();
+    }
+
+     if($this->session->userdata('logged_in'))
+   {
+     $session_data = $this->session->userdata('logged_in');
+     $data['username'] = $session_data['username'];
+   }
+   else
+   {
+     redirect('login', 'refresh');
+   }
+
+   $cat = false;
+   $dog = false;
+   //Explicit due to the ability to add new genders; this functionality is specifically requested for dogs/cats
+   //and generates forms based on that species selection.
+    $animal = $this->animal->getAnimalById($chart_num[0]);
+    $vaccinations = $this->vaccination->getAllVaccination($chart_num[0]);
+    $tests = $this->test->getAllTest($chart_num[0]);
+    $weights = $this->weight->getAllWeights($chart_num[0]);
+
+   if( strtoupper($animal[0]['species']) === "CAT"){
+   $cat = true;
+   }else if(  strtoupper($animal[0]['species']) === "DOG" ){
+   $dog = true;
+   }
+
+
+     $this->load->library('pdf');
+
+    $pdf =  $this->pdf->load();
+    $pdf->allow_output_buffering = true;
+    $pdf->debug = true;
+
+  if($cat){
+    $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Cats_Template.pdf");
+  }else if($dog){
+    $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Dogs_Template.pdf");
+  }
+
+    $pdfFilePath = "uploads/Animal_Notes_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
+
+
+    //If multiple pages; currently is not but in case the contract is updated
+    for ($i=1; $i<=($pagecount); $i++) {
+        $pdf->AddPage();
+        $import_page = $pdf->ImportPage($i);
+        $pdf->UseTemplate($import_page);
+
+              ini_set('memory_limit','32M');
+
+              $html = "<style>
+                    p {
+                        font-family: verdana, arial, sans-serif;
+                        font-size: 11px;
+                        color: #333333;
+                    }
+              </style>";
+
+              $html .= "<div align='center'><img style='display:block;margin:0 auto;text-align:center;' src='uploads/FatherJohnsHeader.png' width='414' height='120' /></div><br/>";
+
+              if($cat){
+              $html .= "<h2>Notes - Cats</h2>";
+              }else if($dog){
+              $html .= "<h2>Notes - Dogs</h2>";
+              }
+
+              $html .= "<div style='max-width:300px;text-align:center;'><img src='". $animal[0]['picture']."' style='max-width:300px;margin:0 auto;'/></div>";
+              $html .= "<h4>Behavior Strategy</h4>
+                <p>".$animal[0]['behavior_strategy']."</p>
+                <h4>General Notes</h4>
+                <p>".$animal[0]['notes']."</p>
+                <h4>Vet Notes</h4>
+                <p>".$animal[0]['medical_notes']."</p>";
+
+              //$html = mb_convert_encoding($html, 'UTF-8', 'UTF-8');
+              $html = utf8_encode($html);
+              $pdf->WriteHTML($html);
+
+              $pdf->Output($pdfFilePath, 'F');
+
+    }
+
+   redirect($pdfFilePath);
+
 
 }
  

@@ -33,7 +33,7 @@ class EditTests extends CI_Controller {
       show_404();
     }
 
-
+    $data['totaltest'] = $this->test->getTotalTest();
     $data['test'] = $this->test->getTestById($id);
 
     $this->load->library('form_validation');
@@ -56,6 +56,7 @@ class EditTests extends CI_Controller {
    $this->form_validation->set_rules('id', 'ID', 'trim|required');
    $this->form_validation->set_rules('name', 'Name', 'trim|required');
    $this->form_validation->set_rules('species', 'Species', 'trim|required');
+   $this->form_validation->set_rules('group_num', 'Group ID', 'trim');
 
 
    if($this->form_validation->run() == FALSE)
@@ -64,7 +65,7 @@ class EditTests extends CI_Controller {
      $this->load->template('edittests_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->edit_test($this->input->post('id'),$this->input->post('name'),$this->input->post('species'));
+     $this->edit_test($this->input->post('id'),$this->input->post('name'),$this->input->post('species'),$this->input->post('group_num'));
      $this->session->set_flashdata('results', 'Test succesfully modified!');
      redirect('/displaytests', 'refresh');
    }else{
@@ -74,9 +75,9 @@ class EditTests extends CI_Controller {
  
  }
 
- function edit_test($id,$name,$species){
+ function edit_test($id,$name,$species,$group_num){
 
-    $result = $this->test->editTest($id,$name,$species);
+    $result = $this->test->editTest($id,$name,$species,$group_num);
 
     if($result){
       return TRUE;

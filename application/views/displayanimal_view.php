@@ -31,6 +31,10 @@
      <a href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a><br/>
 </div>
 
+<div class="form-group">
+     <a href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a><br/>
+</div>
+
   <ul class="nav nav-pills" role="tablist">
       <li role="presentation" class="active"><a href="#general"  aria-controls="general" role="tab" data-toggle="tab">Basic Info</a></li>
       <li role="presentation"><a href="#rescue" aria-controls="rescue" role="tab" data-toggle="tab">Rescue Info</a></li>
@@ -256,8 +260,10 @@ if(!empty($medications)){
     <thead>
       <tr>
         <th>Name</th>
-        <th>Date Given</th>
+        <th>Date Started</th>
         <th>Date Due</th>
+        <th>Dose</th>
+        <th>Duration</th>
       </tr>
     </thead>
     <tbody>
@@ -267,9 +273,11 @@ if(!empty($medications)){
     <td><?=$medication['name']?></td>
     <td><?php $timestamp = strtotime($medication['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
     <td><?php $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
+    <td><?=$medication['dose']?></td>
+    <td><?=$medication['duration']?></td>
   </tr>
   <tr>
-      <td colspan="3">Notes:<?=$medication['notes']?></td>
+      <td colspan="5">Notes:<?=$medication['notes']?></td>
   </tr>
   <?php }
   ?>

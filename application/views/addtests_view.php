@@ -30,6 +30,24 @@
               </select> 
       </div>
 
+                      <div class="form-group">
+                  <label for="group_num">Group ID:</label>
+                  <select name="group_num" id="group_num" class="form-control">
+                    <option selected="selected" value="">N/A</option>
+                    <?php
+                    $i = 1;
+                    $totaltest = $totaltest + 1; //because we're adding this could potentially be a new number
+                    while($i <= $totaltest){
+                    ?>
+                      <option value="<?=$i?>"><?=$i?></option>
+                    <?php
+                    $i++;
+                     }
+                     ?>
+                  </select> 
+                </div>
+
+
      <input class="btn btn-success" type="submit" value="Add Test"/>
    </form>
 

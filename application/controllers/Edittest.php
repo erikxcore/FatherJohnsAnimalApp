@@ -36,6 +36,7 @@ class EditTest extends CI_Controller {
       show_404();
     }
 
+    
     $data['animal'] = $this->animal->getAnimalById($chart_num);
     $data['test'] = $this->test->getAnimalTestById($id[0]);
     
