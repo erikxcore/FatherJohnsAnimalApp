@@ -20,13 +20,13 @@
 <?php } ?>
 
 <div class="form-group">
-     <a class="btn btn-primary" href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a>
+     <a class="btn btn-info" href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a>
 
-     <a class="btn btn-primary" href="getcompleteinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a>
+     <a class="btn btn-info" href="getcompleteinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a>
 
-     <a class="btn btn-primary" href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a>
+     <a class="btn btn-info" href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a>
 
-     <a class="btn btn-primary"   href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a>
+     <a class="btn btn-info"   href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -362,7 +362,7 @@ if(!empty($safer_results)){
 <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
 
 </br>
-<input type="button" value="Edit This Animal" style="float:right;" class="btn btn-info" onclick="location.href='<?php echo site_url('editanimal').'/'.$animal[0]['chart_num'] ?>'">
+<input type="button" value="Edit This Animal" style="float:right;" class="btn btn-success" onclick="location.href='<?php echo site_url('editanimal').'/'.$animal[0]['chart_num'] ?>'">
 
 <?php } ?>
 

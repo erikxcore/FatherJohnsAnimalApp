@@ -115,13 +115,13 @@ $( document ).ready(function() {
 <?php } ?>
 
 <div class="form-group">
-     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getcontract').'/'.$animal[0]['chart_num']; ?>" target="_blank">Adoption Contract PDF</a>
+     <a class="btn btn-info" href="<?php echo site_url('displayanimal/getcontract').'/'.$animal[0]['chart_num']; ?>" target="_blank">Adoption Contract PDF</a>
 
-     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getcompleteinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Information PDF</a>
+     <a class="btn btn-info" href="<?php echo site_url('displayanimal/getcompleteinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Information PDF</a>
 
-     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a>
+     <a class="btn btn-info" href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a>
 
-     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a>
+     <a class="btn btn-info" href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
