@@ -115,19 +115,13 @@ $( document ).ready(function() {
 <?php } ?>
 
 <div class="form-group">
-     <a href="<?php echo site_url('displayanimal/getcontract').'/'.$animal[0]['chart_num']; ?>" target="_blank">Adoption Contract PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getcontract').'/'.$animal[0]['chart_num']; ?>" target="_blank">Adoption Contract PDF</a>
 
-<div class="form-group">
-     <a href="<?php echo site_url('displayanimal/getcompleteinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Information PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getcompleteinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Information PDF</a>
 
-<div class="form-group">
-     <a href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a>
 
-<div class="form-group">
-     <a href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a><br/>
+     <a class="btn btn-primary" href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -288,7 +282,29 @@ $( document ).ready(function() {
         </div>
       </div>
 
+  <ul class="nav nav-tabs" role="tablist">
 
+      <li role="presentation"><a href="#weights" aria-controls="weights" role="tab" data-toggle="tab">Weights</a></li>
+
+      <li role="presentation"><a href="#tests" aria-controls="tests" role="tab" data-toggle="tab">Preventative Tests</a></li>
+
+      <li role="presentation"><a href="#medications" aria-controls="medications" role="tab" data-toggle="tab">Medications</a></li>
+
+
+      <li role="presentation"><a href="#vaccinations" aria-controls="vaccinations" role="tab" data-toggle="tab">Vaccinations</a></li>
+
+  </ul>
+
+   <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane" id="weights">
+  <p>Weight Records</p>
+<a href="<?php echo site_url('addweight').'/'.$animal[0]['chart_num']; ?>">Add Weight Check-In</a><br/>
+<?php
+if(!empty($weights)){ 
+?>
+<a href="<?php echo site_url('removeweight').'/'.$animal[0]['chart_num']; ?>">Remove a Weight Check-In</a><br/>
+<?php }?>
 <?php
 if(!empty($weights)){
 ?>
@@ -314,11 +330,21 @@ if(!empty($weights)){
   </table>
 <?php
 } ?>
+</div>
+
+<div role="tabpanel" class="tab-pane" id="tests">
+  <p>Preventative Tests</p>
+<a href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a><br/>
 
 <?php
 if(!empty($tests)){
 ?>
-  <p>Preventative Tests</p>
+<a href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a><br/>
+<?php }?>
+
+<?php
+if(!empty($tests)){
+?>
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -341,13 +367,25 @@ if(!empty($tests)){
   ?>
   </tbody>
   </table>
+
 <?php
 } ?>
+<a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
+</div>
+
+<div role="tabpanel" class="tab-pane" id="medications">
+  <p>Medications</p>
+<a href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a><br/>
 
 <?php
 if(!empty($medications)){
 ?>
-  <p>Medications</p>
+<a href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a><br/>
+<?php }?>
+
+<?php
+if(!empty($medications)){
+?>
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -379,12 +417,21 @@ if(!empty($medications)){
   </table>
 <?php
 } ?>
+  <a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
 
+</div>
 
+<div role="tabpanel" class="tab-pane" id="vaccinations">
+<p>Vaccinations</p>
+<a href="<?php echo site_url('addvaccination').'/'.$animal[0]['chart_num']; ?>">Add Vaccination</a><br/>
 <?php
 if(!empty($vaccinations)){
 ?>
-  <p>Vaccinations</p>
+<a href="<?php echo site_url('removevaccination').'/'.$animal[0]['chart_num']; ?>">Remove a Vaccination</a><br/>
+<?php }?>
+<?php
+if(!empty($vaccinations)){
+?>
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -411,6 +458,10 @@ if(!empty($vaccinations)){
   </table>
 <?php
 } ?>
+  <a href="<?php echo site_url('displayvaccinationhistory').'/'.$animal[0]['chart_num']; ?>">View Vaccination History</a><br/>
+</div>
+
+</div>
 
 <!--
 <?php
@@ -429,39 +480,12 @@ if(!empty($safer_results)){
 <?php } ?>
 -->
 
-<a href="<?php echo site_url('addweight').'/'.$animal[0]['chart_num']; ?>">Add Weight Check-In</a><br/>
-<?php
-if(!empty($weights)){ 
-?>
-<a href="<?php echo site_url('removeweight').'/'.$animal[0]['chart_num']; ?>">Remove a Weight Check-In</a><br/>
-<?php }?>
-<a href="<?php echo site_url('addvaccination').'/'.$animal[0]['chart_num']; ?>">Add Vaccination</a><br/>
-<?php
-if(!empty($vaccinations)){
-?>
-<a href="<?php echo site_url('removevaccination').'/'.$animal[0]['chart_num']; ?>">Remove a Vaccination</a><br/>
-<?php }?>
-
-<a href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a><br/>
-
-<?php
-if(!empty($medications)){
-?>
-<a href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a><br/>
-<?php }?>
-
-<a href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a><br/>
-
-<?php
-if(!empty($tests)){
-?>
-<a href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a><br/>
-<?php }?>
 
 
-<a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
-<a href="<?php echo site_url('displayvaccinationhistory').'/'.$animal[0]['chart_num']; ?>">View Vaccination History</a><br/>
-<a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
+
+
+
+
 
 
 <!--
@@ -475,11 +499,12 @@ if(!empty($safer_results)){
 <a href="<?php echo site_url('removesafer').'/'.$animal[0]['chart_num']; ?>">Remove SAFER results</a><br/>
 <?php }?>
 -->
-
-<input class="btn btn-success" type="submit" value="Edit Animal"/></br>
+<br/>
+<br/>
+<input class="btn btn-success" type="submit" style="float:right;" value="Edit Animal"/>
 
 <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
-    <a class="btn btn-error" href="delete_animal/<?=$animal[0]['chart_num'];?>">Delete Animal</a>
+    <input type="button" class="btn btn-danger" style="float:left;" onclick="location.href='delete_animal/<?=$animal[0]['chart_num'];?>'" value="Delete Animal"/>
 <?php } ?> 
 
    </form>

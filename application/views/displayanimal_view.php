@@ -4,7 +4,7 @@
         <h1>View An Animal</h1>
     </div>
 
-    <a href="javascript:history.back()">Go Back</a></br>
+    <a href="javascript:history.back();">Go Back</a></br>
 
 
     <?php if(!empty($this->session->flashdata('results'))){ ?>
@@ -20,19 +20,13 @@
 <?php } ?>
 
 <div class="form-group">
-     <a href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="getcontract/<?=$animal[0]['chart_num']?>" target="_blank">Adoption Contract PDF</a>
 
-<div class="form-group">
-     <a href="getcompleteinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="getcompleteinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Information PDF</a>
 
-<div class="form-group">
-     <a href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a><br/>
-</div>
+     <a class="btn btn-primary" href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a>
 
-<div class="form-group">
-     <a href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a><br/>
+     <a class="btn btn-primary"   href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -201,6 +195,23 @@
         </div>
       </div>
 
+
+  <ul class="nav nav-tabs" role="tablist">
+
+      <li role="presentation"><a href="#weights" aria-controls="weights" role="tab" data-toggle="tab">Weights</a></li>
+
+      <li role="presentation"><a href="#tests" aria-controls="tests" role="tab" data-toggle="tab">Preventative Tests</a></li>
+
+      <li role="presentation"><a href="#medications" aria-controls="medications" role="tab" data-toggle="tab">Medications</a></li>
+
+      <li role="presentation"><a href="#vaccinations" aria-controls="vaccinations" role="tab" data-toggle="tab">Vaccinations</a></li>
+
+  </ul>
+
+ <div class="tab-content">
+
+<div role="tabpanel" class="tab-pane" id="weights">
+  <p>Weight Records</p>
 <?php
 if(!empty($weights)){
 ?>
@@ -224,11 +235,14 @@ if(!empty($weights)){
   </table>
 <?php
 } ?>
+</div>
 
+<div role="tabpanel" class="tab-pane" id="tests">
+  <p>Preventative Tests</p>
 <?php
 if(!empty($tests)){
 ?>
-  <p>Preventative Tests</p>
+
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -251,11 +265,15 @@ if(!empty($tests)){
   </table>
 <?php
 } ?>
+  <a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
+</div>
 
+<div role="tabpanel" class="tab-pane" id="medications">
+  <p>Medications</p>
 <?php
 if(!empty($medications)){
 ?>
-  <p>Medications</p>
+
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -285,11 +303,14 @@ if(!empty($medications)){
   </table>
 <?php
 } ?>
+<a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
+</div>
 
+<div role="tabpanel" class="tab-pane" id="vaccinations">
+  <p>Vaccinations</p>
 <?php
 if(!empty($vaccinations)){
 ?>
-  <p>Vaccinations</p>
   <table class="table table-responsive">
     <thead>
       <tr>
@@ -314,10 +335,11 @@ if(!empty($vaccinations)){
   </table>
 <?php
 } ?>
-
-<a href="<?php echo site_url('displaymedicationhistory').'/'.$animal[0]['chart_num']; ?>">View Medication History</a><br/>
 <a href="<?php echo site_url('displayvaccinationhistory').'/'.$animal[0]['chart_num']; ?>">View Vaccination History</a><br/>
-<a href="<?php echo site_url('displaytesthistory').'/'.$animal[0]['chart_num']; ?>">View Preventative Test History</a><br/>
+</div>
+
+</div>
+
 
 
 <!--
@@ -336,12 +358,13 @@ if(!empty($safer_results)){
 </ul>
 <?php } ?>
 -->
-
+</form>
 <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
 
-</br><a href="<?php echo site_url('editanimal').'/'.$animal[0]['chart_num'] ?>">Edit This Animal</a></br>
+</br>
+<input type="button" value="Edit This Animal" style="float:right;" class="btn btn-info" onclick="location.href='<?php echo site_url('editanimal').'/'.$animal[0]['chart_num'] ?>'">
 
 <?php } ?>
 
-   </form>
+   
  </div>

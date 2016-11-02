@@ -614,7 +614,10 @@ function getnotes($chart_num){
               $html .= "<h2>Notes - Dogs</h2>";
               }
 
+              if(isset($animal[0]['picture'])){
               $html .= "<div style='max-width:300px;text-align:center;'><img src='". $animal[0]['picture']."' style='max-width:300px;margin:0 auto;'/></div>";
+              }
+               
               $html .= "<h4>Behavior Strategy</h4>
                 <p>".$animal[0]['behavior_strategy']."</p>
                 <h4>General Notes</h4>
