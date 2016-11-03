@@ -1,4 +1,16 @@
 <script type="text/javascript">
+$(function() {
+    $('.confirm').click(function(e) {
+        //e.preventDefault();
+        if(!window.confirm("Are you sure you want to delete this animal?")){
+          return false;
+        }else{
+          //alert('delete_animal/<?=$animal[0]['chart_num']?>');
+          location.href='delete_animal/<?=$animal[0]['chart_num']?>';
+        };
+    });
+});
+
 $( document ).ready(function() { 
   $("#edit_animal").on("submit", function(e){
     var isValid = false;
@@ -510,7 +522,7 @@ if(!empty($safer_results)){
 <input class="btn btn-success" type="submit" style="float:right;" value="Edit Animal"/>
 
 <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
-    <input type="button" class="btn btn-danger" style="float:left;" onclick="location.href='delete_animal/<?=$animal[0]['chart_num'];?>'" value="Delete Animal"/>
+    <input type="button" class="btn btn-danger confirm" style="float:left;" value="Delete Animal"/>
 <?php } ?> 
 
    </form>
