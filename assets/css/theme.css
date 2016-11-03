@@ -7,6 +7,18 @@ body {
     font-weight: bold;
     border: 1px solid #757575;
 }
+.btn-outline-success {
+    color: #5cb85c;
+    background-image: none;
+    background-color: transparent;
+    border-color: #5cb85c;
+}
+.btn-outline-danger {
+    color: #d9534f;
+    background-image: none;
+    background-color: transparent;
+    border-color: #d9534f;
+}
 .errors{
     color: #e43939;
 }

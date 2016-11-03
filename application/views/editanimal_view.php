@@ -299,12 +299,14 @@ $( document ).ready(function() {
 
     <div role="tabpanel" class="tab-pane" id="weights">
   <p>Weight Records</p>
-<a href="<?php echo site_url('addweight').'/'.$animal[0]['chart_num']; ?>">Add Weight Check-In</a><br/>
+  <div class="buttons" style="float:right;">
+<a  class="btn btn-outline-success btn-sm" href="<?php echo site_url('addweight').'/'.$animal[0]['chart_num']; ?>">Add Weight Check-In</a>
 <?php
 if(!empty($weights)){ 
 ?>
-<a href="<?php echo site_url('removeweight').'/'.$animal[0]['chart_num']; ?>">Remove a Weight Check-In</a><br/>
+<a  class="btn btn-outline-danger btn-sm" href="<?php echo site_url('removeweight').'/'.$animal[0]['chart_num']; ?>">Remove a Weight Check-In</a>
 <?php }?>
+</div>
 <?php
 if(!empty($weights)){
 ?>
@@ -334,14 +336,15 @@ if(!empty($weights)){
 
 <div role="tabpanel" class="tab-pane" id="tests">
   <p>Preventative Tests</p>
-<a href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a><br/>
+  <div class="buttons" style="float:right;">
+<a  class="btn btn-outline-success btn-sm" href="<?php echo site_url('addtest').'/'.$animal[0]['chart_num']; ?>">Add Preventative Test</a>
 
 <?php
 if(!empty($tests)){
 ?>
-<a href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a><br/>
+<a  class="btn btn-outline-danger btn-sm" href="<?php echo site_url('removetest').'/'.$animal[0]['chart_num']; ?>">Remove a Preventative Test</a>
 <?php }?>
-
+</div>
 <?php
 if(!empty($tests)){
 ?>
@@ -375,14 +378,15 @@ if(!empty($tests)){
 
 <div role="tabpanel" class="tab-pane" id="medications">
   <p>Medications</p>
-<a href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a><br/>
+  <div class="buttons" style="float:right;">
+<a  class="btn btn-outline-success btn-sm" href="<?php echo site_url('addmedication').'/'.$animal[0]['chart_num']; ?>">Add Medication</a>
 
 <?php
 if(!empty($medications)){
 ?>
-<a href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a><br/>
+<a  class="btn btn-outline-danger btn-sm" href="<?php echo site_url('removemedication').'/'.$animal[0]['chart_num']; ?>">Remove a Medication</a>
 <?php }?>
-
+</div>
 <?php
 if(!empty($medications)){
 ?>
@@ -423,12 +427,14 @@ if(!empty($medications)){
 
 <div role="tabpanel" class="tab-pane" id="vaccinations">
 <p>Vaccinations</p>
-<a href="<?php echo site_url('addvaccination').'/'.$animal[0]['chart_num']; ?>">Add Vaccination</a><br/>
+<div class="buttons" style="float:right;">
+<a class="btn btn-outline-success btn-sm" href="<?php echo site_url('addvaccination').'/'.$animal[0]['chart_num']; ?>">Add Vaccination</a>
 <?php
 if(!empty($vaccinations)){
 ?>
-<a href="<?php echo site_url('removevaccination').'/'.$animal[0]['chart_num']; ?>">Remove a Vaccination</a><br/>
+<a class="btn btn-outline-danger btn-sm"href="<?php echo site_url('removevaccination').'/'.$animal[0]['chart_num']; ?>">Remove a Vaccination</a>
 <?php }?>
+</div>
 <?php
 if(!empty($vaccinations)){
 ?>
