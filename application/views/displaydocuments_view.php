@@ -53,6 +53,7 @@ $(document).ready( function() {
     <?php echo form_open_multipart('displaydocuments'.'/'.$chart_num);?>
 
            
+<?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
            
 <div class="form-group">
            <label class="btn btn-default btn-file">
@@ -65,7 +66,7 @@ $(document).ready( function() {
 
     </form>
 
-     
+<?php } ?>
 
 
 
