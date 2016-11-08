@@ -6,6 +6,7 @@ class Search extends CI_Controller {
  {
    parent::__construct();
       $this->load->model('animal','',TRUE);
+      $this->load->model('adopter','',TRUE);
  }
  
 
@@ -19,6 +20,7 @@ class Search extends CI_Controller {
     $data['animalcharts'] = $this->animal->getAllAnimalChartNums();
     $data['animalruns'] = $this->animal->getAllAnimalRunNames();
     $data['animalstatuses'] = $this->animal->getAllAnimalStatuses();
+    $data['adopters'] = $this->adopter->getAllAdopters();
 
 
    if($this->session->userdata('logged_in'))
@@ -70,6 +72,15 @@ class Search extends CI_Controller {
      $result = $this->animal->getAnimalByName($search_value);
     }else if($search_type == "run"){
      $result = $this->animal->getAnimalByRun($search_value);
+    }else if($search_type == "adopter_name"){
+     $adopter_result = $this->adopter->getAdopterByName($search_value);
+     $result = $this->animal->getAnimalByAdopter($adopter_result[0]['id']);
+    }else if($search_type == "adopter_email"){
+     $adopter_result = $this->adopter->getAdopterByEmail($search_value);
+     $result = $this->animal->getAnimalByAdopter($adopter_result[0]['id']);
+    }else if($search_type == "adopter_phone"){
+     $adopter_result = $this->adopter->getAdopterByPhone($search_value);
+     $result = $this->animal->getAnimalByAdopter($adopter_result[0]['id']);
     }else if($search_type == "status"){
      $result = $this->animal->getAnimalByStatus($search_value);
     }

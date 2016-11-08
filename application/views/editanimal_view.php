@@ -134,6 +134,9 @@ $( document ).ready(function() {
      <a class="btn btn-info" href="<?php echo site_url('displayanimal/getmedicalinfo').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Medical Info PDF</a>
 
      <a class="btn btn-info" href="<?php echo site_url('displayanimal/getnotes').'/'.$animal[0]['chart_num']; ?>" target="_blank">Animal Notes PDF</a>
+
+      <a class="btn btn-info" href="<?php echo site_url('displaydocuments').'/'.$animal[0]['chart_num']; ?>">View/Add Extra Documents</a>
+
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -154,6 +157,23 @@ $( document ).ready(function() {
      <label for="chart_num">Chart Number:</label>
      <input readonly type="text" size="20" id="chart_num" name="chart_num" class="form-control" value="<?=$animal[0]['chart_num']?>"/>
 </div>
+
+
+        <div class="form-group">
+                <label for="status">Adopter:</label>
+                <select name="adopter" id="adopter" class="form-control">
+          <option selected="selected" value="">Select an Adopter</option>
+          <option value="">N/A</option>
+                  <?php
+                    foreach($adopters as $adopter) { 
+                     ?>
+                      <option  value="<?= $adopter['id'] ?>"  <?php if($animal[0]['adopter'] == $adopter['id']) { ?> selected <?php } ?> ><?= $adopter['name'] ?></option>
+                  <?php
+                      
+                    } ?>
+                </select>
+        </div>
+
 
 <div class="form-group">
         <label for="status">Run Number:</label>

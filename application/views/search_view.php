@@ -20,12 +20,15 @@
 
       <div class="form-group">
         <span> by </span>
-        <select name="search_type" id="search_type">
+        <select name="search_type" id="search_type" style="color:black;">
           <option selected="selected" value="" style="color:black;">Choose a search type</option>
               <option style="color:black;" value="id" <?php echo set_select('search_type', 'id'); ?>>By Chart Number</option>
               <option style="color:black;" value="name" <?php echo set_select('search_type', 'name'); ?>>By Name</option>
               <option style="color:black;" value="run" <?php echo set_select('search_type', 'run'); ?>>By Run Name</option>
               <option style="color:black;" value="status" <?php echo set_select('search_type', 'status'); ?>>By Status</option>
+              <option style="color:black;" value="adopter_name" <?php echo set_select('search_type', 'adopter_name'); ?>>By Adoptee's Name</option>
+              <option style="color:black;" value="adopter_phone" <?php echo set_select('search_type', 'adopter_phone'); ?>>By Adoptee's Phone</option>
+              <option style="color:black;" value="adopter_email" <?php echo set_select('search_type', 'adopter_email'); ?>>By Adoptee's Email</option>
         </select> 
       </div>
 
@@ -39,6 +42,9 @@
        charts = [];
        runs = [];
        statuses = [];
+       adoptees_names = [];
+       adoptees_emails = [];
+       adoptees_phones = [];
 
               <?php
                     foreach($animalnames as $animal) { ?>
@@ -55,6 +61,16 @@
               <?php
                     foreach($animalstatuses as $status) { ?>
                     statuses.push("<?=$status['name']?>");
+              <?php } ?>
+              <?php
+                    foreach($adopters as $adopter) { ?>
+                    adoptees_names.push("<?=$adopter['name']?>");
+                    <?php if(isset($adopter['email'])){ ?>
+                    adoptees_emails.push("<?=$adopter['email']?>");
+                    <?php } ?>
+                     <?php if(isset($adopter['phone'])){ ?>
+                    adoptees_phones.push("<?=$adopter['phone']?>");
+                       <?php } ?>
               <?php } ?>
 
 $('#search_type').change(function() {
@@ -75,6 +91,18 @@ $('#search_type').change(function() {
   }else if(val == "status"){
             $( "#search_value" ).autocomplete({
               source: statuses
+            });
+  }else if(val == "adopter_name"){
+            $( "#search_value" ).autocomplete({
+              source: adoptees_names
+            });
+  }else if(val == "adopter_phone"){
+            $( "#search_value" ).autocomplete({
+              source: adoptees_phones
+            });
+  }else if(val == "adopter_email"){
+            $( "#search_value" ).autocomplete({
+              source: adoptees_emails
             });
   }
 

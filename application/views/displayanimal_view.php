@@ -27,6 +27,9 @@
      <a class="btn btn-info" href="getmedicalinfo/<?=$animal[0]['chart_num']?>" target="_blank">Animal Medical Info PDF</a>
 
      <a class="btn btn-info"   href="getnotes/<?=$animal[0]['chart_num']?>" target="_blank">Animal Notes PDF</a>
+     <?php if($document_count > 0) { ?>
+     <a class="btn btn-info" href="<?php echo site_url('displaydocuments').'/'.$animal[0]['chart_num']; ?>">View Extra Documents</a>
+     <?php } ?>
 </div>
 
   <ul class="nav nav-pills" role="tablist">
@@ -47,6 +50,22 @@
         <div class="form-group">
              <label for="chart_num">Chart Number:</label>
              <input readonly type="text" size="20" id="chart_num" name="chart_num" class="form-control" value="<?=$animal[0]['chart_num']?>"/>
+        </div>
+
+        <div class="form-group">
+                <label for="status">Adopter:</label>
+                <select readonly name="adopter" id="adopter" class="form-control">
+                  <?php
+                    foreach($adopters as $adopter) { 
+                      if($animal[0]['adopter'] == $adopter['id']) { ?>
+                      <option  value="<?= $adopter['id'] ?>" selected ><?= $adopter['name'] ?></option>
+                  <?php
+                      }
+                    } ?>
+                </select> 
+                <?php if(isset($animal[0]['adopter'] )){ ?>
+          <a href="<?php echo site_url('displayadopter').'/'.$animal[0]['adopter'] ?>">View Adopter's Information</a> 
+                <?php } ?>
         </div>
 
         <div class="form-group">

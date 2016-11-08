@@ -75,7 +75,8 @@
                <li><a href="<?php echo site_url('displayspecies') ?>">Display/Adjust Species</a></li>
                <li><a href="<?php echo site_url('displayruns') ?>">Display/Adjust Runs</a></li>
                 <?php } ?>
-                 <li><a href="<?php echo site_url('displayanimals') ?>">View All Animals</a></li>
+               <li><a href="<?php echo site_url('displayadopters') ?>">View All Adopters</a></li>
+               <li><a href="<?php echo site_url('displayanimals') ?>">View All Animals</a></li>
                  <!-- This hasn't been done yet - doesn't really seem to be a need with homepage view. Why would we need to specifically go into a run if we can go by other details?
                  Searching via run is possible, as well. -->
                  <!--<li><a href="<?php echo site_url('displayanimalsrun') ?>">View All Animals By Run</a></li>-->

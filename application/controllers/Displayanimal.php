@@ -11,7 +11,9 @@ class DisplayAnimal extends CI_Controller {
    $this->load->model('weight','',TRUE);
    $this->load->model('safer','',TRUE);
    $this->load->model('test','',TRUE);
-
+   $this->load->model('adopter','',TRUE);
+   $this->load->model('document','',TRUE);
+   $this->load->library('encrypt');
  }
 
    function _remap($method,$args)
@@ -48,6 +50,8 @@ class DisplayAnimal extends CI_Controller {
     $data['statuses'] = $this->animal->getAllStatus();
     $data['genders'] = $this->animal->getAllGenders();
     $data['runs'] = $this->animal->getAllRuns();
+    $data['adopters'] = $this->adopter->getAllAdopters();
+    $data['document_count'] = $this->document->record_count_documents($chart_num);
 
 
    if($this->session->userdata('logged_in'))
@@ -86,6 +90,20 @@ class DisplayAnimal extends CI_Controller {
 
  $animal = $this->animal->getAnimalById($chart_num[0]);
 
+ $is_adopter = false;
+ if(!empty($animal[0]['adopter'])){
+    $adopter = $this -> adopter -> getAdopterById($animal[0]['adopter']);
+    if(!empty($adopter)){
+      $is_adopter = true;
+        $name = $adopter[0]['name'];
+        $address = $adopter[0]['address'];
+        $city = $adopter[0]['city'];
+        $phone = $adopter[0]['phone'];
+        $email = $adopter[0]['email'];
+        $license = $this->encrypt->decode($adopter[0]['license']);
+    }
+ }
+
    $this->load->library('pdf');  
    $pdf =  $this->pdf->load();
 
@@ -110,11 +128,15 @@ class DisplayAnimal extends CI_Controller {
               $pdf->WriteText(130,206, $animal[0]['age'] ); 
               $pdf->WriteText(130,213, $animal[0]['sex'] ); 
               $pdf->WriteText(130,220, $animal[0]['microchip_num'] ); 
-              //Name - 497, 747    
-              //Breed -475, 775
-              //Age - 466,805
-              //Sex - 463, 834
-              //Microchip - 505, 859
+              if($is_adopter){
+                $pdf->WriteText(25,191, $name);
+                $pdf->WriteText(25,199, $address); 
+                $pdf->WriteText(26,213, $city);
+                $pdf->WriteText(25,220, $phone ); 
+                $pdf->WriteText(25,227, $email ); 
+                $pdf->WriteText(32,234, $license);
+              }
+
 
               $pdf->Output($pdfFilePath, 'F');
         

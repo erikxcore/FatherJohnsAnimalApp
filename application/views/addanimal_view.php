@@ -122,7 +122,20 @@ $( document ).ready(function() {
      <input type="text" size="20" id="chart_num" name="chart_num" class="form-control"  value="<?php echo set_value('chart_num'); ?>"/>
 </div>
 
-
+        <div class="form-group">
+                <label for="status">Adopter:</label>
+                <select name="adopter" id="adopter" class="form-control">
+          <option selected="selected" value="">Select an Adopter</option>
+          <option value="">N/A</option>
+                  <?php
+                    foreach($adopters as $adopter) { 
+                     ?>
+                      <option  value="<?= $adopter['id'] ?>"   ><?= $adopter['name'] ?></option>
+                  <?php
+                      
+                    } ?>
+                </select> 
+        </div>
 
 <div class="form-group">
         <label for="status">Run Number:</label>

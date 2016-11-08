@@ -2,10 +2,17 @@
 Class Animal extends CI_Model
 {
 
-function add($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$user_date,$medical_notes){
+function add($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$user_date,$medical_notes,$adopter){
 //request by garret
 if($status == "Adopted"){
   $run_num = "";
+}
+
+if(!empty($adopter)){
+  $this->load->model('adopter','',TRUE);
+  $this -> adopter -> assignAdopter($adopter,$chart_num);
+}else{
+  $adopter = null;
 }
 
 $data = array(
@@ -30,16 +37,40 @@ $data = array(
 'user' => $user,
 'user_date' => $user_date,
 'medical_notes' => $medical_notes,
+'adopter' => $adopter
 );
 return $this -> db ->insert('animals', $data);
 }
 
-function edit($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$user_date,$medical_notes){
+function edit($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$user_date,$medical_notes,$adopter){
 
 //request by garret
 if($status == "Adopted"){
   $run_num = "";
 }
+
+$this -> db -> where('chart_num', $chart_num);
+$animal = $this -> db -> get('animals');
+$data = $animal->result_array();
+
+$this->load->model('adopter','',TRUE);
+$saved_adopter = $data[0]['adopter'];
+//If this animal has an adopter on it already...
+if(!empty($saved_adopter)){
+  //Check if the incoming information matches, if so don't remove or add.
+  //If no match, remove the chart number from the past adopter and assign the new adopter
+  if($saved_adopter != $adopter){
+    $this-> adopter -> removeAssignedAdopter($saved_adopter,$chart_num);
+    $this-> adopter -> assignAdopter($adopter,$chart_num);
+  }
+}else if(!empty($adopter) && empty($saved_adopter)){ 
+  //If animal had no adopter and incoming data has a value assign
+  $this-> adopter -> assignAdopter($adopter,$chart_num);
+}else if(empty($adopter) && !empty($saved_adopter)){
+  //If incoming data has no adopter but animal had one, remove
+  $this-> adopter -> removeAssignedAdopter($saved_adopter,$chart_num);
+}
+
 
 //no clean way to handle these symbols with history log
 $behavior_strategy_safe = str_replace(",","%2C",$behavior_strategy);
@@ -68,6 +99,7 @@ $data = array(
 'user' => $user,
 'user_date' => $user_date,
 'medical_notes' => $medical_notes,
+'adopter' => $adopter
 );
     $this -> db -> from('animals');
     $where = "chart_num = " . $chart_num;
@@ -95,13 +127,21 @@ $data = array(
     return $this->db->update('animals' ,$data);
 }
 
-//for future drag n drop
-function switchRunNum($run_num1,$run_num2){
-//TO DO
 
-}
 
 function remove_image($chart_num){
+
+
+$this -> db -> where('chart_num', $chart_num);
+$animal = $this -> db -> get('animals');
+$data = $animal->result_array();
+if(isset($data[0]['picture'])){
+$data[0]['picture'] = str_replace('/garret2/', './', $data[0]['picture']);
+    if (file_exists($data[0]['picture'])) {
+        unlink($data[0]['picture']);
+    }
+}
+
   $data = array(
 'picture' => null,
 );
@@ -111,6 +151,25 @@ function remove_image($chart_num){
 }
 
 function remove($chart_num){
+
+//Adoptee check
+$this -> db -> where('chart_num', $chart_num);
+$animal = $this -> db -> get('animals');
+$data = $animal->result_array();
+$this->load->model('adopter','',TRUE);
+$saved_adopter = $data[0]['adopter'];
+//If this animal has an adopter on it remove it
+if(isset($saved_adopter)){  
+    $this-> adopter -> removeAssignedAdopter($saved_adopter,$chart_num);
+}
+
+if(isset($data[0]['picture'])){
+$data[0]['picture'] = str_replace('/garret2/', './', $data[0]['picture']);
+    if (file_exists($data[0]['picture'])) {
+        unlink($data[0]['picture']);
+    }
+}
+
       $data = array(
      'chart_num' => $chart_num,
       );
@@ -342,6 +401,13 @@ function getAllAdoptedAnimals(){
    return $query->result_array();
  }
 
+   function getAnimalByAdopter($adopter){
+   $this -> db -> from('animals');
+   $this -> db -> where('adopter',$adopter);
+   $query = $this -> db -> get();
+   return $query->result_array();
+ }
+
    function getAnimalRunColor($id){
     $query = $this->db->query('select color, status.name from status left join animals on animals.status = status.name where animals.id = \''.$id.'\'');
    return $query->result_array();
@@ -540,6 +606,12 @@ function mysql_affected_fields($sql)
         }
 
 return $different;
+
+}
+
+//for future drag n drop
+function switchRunNum($run_num1,$run_num2){
+//TO DO
 
 }
 

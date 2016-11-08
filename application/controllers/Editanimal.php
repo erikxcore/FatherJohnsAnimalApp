@@ -13,7 +13,8 @@ class EditAnimal extends CI_Controller {
    $this->load->model('history','',TRUE);
    $this->load->model('run','',TRUE);
    $this->load->model('test','',TRUE);
-
+   $this->load->model('adopter','',TRUE);
+   $this->load->model('document','',TRUE);
  }
 
    function _remap($method,$args)
@@ -49,8 +50,9 @@ class EditAnimal extends CI_Controller {
     $data['statuses'] = $this->animal->getAllStatus();
     $data['genders'] = $this->animal->getAllGenders();
     $data['runs'] = $this->animal->getAllRuns();
-
-
+    $data['adopters'] = $this->adopter->getAllAdopters();
+    $data['document_count'] = $this->document->record_count_documents($chart_num);
+    
     $this->load->library('form_validation');
 
 
@@ -72,6 +74,7 @@ class EditAnimal extends CI_Controller {
 
    $this->form_validation->set_rules('name', 'Name', 'trim|required');
    $this->form_validation->set_rules('chart_num', 'Chart Number', 'trim|required');
+   $this->form_validation->set_rules('adopter', 'Adopter', 'trim');
    $this->form_validation->set_rules('run_num', 'Run Number', 'trim');
    $this->form_validation->set_rules('species', 'Species', 'trim|required');
    $this->form_validation->set_rules('breed', 'Breed', 'trim');
@@ -130,7 +133,7 @@ class EditAnimal extends CI_Controller {
       $picture = null;
     }
 
-     $this->edit_animal($this->input->post('name'),$this->input->post('chart_num'),$this->input->post('run_num'),$this->input->post('species'),$this->input->post('breed'),$this->input->post('date_of_arrival'),$this->input->post('acquired'),$this->input->post('acquired_how'),$this->input->post('microchip_num'),$this->input->post('age'),$this->input->post('sex'),$this->input->post('feeding_instructions'),$this->input->post('status'),$this->input->post('status_date'),$this->input->post('behavior_strategy'),$this->input->post('notes'),$this->input->post('safer_complete'),$this->input->post('medical_notes'),$picture);
+     $this->edit_animal($this->input->post('name'),$this->input->post('chart_num'),$this->input->post('run_num'),$this->input->post('species'),$this->input->post('breed'),$this->input->post('date_of_arrival'),$this->input->post('acquired'),$this->input->post('acquired_how'),$this->input->post('microchip_num'),$this->input->post('age'),$this->input->post('sex'),$this->input->post('feeding_instructions'),$this->input->post('status'),$this->input->post('status_date'),$this->input->post('behavior_strategy'),$this->input->post('notes'),$this->input->post('safer_complete'),$this->input->post('medical_notes'),$picture,$this->input->post('adopter'));
      $this->session->set_flashdata('results', 'Animal succesfully modified!');
 
      redirect('/editanimal/'.$chart_num, 'refresh');
@@ -142,7 +145,7 @@ class EditAnimal extends CI_Controller {
 
  }
 
-  function edit_animal($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$medical_notes,$picture){
+  function edit_animal($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$medical_notes,$picture,$adopter){
     $date_of_arrival = date('Y-m-d', strtotime($date_of_arrival));
     $status_date = date('Y-m-d', strtotime($status_date));
 
@@ -150,7 +153,7 @@ class EditAnimal extends CI_Controller {
       $sd = $this->session->userdata('logged_in');
       $user= $sd['username'];
 
-    $result = $this->animal->edit($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$date,$medical_notes);
+    $result = $this->animal->edit($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquired,$acquired_how,$microchip_num,$age,$sex,$feeding_instructions,$status,$status_date,$behavior_strategy,$notes,$safer_complete,$picture,$user,$date,$medical_notes,$adopter);
 
     if($result){
       $this->history->addHistoryEntry($user,$date,"Modified an animal : " . $name . " with chart number " . $chart_num);
