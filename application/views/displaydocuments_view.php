@@ -49,11 +49,12 @@ $(document).ready( function() {
         </table>
 
     </div>
+    <?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
+
     <h4>Upload Files</h4>
     <?php echo form_open_multipart('displaydocuments'.'/'.$chart_num);?>
 
            
-<?php if(isset($_SESSION['superuser']) && $_SESSION['superuser'] == 1 ){ ?>
            
 <div class="form-group">
            <label class="btn btn-default btn-file">
