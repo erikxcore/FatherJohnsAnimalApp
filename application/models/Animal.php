@@ -137,6 +137,7 @@ $animal = $this -> db -> get('animals');
 $data = $animal->result_array();
 if(isset($data[0]['picture'])){
 $data[0]['picture'] = str_replace('/garret2/files', './uploads', $data[0]['picture']);
+
     if (file_exists($data[0]['picture'])) {
         unlink($data[0]['picture']);
     }

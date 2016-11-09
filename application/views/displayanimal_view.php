@@ -63,7 +63,7 @@
                       }
                     } ?>
                 </select> 
-                <?php if(isset($animal[0]['adopter'] )){ ?>
+                <?php if(!empty($animal[0]['adopter'] )){ ?>
           <a href="<?php echo site_url('displayadopter').'/'.$animal[0]['adopter'] ?>">View Adopter's Information</a> 
                 <?php } ?>
         </div>
