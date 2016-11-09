@@ -298,7 +298,7 @@ if(!empty($medications)){
       <tr>
         <th>Name</th>
         <th>Date Started</th>
-        <th>Date Due</th>
+        <th>Date Completed</th>
         <th>Dose</th>
         <th>Duration</th>
       </tr>
