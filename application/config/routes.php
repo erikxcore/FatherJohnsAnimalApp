@@ -64,4 +64,5 @@ $route['displaynonadopted/(:any)'] = "displaynonadopted";
 $route['displaycats/(:any)'] = "displaycats";
 $route['displaydogs/(:any)'] = "displaydogs";
 
+$route['files/(:any)'] = "filecontroller/$1";
 

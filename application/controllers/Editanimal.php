@@ -128,7 +128,7 @@ class EditAnimal extends CI_Controller {
     
     if ($this->upload->do_upload('picture')) {
       $image_data = $this->upload->data();
-      $picture = base_url() . "/uploads/" . $image_data['file_name'];
+      $picture = base_url() . "files/" . $image_data['file_name'];
     }else{
       $picture = null;
     }

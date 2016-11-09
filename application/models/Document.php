@@ -25,7 +25,7 @@ $this->db->from('documents');
 $this->db->where('id',$id);
 $doc_url = $this->db->get();
 $doc_url = $doc_url->result_array();
-$doc_url[0]['url'] = str_replace('/garret2/', './', $doc_url[0]['url']);
+$doc_url[0]['url'] = str_replace('/garret2/files', './uploads', $doc_url[0]['url']);
 
     if (file_exists($doc_url[0]['url'])) {
         unlink($doc_url[0]['url']);

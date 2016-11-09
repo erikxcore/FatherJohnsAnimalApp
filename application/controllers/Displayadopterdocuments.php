@@ -74,7 +74,7 @@ $this->load->library('form_validation');
 
         if ($this->upload->do_upload('documents')) {
             $this->upload->data();
-             $url = base_url() . "uploads/" . $fileName;
+             $url = base_url() . "files/" . $fileName;
              $this->adopter_document->addDocument($id,$url);
            $this->session->set_flashdata('results', 'Document(s) successfully uploaded to the database.');
 
