@@ -17,13 +17,15 @@ $(function() {
         <h1>Edit An Adopter's Record</h1>
     </div>
 
-    <a href="<?=site_url();?>displayadopters">Go Back to Display Adopter Page</a></br>
-
+ <a href="javascript:history.back();">Go Back</a></br>
+ 
     <?php if(!empty($this->session->flashdata('results'))){ ?>
         <?php echo $this->session->flashdata('results'); ?>
     <?php } ?>
     <?php echo validation_errors(); ?>
     <?php echo form_open('editadopter' .'/'.$adopter[0]['id'] );?>
+
+     <a class="btn btn-info" href="<?php echo site_url('displayadopterdocuments').'/'.$adopter[0]['id']; ?>">View/Edit Extra Documents</a>
 
       <div class="form-group">
            <label for="id">ID:</label>
@@ -61,7 +63,7 @@ $(function() {
            <input type="text" size="20" id="license" name="license" class="form-control" value="<?=$adopter[0]['license']?>"/>
       </div>
       
-      <?php if(isset($adopter[0]['chart_num'])) { ?>
+      <?php if(!empty($adopter[0]['chart_num'])) { ?>
         <p>Assigned Animals:</p>
       <?php
       $chart_num_array = unserialize($adopter[0]['chart_num']);

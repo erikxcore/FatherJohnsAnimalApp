@@ -4,7 +4,8 @@
         <h1>View An Adopter</h1>
     </div>
 
-    <a href="javascript:history.back();">Go Back</a></br>
+   
+    <a href="<?=site_url();?>displayadopters">Go Back to Display Adopters Page</a></br>
 
 
     <?php if(!empty($this->session->flashdata('results'))){ ?>
@@ -12,6 +13,9 @@
     <?php } ?>
     <?php echo form_open('displayadopter' .'/'.$adopter[0]['id']); ?>
 
+     <?php if($document_count > 0) { ?>
+     <a class="btn btn-info" href="<?php echo site_url('displayadopterdocuments').'/'.$adopter[0]['id']; ?>">View Extra Documents</a>
+     <?php } ?>
 
       <div class="form-group">
            <label for="id">ID:</label>
@@ -49,7 +53,7 @@
            <input readonly type="text" size="20" id="license" name="license" class="form-control" value="<?=$adopter[0]['license']?>"/>
       </div>
 
-      <?php if(isset($adopter[0]['chart_num'])){ ?>
+      <?php if(!empty($adopter[0]['chart_num'])){ ?>
         <p>Assigned Animals:</p>
       <?php
       $chart_num_array = unserialize($adopter[0]['chart_num']);

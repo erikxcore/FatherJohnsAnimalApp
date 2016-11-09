@@ -7,6 +7,7 @@ class EditAdopter extends CI_Controller {
    parent::__construct();
    $this->load->model('adopter','',TRUE);
    $this->load->model('history','',TRUE);
+   $this->load->model('adopter_document','',TRUE);
    $this->load->library('encrypt');
  }
 
@@ -35,6 +36,7 @@ class EditAdopter extends CI_Controller {
     $adopter = $this->adopter->getAdopterById($id);
     $adopter[0]['license'] = $this->encrypt->decode($adopter[0]['license']);
     $data['adopter'] = $adopter;
+    $data['document_count'] = $this->adopter_document->record_count_documents($id);
 
     $this->load->library('form_validation');
 

@@ -13,7 +13,7 @@
     <?php echo form_open('removeuser'); ?>
 
       <div class="form-group">
-        <select name="username" id="username">
+        <select name="username" id="username" style="color:black;">
           <option class="form-control" selected="selected" value="">Choose a user</option>
           <?php
             foreach($usernames as $username) { ?>

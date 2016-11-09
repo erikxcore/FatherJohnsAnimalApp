@@ -12,7 +12,7 @@
     <?php echo form_open('changeallpassword'); ?>
 
       <div class="form-group">
-        <select name="username" id="username">
+        <select name="username" id="username" style="color:black;">
           <option clas="form-control" selected="selected" value="">Choose a user</option>
           <?php
             foreach($usernames as $username) { ?>

@@ -59,6 +59,7 @@ $route['displayanimals/(:any)'] = "displayanimals";
 $route['displayadopters/(:any)'] = "displayadopters";
 $route['displayadopted/(:any)'] = "displayadopted";
 $route['displaydocuments/(:any)'] = "displaydocuments/$1";
+$route['displayadopterdocuments/(:any)'] = "displayadopterdocuments/$1";
 $route['displaynonadopted/(:any)'] = "displaynonadopted";
 $route['displaycats/(:any)'] = "displaycats";
 $route['displaydogs/(:any)'] = "displaydogs";
