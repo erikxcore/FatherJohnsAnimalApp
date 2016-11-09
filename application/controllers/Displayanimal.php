@@ -114,8 +114,8 @@ class DisplayAnimal extends CI_Controller {
 
     $pagecount = $pdf->SetSourceFile("uploads/AdoptionContractTemplate.pdf");
 
-    $pdfUploadPath = "uploads/Adoption_Contract_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
-    $pdfFilePath = "files/Adoption_Contract_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
+    $pdfUploadPath = "uploads/Adoption_Contract_" .  $chart_num[0] . ".pdf";
+    $pdfFilePath = "files/Adoption_Contract_" .  $chart_num[0] . ".pdf";
 
     for ($i=1; $i<=($pagecount); $i++) {
         $pdf->AddPage();
@@ -203,8 +203,8 @@ function getcompleteinfo($chart_num){
     $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Dogs_Template.pdf");
   }
 
-    $pdfUploadPath = "uploads/Adoption_Contract_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
-    $pdfFilePath = "files/Adoption_Contract_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
+    $pdfUploadPath = "uploads/Adoption_Contract_Info_" .  $chart_num[0] . ".pdf";
+    $pdfFilePath = "files/Adoption_Contract_Info_" .  $chart_num[0] . ".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -410,8 +410,8 @@ function getmedicalinfo($chart_num){
 
     $pagecount = $pdf->SetSourceFile("uploads/MedicalTreatmentTemplate.pdf");
 
-    $pdfUploadPath = "uploads/Medical_Info_" . $animal[0]['name'] . "_" . $chart_num[0] .".pdf";
-    $pdfFilePath = "files/Medical_Info_" . $animal[0]['name'] . "_" . $chart_num[0] .".pdf";
+    $pdfUploadPath = "uploads/Medical_Info_" . $chart_num[0] .".pdf";
+    $pdfFilePath = "files/Medical_Info_" .  $chart_num[0] .".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -473,7 +473,7 @@ function getmedicalinfo($chart_num){
               <thead>
               <tr>
                 <td>Date Started</td>
-                <td>Date Due (If Applicable)</td>
+                <td>Date Completed (If Applicable)</td>
                 <td>Medication Name & Notes</td>
               </tr>
               </thead><tbody>";
@@ -626,8 +626,8 @@ function getnotes($chart_num){
     $pagecount = $pdf->SetSourceFile("uploads/Adopter_Info_Dogs_Template.pdf");
   }
 
-    $pdfUploadPath = "uploads/Animal_Notes_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
-    $pdfFilePath = "files/Animal_Notes_Info_" . $animal[0]['name'] . "_" . $chart_num[0] . ".pdf";
+    $pdfUploadPath = "uploads/Animal_Notes_Info_" .  $chart_num[0] . ".pdf";
+    $pdfFilePath = "files/Animal_Notes_Info_" . $chart_num[0] . ".pdf";
 
 
     //If multiple pages; currently is not but in case the contract is updated
@@ -656,7 +656,7 @@ function getnotes($chart_num){
 
               if(isset($animal[0]['picture'])){
               $animal[0]['picture'] = str_replace('/garret2/files/','uploads/',$animal[0]['picture']);
-              log_message('Error','URL for PDF is : ' . $animal[0]['picture']);
+              //log_message('Error','URL for PDF is : ' . $animal[0]['picture']);
               $html .= "<div style='max-width:300px;text-align:center;'><img src='". $animal[0]['picture']."' style='max-width:300px;margin:0 auto;'/></div>";
               }
                

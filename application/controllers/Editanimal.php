@@ -125,10 +125,15 @@ class EditAnimal extends CI_Controller {
 
 
     $this->load->library('upload', $config);
-    
+
+        $fileName =  uniqid() . 'file_' . $_FILES['picture']['name'];
+        $fileName =  urlencode($fileName);
+        $config['file_name'] = $fileName;
+        $this->upload->initialize($config);
+
     if ($this->upload->do_upload('picture')) {
       $image_data = $this->upload->data();
-      $picture = base_url() . "files/" . $image_data['file_name'];
+      $picture = base_url() . "files/" . $fileName;
     }else{
       $picture = null;
     }

@@ -68,7 +68,8 @@ $this->load->library('form_validation');
         $_FILES['documents']['error']= $files['documents']['error'][$i];
         $_FILES['documents']['size']= $files['documents']['size'][$i];    
 
-        $fileName = $files['documents']['name'][$i];
+        $fileName = uniqid() . 'file_' . $files['documents']['name'][$i];
+        $fileName =  urlencode($fileName);
         $config['file_name'] = $fileName;
         $this->upload->initialize($config);
 

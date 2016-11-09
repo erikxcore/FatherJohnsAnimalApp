@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-             <label for="date_due">Date Due:</label>
+             <label for="date_due">Date Completed:</label>
              <input value="<?php echo set_value('date_due'); ?>" type="text" size="20" id="date_due" name="date_due" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
         </div>
 
