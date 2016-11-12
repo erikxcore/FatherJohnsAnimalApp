@@ -80,6 +80,7 @@ class AddVaccination extends CI_Controller {
       $vac = array();
       array_push($vac,$this->input->post('date_given_'.$i),$this->input->post('date_completed_'.$i),$this->input->post('vac_name_'.$i),$this->input->post('serial_num_'.$i));
       array_push($vac_to_add,$vac);
+      $processed = true;
      }
       $i++;
      }
