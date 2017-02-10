@@ -35,6 +35,10 @@ class Home extends CI_Controller {
     $data['emergencyvaccinationdogs'] = $this->animal->getVaccinationRequiredDogs();
     $data['emergencyvaccinationcats'] = $this->animal->getVaccinationRequiredCats();
 
+    $data['overduevaccinationsDogs'] = $this->animal->getOverdueVaccinationRequiredDogs();
+    $data['overduevaccinationsCats'] = $this->animal->getOverdueVaccinationRequiredCats();
+
+
     if($this->homepage->getHomePageEnabled() == true){
       $allanimals = $this->animal->getAllAnimals();
       $data['allanimals'] = $allanimals;

@@ -5,6 +5,7 @@ class DailyVaccination extends CI_Controller {
  function __construct()
  {
    parent::__construct();
+   $this->load->model('animal','',TRUE);
    $this->load->model('vaccination','',TRUE);
  }
  
@@ -29,6 +30,7 @@ class DailyVaccination extends CI_Controller {
  	$date = $this->input->get('date'); 
 
     $data['allvaccinations'] = $this->vaccination->getAllVaccinationByDate($date);
+    $data['overduevaccinations'] = $this->animal->getOverdueVaccinationRequiredAll();
 
      if($this->session->userdata('logged_in'))
    {

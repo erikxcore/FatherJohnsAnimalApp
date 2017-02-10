@@ -243,6 +243,27 @@ function get_all_animals_paged($limit, $start) {
    return $query->result_array();
  }
 
+   function getOverdueVaccinationRequiredAll(){
+     $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE AND animals.status != "Adopted"');
+      //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();  
+   }
+
+   function getOverdueVaccinationRequiredCats(){
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE AND animals.status != "Adopted" AND animals.species = "Cat"');
+      //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();
+   }
+
+   function getOverdueVaccinationRequiredDogs(){
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE AND animals.status != "Adopted" AND animals.species = "Dog"');
+   //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();
+   }
+
 //following two will only return results if the correct Species exists
  function getAllDogs(){
    $this -> db -> from('animals');

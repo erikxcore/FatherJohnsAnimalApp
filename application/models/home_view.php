@@ -52,26 +52,10 @@ $("#search_date").on('changeDate', function (ev) {
           <?php
             } */?>
 -->
-          <div style="width:100%;float:left;clear:both;">
-            <div class="form-group">
-                 <a href="#" class="date_search">Search for vaccination on a specific date</a>
-                 <input style="height:0px;width:0px;float:left;display:inline;background:transparent;"value="" type="text" size="20" id="search_date" name="search_date" class="datepicker form-control" data-date-format="yyyy-mm-dd"/>
-            </div>
-          </div> 
+
 
         <div class="full_width" style="width:100%;float:left;clear:both;">
-              <div class="dog_vac" style="width:50%;float:left;">
-              <?php if( !empty($overduevaccinationsDogs) ){ ?>
-              <p style="font-weight:bold;color:red;font-size: 18px;">Overdue Dog Vaccinations Due</p> 
-              <?php }
-              foreach($overduevaccinationsDogs as $animal) { ?>
-              <p style="width:100%;">
-              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
-              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
-              </p>
-            <?php
-              } ?>
+   
 
 
               <?php if( !empty($emergencyvaccinationdogs) ){ ?>
@@ -85,20 +69,8 @@ $("#search_date").on('changeDate', function (ev) {
               </p>
             <?php
               } ?>
-              </div>
 
-              <div class="cat_vac" style="width:50%;float:right;">
-              <?php if( !empty($overduevaccinationsDogs) ){ ?>
-              <p style="font-weight:bold;color:red;font-size: 18px;">Overdue Cat Vaccinations Due</p>
-              <?php }
-              foreach($overduevaccinationsDogs as $animal) { ?>
-              <p style="width:100%;">
-              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
-              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
-              </p>
-            <?php
-              } ?>
+
 
 
               <?php if( !empty($emergencyvaccinationcats) ){ ?>
@@ -112,7 +84,6 @@ $("#search_date").on('changeDate', function (ev) {
               </p>
             <?php
               } ?>
-            </div>
         </div>
 
         <div class="table-responsive" style="clear:both;">  
