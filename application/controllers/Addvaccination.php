@@ -80,14 +80,15 @@ class AddVaccination extends CI_Controller {
       $vac = array();
       array_push($vac,$this->input->post('date_given_'.$i),$this->input->post('date_completed_'.$i),$this->input->post('vac_name_'.$i),$this->input->post('serial_num_'.$i));
       array_push($vac_to_add,$vac);
+      $processed = true;
      }
       $i++;
      }
 
      if(!$processed){
      $data['title'] = 'Add an Animal\'s Vaccination';
+     $this->session->set_flashdata('results', 'Please enable at least one vaccination!');
      $this->load->template('addvaccination_view', $data);
-          $this->session->set_flashdata('results', 'Please enable at least one vaccination!');
      }else{
 
      $this->add_vaccination($this->input->post('chart_num'),$vac_to_add);

@@ -215,7 +215,7 @@ function get_all_animals_paged($limit, $start) {
 
 //no longer a requirement, not used in official capacity
   function getMedicationRequiredAnimals(){
-   $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,medication.name as medication_name,medication.date_due FROM animals JOIN medication ON medication.chart_num = animals.chart_num WHERE medication.date_due < CURRENT_DATE + INTERVAL 5 DAY AND medication.date_due > CURRENT_DATE - INTERVAL 5 DAY ');
+   $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,medication.name as medication_name,medication.date_due FROM animals JOIN medication ON medication.chart_num = animals.chart_num WHERE medication.date_due < CURRENT_DATE + INTERVAL 1 DAY AND medication.date_due > CURRENT_DATE - INTERVAL 1 DAY ');
    //improve to return only the unique row instead of repeat rows if an animal has multiple medications due
    return $query->result_array();
  }
@@ -223,21 +223,21 @@ function get_all_animals_paged($limit, $start) {
 //dependent on a status named Adopted although thats just what not to display..all other statuses will appear
 //to further modify just add and animals.status != &quot; status &quot;...obviously translate the encoding
    function getVaccinationRequiredAnimals(){
-   $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 5 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 5 DAY AND animals.status != "Adopted"');
+   $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 1 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 1 DAY AND animals.status != "Adopted"');
    //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();
  }
 
    function getVaccinationRequiredDogs(){
-   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 5 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 5 DAY AND animals.status != "Adopted" AND animals.species = "Dog"');
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 1 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 1 DAY AND animals.status != "Adopted" AND animals.species = "Dog"');
    //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();
  }
 
     function getVaccinationRequiredCats(){
-   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 5 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 5 DAY AND animals.status != "Adopted" AND animals.species = "Cat"');
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed < CURRENT_DATE + INTERVAL 1 DAY AND vaccination.date_completed > CURRENT_DATE - INTERVAL 1 DAY AND animals.status != "Adopted" AND animals.species = "Cat"');
    //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();

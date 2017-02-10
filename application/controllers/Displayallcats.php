@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class DisplayCats extends CI_Controller {
+class DisplayAllCats extends CI_Controller {
  
  function __construct()
  {
    parent::__construct();
    $this->load->model('animal','',TRUE);
-   $this->load->library("pagination");
+   //$this->load->library("pagination");
  }
  
 
@@ -24,7 +24,7 @@ class DisplayCats extends CI_Controller {
    {
      redirect('login', 'refresh');
    }
-
+/*
        $config["base_url"] = base_url() . "displaycats";
     $config["total_rows"] = $this->animal->record_count_cats();
     $config["per_page"] = 10;
@@ -42,9 +42,9 @@ class DisplayCats extends CI_Controller {
       else{
       $page = 0;
       }
+*/
 
-
-    $allanimals = $this->animal->get_all_cats_paged($config["per_page"], $page);
+    $allanimals = $this->animal->getAllCats();
 
     if(!empty($allanimals)){  
     $i = 0;
@@ -63,11 +63,11 @@ class DisplayCats extends CI_Controller {
     $data['animalcolors'] = array();
     }
 
-     $data["links"] = $this->pagination->create_links();
-     $data["type"] = "cat";
+     //$data["links"] = $this->pagination->create_links();
+
 
      $data['title'] = 'Display All Cats';
-     $this->load->template('displayanimals_view', $data);
+     $this->load->template('displayallcats_view', $data);
 
  }
  

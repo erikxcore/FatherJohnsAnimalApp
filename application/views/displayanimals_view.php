@@ -9,6 +9,14 @@
         <?php echo $this->session->flashdata('results'); ?>
     <?php } ?>
 
+      <?php if($type == "dog"){ ?>
+    <a href="<?php echo site_url('displayalldogs')?>">View All Dogs</a>
+
+      <?php }else if($type == "cat"){ ?>
+    <a href="<?php echo site_url('displayallcats')?>">View All Cats</a>
+
+      <?php } ?>
+
         <table class="table table-striped">
           <thead>
             <tr>

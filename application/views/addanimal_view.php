@@ -119,7 +119,7 @@ $( document ).ready(function() {
 
 <div class="form-group">
      <label for="chart_num"><span class="required">*</span>Chart Number:</label>
-     <input type="text" size="20" id="chart_num" name="chart_num" class="form-control"  value="<?php echo set_value('chart_num'); ?>"/>
+     <input autocomplete="off" type="text" size="20" id="chart_num" name="chart_num" class="form-control"  value="<?php echo set_value('chart_num'); ?>"/>
 </div>
 
         <div class="form-group">

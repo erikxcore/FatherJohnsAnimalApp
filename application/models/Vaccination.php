@@ -9,6 +9,13 @@ Class Vaccination extends CI_Model
    return $query->result_array();
  }
 
+  function getAllVaccinationByDate($date){
+   $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed = "'.$date.'" AND animals.status != "Adopted"');
+   //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();
+ }
+
   function get_all_vaccination_paged($limit, $start, $chart_num) {
     $this -> db ->limit($limit, $start);
     $this -> db -> from('vaccination');

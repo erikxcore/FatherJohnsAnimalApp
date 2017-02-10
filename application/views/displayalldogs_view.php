@@ -1,14 +1,15 @@
     <div class="container theme-showcase" role="main">
 
     <div class="page-header">
-        <h1>Cats</h1>
+        <h1>Dogs</h1>
     </div>
       <div class="well">
 
     <?php if(!empty($this->session->flashdata('results'))){ ?>
         <?php echo $this->session->flashdata('results'); ?>
-    <?php } ?>
-    <a href="<?php echo site_url('displayallcats')?>">View All Cats</a>
+    <?php } ?> 
+
+        <a href="<?php echo site_url('displayalldogs')?>">View All Dogs</a>
 
         <table class="table table-striped">
           <thead>
@@ -52,7 +53,6 @@
             } ?>
             </tbody>
         </table>
-   <div class="paged_links"><?php echo $links; ?></div>
 
       </div>
 

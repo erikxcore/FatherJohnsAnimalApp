@@ -155,7 +155,7 @@ $( document ).ready(function() {
 
 <div class="form-group">
      <label for="chart_num">Chart Number:</label>
-     <input readonly type="text" size="20" id="chart_num" name="chart_num" class="form-control" value="<?=$animal[0]['chart_num']?>"/>
+     <input readonly autocomplete="off" type="text" size="20" id="chart_num" name="chart_num" class="form-control" value="<?=$animal[0]['chart_num']?>"/>
 </div>
 
 

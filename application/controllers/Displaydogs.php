@@ -64,6 +64,7 @@ class DisplayDogs extends CI_Controller {
     }
 
      $data["links"] = $this->pagination->create_links();
+    $data["type"] = "dog";
 
      $data['title'] = 'Display All Dogs';
      $this->load->template('displayanimals_view', $data);

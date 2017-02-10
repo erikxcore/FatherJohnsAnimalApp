@@ -8,7 +8,6 @@
     <?php if(!empty($this->session->flashdata('results'))){ ?>
         <?php echo $this->session->flashdata('results'); ?>
     <?php } ?>
-    <a href="<?php echo site_url('displayallcats')?>">View All Cats</a>
 
         <table class="table table-striped">
           <thead>
@@ -52,7 +51,6 @@
             } ?>
             </tbody>
         </table>
-   <div class="paged_links"><?php echo $links; ?></div>
 
       </div>
 

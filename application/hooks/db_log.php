@@ -15,7 +15,7 @@ class Db_log {
                 $username = "Username was null";
             }
  
-        $filepath = APPPATH . 'logs/Query-log-' . date('Y-m-d') . '.php';
+        $filepath = APPPATH . 'logs/Query-log' . '.php';
         $handle = fopen($filepath, "a+");
  
         $times = $CI->db->query_times;

@@ -1,9 +1,28 @@
+<script type="text/javascript">
+$( document ).ready(function() {
 
+$(".date_search").click(function(event) {
+  event.preventDefault();
+$('#search_date').datepicker().focus();
+}); 
+
+$("#search_date").datepicker('destroy');
+
+$("#search_date").on('changeDate', function (ev) { 
+        var date = $(this).val();
+        window.location.href = "<?php echo site_url() ?>dailyvaccination?date="+date;
+});
+
+});
+
+</script>
+ 
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
          <h1>Home</h1>
          <h2>Welcome <?php echo $username; ?>!</h2>
     </div>
+
 
       <div class="well" style="overflow:auto;">
 
@@ -31,6 +50,13 @@
           <?php
             } */?>
 -->
+           <div style="width:25%;float:left;clear:both;">
+          <div class="form-group">
+               <a href="#" class="date_search">Search for vaccination on a specific date</a>
+               <input style="height:0px;width:0px;float:left;display:inline;background:transparent;"value="" type="text" size="20" id="search_date" name="search_date" class="datepicker form-control" data-date-format="yyyy-mm-dd"/>
+          </div>
+        </div> 
+
         <div class="full_width" style="width:100%;float:left;clear:both;">
               <div class="dog_vac" style="width:50%;float:left;">
               <?php if( !empty($emergencyvaccinationdogs) ){ ?>
@@ -59,7 +85,8 @@
             <?php
               } ?>
             </div>
-        </div> 
+        </div>
+
         <div class="table-responsive" style="clear:both;">  
         <table class="table table-striped">
           <caption>Latest Additions</caption>
