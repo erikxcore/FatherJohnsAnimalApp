@@ -8,6 +8,8 @@ $('#search_date').datepicker().focus();
 
 $("#search_date").datepicker('destroy');
 
+$("#search_date").datepicker().attr("readonly", "readonly");
+
 $("#search_date").on('changeDate', function (ev) { 
         var date = $(this).val();
         window.location.href = "<?php echo site_url() ?>dailyvaccination?date="+date;
@@ -50,7 +52,7 @@ $("#search_date").on('changeDate', function (ev) {
           <?php
             } */?>
 -->
-           <div style="width:25%;float:left;clear:both;">
+           <div style="width:100%;float:left;clear:both;">
           <div class="form-group">
                <a href="#" class="date_search">Search for vaccination on a specific date</a>
                <input style="height:0px;width:0px;float:left;display:inline;background:transparent;"value="" type="text" size="20" id="search_date" name="search_date" class="datepicker form-control" data-date-format="yyyy-mm-dd"/>
