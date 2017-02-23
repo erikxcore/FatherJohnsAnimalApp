@@ -108,7 +108,7 @@ class EditVaccination extends CI_Controller {
               //var_dump($series_json);
 
               foreach($series_json as $json){
-                var_dump($json);
+                //var_dump($json);
               $iterator = $json[0]['iterator'];
               $amount = $json[0]['amount'];
 

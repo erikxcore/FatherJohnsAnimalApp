@@ -96,7 +96,7 @@ class AddVaccination extends CI_Controller {
      $this->add_vaccination($this->input->post('chart_num'),$vac_to_add);
      $this->session->set_flashdata('results', 'Vaccination succesfully added!');
 
-     //redirect('/editanimal/'.$chart_num, 'refresh');
+     redirect('/editanimal/'.$chart_num, 'refresh');
      }
    }else{
      $data['title'] = 'Add an Animal\'s Vaccination';
