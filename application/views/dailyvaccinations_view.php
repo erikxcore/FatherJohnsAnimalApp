@@ -15,7 +15,7 @@
               foreach($overduevaccinations as $animal) { ?>
               <p style="width:100%;">
               <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
+              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_given']?></br>
               <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
               </p>
             <?php
@@ -29,7 +29,7 @@
               foreach($allvaccinations as $animal) { ?>
               <p style="width:100%;">
               <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_completed']?></br>
+              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_given']?></br>
               <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
               </p>
             <?php

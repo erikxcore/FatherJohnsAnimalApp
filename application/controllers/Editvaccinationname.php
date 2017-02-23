@@ -53,6 +53,10 @@ class EditVaccinationName extends CI_Controller {
 
    $this->form_validation->set_rules('id', 'ID', 'trim|required');
    $this->form_validation->set_rules('name', 'Name', 'trim|required');
+   $this->form_validation->set_rules('brand_name', 'Name', 'trim');
+   $this->form_validation->set_rules('serial_number', 'Serial Number', 'trim');
+   $this->form_validation->set_rules('expiration_date', 'Expiration Date', 'trim|required');
+   $this->form_validation->set_rules('type', 'Type', 'trim|required');
 
 
    if($this->form_validation->run() == FALSE)
@@ -61,7 +65,7 @@ class EditVaccinationName extends CI_Controller {
      $this->load->template('editvaccinationname_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->edit_vaccination_name($this->input->post('id'),$this->input->post('name'));
+     $this->edit_vaccination_name($this->input->post('id'),$this->input->post('name'),$this->input->post('brand_name'),$this->input->post('serial_number'),$this->input->post('expiration_date'),$this->input->post('type'));
      $this->session->set_flashdata('results', 'Vaccination succesfully modified!');
      redirect('/displayvaccinations', 'refresh');
    }else{
@@ -71,9 +75,10 @@ class EditVaccinationName extends CI_Controller {
  
  }
 
- function edit_vaccination_name($id,$name){
+ function edit_vaccination_name($id,$name,$brand_name,$serial_number,$expiration_date,$type){
+    $date_converted = date('Y-m-d', strtotime($expiration_date));
 
-    $result = $this->vaccination->editVaccinationName($id,$name);
+    $result = $this->vaccination->editVaccinationName($id,$name,$brand_name,$serial_number,$date_converted,$type);
 
     if($result){
       return TRUE;

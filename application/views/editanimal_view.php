@@ -474,9 +474,8 @@ if(!empty($vaccinations)){
     <thead>
       <tr>
         <th>Name</th>
-        <th>Serial</th>
-        <th>Date Given</th>
         <th>Date Due</th>
+        <th>Date Given</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -485,10 +484,14 @@ if(!empty($vaccinations)){
   foreach($vaccinations as $vaccination) { ?>
   <tr>
     <td><?=$vaccination['name']?></td>
-    <td><?=$vaccination['serial_num']?></td>
     <td><?php $timestamp = strtotime($vaccination['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
     <td><?php if($vaccination['date_completed'] != null){$timestamp = strtotime($vaccination['date_completed']);$dmy = date("m/d/Y", $timestamp);echo $dmy;}?></td>
     <td><a href="<?php echo site_url('editvaccination').'/'.$animal[0]['chart_num'] .'/'.$vaccination['id']?>">Edit</a></td>
+  </tr>
+    <tr>
+      <?php if($vaccination['notes'] != null && $vaccination['notes'] != ""){?>
+        <td colspan="4">Notes:<?=$vaccination['notes']?></td>
+      <?php } ?>
   </tr>
   <?php }
   ?>

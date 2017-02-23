@@ -29,6 +29,11 @@ class AddVaccinationName extends CI_Controller {
     }
    
    $this->form_validation->set_rules('name', 'Name', 'trim|required');
+   $this->form_validation->set_rules('brand_name', 'Name', 'trim');
+   $this->form_validation->set_rules('serial_number', 'Serial Number', 'trim');
+   $this->form_validation->set_rules('expiration_date', 'Expiration Date', 'trim|required');
+   $this->form_validation->set_rules('type', 'Type', 'trim|required');
+
 
    if($this->form_validation->run() == FALSE)
    {
@@ -36,7 +41,7 @@ class AddVaccinationName extends CI_Controller {
      $this->load->template('addvaccinationname_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->add_vaccination_name($this->input->post('name'));
+     $this->add_vaccination_name($this->input->post('name'),$this->input->post('brand_name'),$this->input->post('serial_number'),$this->input->post('expiration_date'),$this->input->post('type'));
      $this->session->set_flashdata('results', 'Vaccination succesfully added!');
      redirect('/displayvaccinations', 'refresh');
    }else{
@@ -46,9 +51,9 @@ class AddVaccinationName extends CI_Controller {
 
  }
 
- function add_vaccination_name($name){
-
-    $result = $this->vaccination->addVaccinationName($name);
+ function add_vaccination_name($name,$brand_name,$serial_number,$expiration_date,$type){
+    $date_converted = date('Y-m-d', strtotime($expiration_date));
+    $result = $this->vaccination->addVaccinationName($name,$brand_name,$serial_number,$date_converted,$type);
 
     if($result){
       return TRUE;

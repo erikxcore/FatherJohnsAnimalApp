@@ -59,10 +59,12 @@ class EditVaccination extends CI_Controller {
    $this->form_validation->set_rules('id', 'ID', 'trim|required');
    $this->form_validation->set_rules('chart_num', 'Chart Number', 'trim|required');
    $this->form_validation->set_rules('vac_name', 'Vaccination Name', 'trim|required');
-   $this->form_validation->set_rules('serial_num', 'Serial Number', 'trim');
+   //$this->form_validation->set_rules('serial_num', 'Serial Number', 'trim');
    $this->form_validation->set_rules('date_given', 'Date Given', 'trim|required');
    $this->form_validation->set_rules('date_completed', 'Date Completed', 'trim');
-
+   $this->form_validation->set_rules('vac_notes', 'Vaccination Notes', 'trim');
+   $this->form_validation->set_rules('vac_source', 'Vaccination Source', 'trim');
+   $this->form_validation->set_rules('vac_series', 'Vaccination Series', 'trim');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -70,7 +72,7 @@ class EditVaccination extends CI_Controller {
      $this->load->template('editvaccination_view', $data);
    }else if($this->form_validation->run() == TRUE)
    {
-     $this->edit_vaccination($this->input->post('id'),$this->input->post('vac_name'),$this->input->post('date_given'),$this->input->post('date_completed'),$this->input->post('chart_num'),$this->input->post('serial_num'));
+     $this->edit_vaccination($this->input->post('id'),$this->input->post('vac_name'),$this->input->post('date_given'),$this->input->post('date_completed'),$this->input->post('chart_num'),$this->input->post('vac_notes'),$this->input->post('vac_source'),$this->input->post('vac_series'));
      $this->session->set_flashdata('results', 'Vaccination succesfully modified!');
      redirect('/editanimal/'.$chart_num, 'refresh');
    }else{
@@ -81,7 +83,7 @@ class EditVaccination extends CI_Controller {
 
  }
 
- function edit_vaccination($id,$name,$date_given,$date_completed,$chart_num,$serial_num){
+ function edit_vaccination($id,$name,$date_given,$date_completed,$chart_num,$notes,$source,$series){
     $session_data = $this->session->userdata('logged_in');
 
 
@@ -92,12 +94,43 @@ class EditVaccination extends CI_Controller {
     $date_converted2 = date('Y-m-d', strtotime($date_completed));
     }
 
-    $result = $this->vaccination->editVaccination($id,$date_converted1,$date_converted2,$name,$serial_num);
+    $result = $this->vaccination->editVaccination($id,$date_converted1,$date_converted2,$name,$notes,$source,$series);
 
-    $entry = "Vaccination " . $name . " / Serial Number : " . $serial_num . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . "<br/> by " . $session_data['username'] . "</br>";
+    $entry = "Vaccination " . " for " . $chart_num . ' has been updated on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date completed is now ' . $date_converted2 . "<br/> by " . $session_data['username'] . "</br>";
+
 
     if($result){
       $this->vaccination_history->addVaccinationHistory($chart_num,$entry);
+          if($date_completed != null && $date_completed != ""){
+        if($series != null && $series != ""){
+            $series_json = json_decode($series,true);
+            if($series_json != null){
+              //var_dump($series_json);
+
+              foreach($series_json as $json){
+                var_dump($json);
+              $iterator = $json[0]['iterator'];
+              $amount = $json[0]['amount'];
+
+              if($iterator == "days"){
+                $day = $amount * 1;
+                $date_converted2 = date('Y-m-d', strtotime($date_completed . ' + ' . $day . ' days'));
+              }else if($iterator == "weeks"){
+                $day = $amount * 7;
+                $date_converted2 = date('Y-m-d', strtotime($date_completed . ' + ' . $day . ' days'));
+              }else if($iterator == "months"){
+                $day = $amount * 30;
+                $date_converted2 = date('Y-m-d', strtotime($date_completed . ' + ' . $day . ' days'));
+              }else if($iterator == "years"){
+                $day = $amount * 365;
+                $date_converted2 = date('Y-m-d', strtotime($date_completed . ' + ' . $day . ' days'));
+              }
+              //var_dump($date_converted2);
+                $this->vaccination->addVaccination($chart_num,$date_converted2,null,$name,$notes,$source,$series);
+              }
+            }
+        }
+    }
       return TRUE;
     }else{
       $this->session->set_flashdata('results', 'There was a problem editing the animal\'s vaccination.');
