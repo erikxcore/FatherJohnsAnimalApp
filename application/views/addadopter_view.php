@@ -43,6 +43,17 @@
            <input type="text" size="20" id="license" name="license" class="form-control" value="<?php echo set_value('license'); ?>"/>
       </div>
 
+      <div class="checkbox">
+          <label>
+            <input value="true" type="checkbox" name="blacklisted" id="blacklisted"> Blacklisted?
+          </label>
+      </div>
+
+      <div class="form-group">
+           <label for="notes">Notes:</label>
+           <textarea rows="5" size="100" id="notes" name="notes"  class="form-control"></textarea>
+      </div>
+
      <input class="btn btn-success" type="submit" value="Add Adopter"/>
    </form>
 

@@ -50,9 +50,10 @@ class EditAnimal extends CI_Controller {
     $data['statuses'] = $this->animal->getAllStatus();
     $data['genders'] = $this->animal->getAllGenders();
     $data['runs'] = $this->animal->getAllRuns();
-    $data['adopters'] = $this->adopter->getAllAdopters();
+    $data['adopters'] = $this->adopter->getAcceptableAdopters();
     $data['document_count'] = $this->document->record_count_documents($chart_num);
-    
+    $data['adopter_history'] = $this->adopter->getAdopterHistory($chart_num);
+
     $this->load->library('form_validation');
 
 

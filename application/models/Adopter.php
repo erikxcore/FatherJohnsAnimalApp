@@ -32,7 +32,7 @@ Class Adopter extends CI_Model
 
 
 
- function addAdopter($name,$phone,$address,$email,$city,$license){
+ function addAdopter($name,$phone,$address,$email,$city,$license,$blacklisted,$notes){
 
    $data = array(
     'name' => $name,
@@ -40,7 +40,9 @@ Class Adopter extends CI_Model
     'address' => $address,
     'email' => $email,
     'city' => $city,
-    'license' => $license
+    'license' => $license,
+    'is_blacklisted' => $blacklisted,
+    'notes' => $notes
     ); 
 
     return $this -> db ->insert('adopter', $data);
@@ -53,14 +55,16 @@ Class Adopter extends CI_Model
    return $query->result_array();
  }
 
- function editAdopter($id,$name,$phone,$address,$email,$city,$license){
+ function editAdopter($id,$name,$phone,$address,$email,$city,$license,$blacklisted,$notes){
    $data = array(
     'name' => $name,
     'phone' => $phone,
     'address' => $address,
     'email' => $email,
     'city' => $city,
-    'license' => $license
+    'license' => $license,
+    'is_blacklisted' => $blacklisted,
+    'notes' => $notes
     ); 
 
     $this -> db -> from('adopter');
@@ -73,6 +77,13 @@ Class Adopter extends CI_Model
    $query = $this -> db -> get();
    return $query->result_array();
  }
+
+ function getAcceptableAdopters(){
+   $this -> db -> from('adopter');
+   $this -> db -> where('is_blacklisted != 1');
+   $query = $this -> db -> get();
+   return $query->result_array();
+ } 
 
  function getAdopterByName($name){
    $this -> db -> from('adopter');
@@ -134,15 +145,53 @@ Class Adopter extends CI_Model
     return $this->db->update('adopter' ,$data);
  }
 
+ function addAdopterHistory($id,$chart_num,$status,$date_assigned){
+   $data = array(
+    'chart_num' => $chart_num,
+    'adopter_id' => $id,
+    'status' => $status,
+    'date_assigned' => $date_assigned
+    ); 
+   // $this -> db -> from('adopter_history');
+   // $this -> db -> where('id', $id);
+   if(!empty($id)){
+    return $this->db->insert('adopter_history' ,$data);
+    }
+ }
+
+ function getAdopterHistory($chart_num){
+  /*
+   $data = array(
+    'chart_num' => $chart_num,
+    ); 
+    $this -> db -> from('adopter_history');
+    $this -> db -> where('chart_num', $chart_num);
+    return $this->db->update('adopter_history' ,$data);
+  */
+   $query =    $this->db->query('SELECT adopter.name,adopter.id,adopter_history.adopter_id,adopter_history.chart_num,adopter_history.status,adopter_history.date_assigned FROM adopter JOIN adopter_history ON adopter.id = adopter_history.adopter_id WHERE adopter_history.chart_num = "'.$chart_num.'"');
+
+   return $query->result_array();
+
+ }
+
+/*
+ function updateAdopterHistory($id,$chart_num,$status){
+
+ }
+*/
+
 //Remove the incoming chart number from the array on the incoming ID
 //If somehow the adoptee doesn't have the assigned chart number do nothing since that call is erroneous
  function removeAssignedAdopter($id,$chart_num){
+
    $adopter_result = $this->adopter->getAdopterById($id);
 
    if(isset($adopter_result[0]['chart_num'])){
     $chart_array = unserialize($adopter_result[0]['chart_num']);  
     if(in_array($chart_num,$chart_array)){
       $chart_array = array_diff($chart_array, array($chart_num));
+      $chart_array = serialize($chart_array);
+    }else{
       $chart_array = serialize($chart_array);
     }
   }

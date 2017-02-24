@@ -11,6 +11,8 @@ if($status == "Adopted"){
 if(!empty($adopter)){
   $this->load->model('adopter','',TRUE);
   $this -> adopter -> assignAdopter($adopter,$chart_num);
+  $date_assigned =  date("Y-m-d");
+  $this -> adopter -> addAdopterHistory($adopter,$chart_num,$date_assigned);
 }else{
   $adopter = null;
 }
@@ -47,6 +49,11 @@ function edit($name,$chart_num,$run_num,$species,$breed,$date_of_arrival,$acquir
 //request by garret
 if($status == "Adopted"){
   $run_num = "";
+    if(!empty($adopter)){
+
+      $date_assigned =  date("Y-m-d");
+      $this -> adopter -> addAdopterHistory($adopter,$chart_num,$status,$date_assigned);
+    }
 }
 
 $this -> db -> where('chart_num', $chart_num);
@@ -60,12 +67,20 @@ if(!empty($saved_adopter)){
   //Check if the incoming information matches, if so don't remove or add.
   //If no match, remove the chart number from the past adopter and assign the new adopter
   if($saved_adopter != $adopter){
+    //var_dump($chart_num);
     $this-> adopter -> removeAssignedAdopter($saved_adopter,$chart_num);
     $this-> adopter -> assignAdopter($adopter,$chart_num);
+
+    $date_assigned =  date("Y-m-d");
+    $this -> adopter -> addAdopterHistory($adopter,$chart_num,$status,$date_assigned);
   }
 }else if(!empty($adopter) && empty($saved_adopter)){ 
   //If animal had no adopter and incoming data has a value assign
-  $this-> adopter -> assignAdopter($adopter,$chart_num);
+    $this-> adopter -> assignAdopter($adopter,$chart_num);
+
+    $date_assigned =  date("Y-m-d");
+
+    $this -> adopter -> addAdopterHistory($adopter,$chart_num,$status,$date_assigned);
 }else if(empty($adopter) && !empty($saved_adopter)){
   //If incoming data has no adopter but animal had one, remove
   $this-> adopter -> removeAssignedAdopter($saved_adopter,$chart_num);
@@ -244,21 +259,21 @@ function get_all_animals_paged($limit, $start) {
  }
 
    function getOverdueVaccinationRequiredAll(){
-     $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND animals.status != "Adopted"');
+     $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND vaccination.date_given < CURRENT_DATE AND animals.status != "Adopted"');
       //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();  
    }
 
    function getOverdueVaccinationRequiredCats(){
-   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND animals.status != "Adopted" AND animals.species = "Cat"');
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND vaccination.date_given < CURRENT_DATE AND animals.status != "Adopted" AND animals.species = "Cat"');
       //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();
    }
 
    function getOverdueVaccinationRequiredDogs(){
-   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND animals.status != "Adopted" AND animals.species = "Dog"');
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,vaccination.name as vaccination_name,vaccination.date_completed,vaccination.date_given FROM animals JOIN vaccination ON vaccination.chart_num = animals.chart_num WHERE vaccination.date_completed IS NULL AND vaccination.date_given < CURRENT_DATE AND animals.status != "Adopted" AND animals.species = "Dog"');
    //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
    //may be better to display all vacations for an animal however
    return $query->result_array();

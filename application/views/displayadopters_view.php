@@ -22,10 +22,13 @@
           <tbody>
           <?php
             foreach($alladopters as $adopter) { ?>
-            <tr>
+            <tr <?php if($adopter['is_blacklisted'] == 1) { ?> style="background-color:red;" <?php } ?> >
               <td>
             <?=$adopter['id']?>
               </td>
+
+              <td><?=$adopter['is_blacklisted']?></td>
+
             <td>
             <?=$adopter['name']?>
               </td>

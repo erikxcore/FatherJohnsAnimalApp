@@ -22,7 +22,7 @@ class AddAnimal extends CI_Controller {
     $data['statuses'] = $this->animal->getAllStatus();
     $data['genders'] = $this->animal->getAllGenders();
     $data['runs'] = $this->animal->getAllRuns();
-    $data['adopters'] = $this->adopter->getAllAdopters();
+    $data['adopters'] = $this->adopter->getAcceptableAdopters();
 
    if($this->session->userdata('logged_in'))
    {

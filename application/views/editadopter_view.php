@@ -63,6 +63,17 @@ $(function() {
            <input type="text" size="20" id="license" name="license" class="form-control" value="<?=$adopter[0]['license']?>"/>
       </div>
       
+      <div class="checkbox">
+          <label>
+            <input <?php if($adopter[0]['is_blacklisted'] == 1 ) { ?> checked <?php } ?> value="true" type="checkbox" name="blacklisted" id="blacklisted"> Blacklisted?
+          </label>
+      </div>
+
+      <div class="form-group">
+           <label for="notes">Notes:</label>
+           <textarea rows="5" size="100" id="notes" name="notes"  class="form-control"><?=$adopter[0]['notes']?></textarea>
+      </div>
+
       <?php if(!empty($adopter[0]['chart_num'])) { ?>
         <p>Assigned Animals:</p>
       <?php

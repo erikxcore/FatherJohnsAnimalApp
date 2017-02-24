@@ -68,6 +68,20 @@
                 <?php } ?>
         </div>
 
+        <?php
+        if(!empty($adopter_history)){ ?>
+          <h4>Previous Adopter(s):</h4>
+          <ul>
+          <?php
+            foreach($adopter_history as $adopter){
+          ?>
+            <li><a href="<?php echo site_url('displayadopter').'/'.$adopter['adopter_id'] ?>"><?php echo $adopter['name'] . ' - ' . $adopter['status'] . ' - ' . $adopter['date_assigned'];?></a></li>
+            <?php
+              }
+            ?>
+        </ul>
+        <?php } ?>
+
         <div class="form-group">
                 <label for="status">Run Number:</label>
                 <select readonly name="run_num" id="run_num" class="form-control">

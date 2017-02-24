@@ -51,6 +51,8 @@ class AddAdopter extends CI_Controller {
      $this->form_validation->set_rules('city', 'City/Address/Zip', 'trim');
      $this->form_validation->set_rules('email', 'Email Address', 'trim');
      $this->form_validation->set_rules('license', 'Driver License Number', 'trim');
+     $this->form_validation->set_rules('blacklisted', 'Blacklisted', 'trim');
+     $this->form_validation->set_rules('notes', 'notes', 'trim');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -59,7 +61,7 @@ class AddAdopter extends CI_Controller {
    }else if($this->form_validation->run() == TRUE)
    {
 
-     $this->add_adopter($this->input->post('name'),$this->input->post('phone'),$this->input->post('address'),$this->input->post('email'),$this->input->post('city'),$this->input->post('license'));
+     $this->add_adopter($this->input->post('name'),$this->input->post('phone'),$this->input->post('address'),$this->input->post('email'),$this->input->post('city'),$this->input->post('license'),$this->input->post('blacklisted'),$this->input->post('notes'));
      $this->session->set_flashdata('results', 'Adopter succesfully added!');
 
      redirect('/displayadopters/', 'refresh');
@@ -70,14 +72,20 @@ class AddAdopter extends CI_Controller {
 
  }
 
- function add_adopter($name,$phone,$address,$email,$city,$license){
+ function add_adopter($name,$phone,$address,$email,$city,$license,$blacklisted,$notes){
+    if($blacklisted == "true"){
+      $blacklisted = true;
+    }else{
+      $blacklisted = false;
+    }
+
     $sd = $this->session->userdata('logged_in');
     $user= $sd['username'];
     $date = date('Y-m-d');
     
     $license = $this->encrypt->encode($license);
 
-    $result = $this->adopter->addAdopter($name,$phone,$address,$email,$city,$license);
+    $result = $this->adopter->addAdopter($name,$phone,$address,$email,$city,$license,$blacklisted,$notes);
 
   if($result){
       $this->history->addHistoryEntry($user,$date,"Added a new adopter : " . $name);

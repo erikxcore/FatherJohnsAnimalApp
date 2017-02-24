@@ -52,7 +52,7 @@ class DisplayAnimal extends CI_Controller {
     $data['runs'] = $this->animal->getAllRuns();
     $data['adopters'] = $this->adopter->getAllAdopters();
     $data['document_count'] = $this->document->record_count_documents($chart_num);
-
+    $data['adopter_history'] = $this->adopter->getAdopterHistory($chart_num);
 
    if($this->session->userdata('logged_in'))
    {
