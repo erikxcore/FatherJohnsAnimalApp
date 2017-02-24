@@ -50,7 +50,7 @@
 
         <div class="form-group">
              <label for="date_due">Date Completed:</label>
-             <input value="<?php $timestamp = strtotime($medication[0]['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?>" type="text" size="20" id="date_due" name="date_due" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
+             <input value="<?php if($medication[0]['date_due'] != null){$timestamp = strtotime($medication[0]['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;}?>" type="text" size="20" id="date_due" name="date_due" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
         </div>
 
      <input class="btn btn-success" type="submit" value="Edit Medication"/>

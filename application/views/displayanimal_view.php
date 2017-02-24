@@ -323,7 +323,7 @@ if(!empty($medications)){
   <tr>
     <td><?=$medication['name']?></td>
     <td><?php $timestamp = strtotime($medication['date_given']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
-    <td><?php $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;?></td>
+    <td><?php if($medication['date_due'] != null) { $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy; }?></td>
     <td><?=$medication['dose']?></td>
     <td><?=$medication['duration']?></td>
   </tr>

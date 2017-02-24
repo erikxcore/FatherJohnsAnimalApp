@@ -500,9 +500,13 @@ function getmedicalinfo($chart_num){
                   $timestamp = strtotime($medication['date_given']);
                   $dmy = date("m/d/Y", $timestamp);
                   $html .= "<tr><td>". $dmy . "</td>";
+                  if($medication['date_due'] != null){
                   $timestamp2 = strtotime($medication['date_due']);
                   $dmy2 = date("m/d/Y", $timestamp2);
                   $html .= "<td>". $dmy2 . "</td>";
+                  }else{
+                   $html .= "<td></td>"; 
+                  }
                   $html .= "<td>" . $medication['name'];
                   if(isset($medication['notes'])){
                     $html .= " - " . $medication['notes'];

@@ -53,8 +53,8 @@ class AddMedication extends CI_Controller {
      
    $this->form_validation->set_rules('chart_num', 'Chart Number', 'trim|required');
    $this->form_validation->set_rules('med_name', 'Medication Name', 'trim|required');
-   $this->form_validation->set_rules('date_given', 'Date Given', 'trim|required');
-   $this->form_validation->set_rules('date_due', 'Date Due', 'trim|required');
+   $this->form_validation->set_rules('date_given', 'Date Started', 'trim|required');
+   $this->form_validation->set_rules('date_due', 'Date Completed', 'trim');
    $this->form_validation->set_rules('med_notes', 'Medication Notes', 'trim');
    $this->form_validation->set_rules('med_duration', 'Duration', 'trim');
    $this->form_validation->set_rules('med_dose', 'Dose', 'trim');
@@ -81,7 +81,13 @@ class AddMedication extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
 
     $date_converted1 = date('Y-m-d', strtotime($date_given));
-    $date_converted2 = date('Y-m-d', strtotime($date_due));
+
+    if($date_due == null ){
+      $date_converted2 = null;
+    }else{
+      $date_converted2 = date('Y-m-d', strtotime($date_due));
+    }
+
     $result = $this->medication->addMedication($chart_num,$date_converted1,$date_converted2,$name,$notes,$duration,$dose);
     
         $entry = "Medication " . $name . " for " . $chart_num . ' has been added on ' . date('Y-m-d') . '. Date given is now ' . $date_converted1 . '. Date due is now ' . $date_converted2 . '<br/> Dose is now ' . $dose . '<br/> Duration is now ' . $duration . '<br/>'. ' by ' . $session_data['username'];
