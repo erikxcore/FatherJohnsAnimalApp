@@ -444,6 +444,7 @@ if(!empty($medications)){
         <th>Date Completed</th>
         <th>Dose</th>
         <th>Duration</th>
+        <th>Given?</th>
         <th>&nbsp;</th>
       </tr>
     </thead>
@@ -456,6 +457,7 @@ if(!empty($medications)){
     <td><?php if($medication['date_due'] != null){ $timestamp = strtotime($medication['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy; }?></td>
     <td><?=$medication['dose']?></td>
     <td><?=$medication['duration']?></td>
+    <td><?php if($medication['given'] != 1){ echo "No"; }else{ echo "Yes"; } ?></td>
     <td><a href="<?php echo site_url('editmedication').'/'.$animal[0]['chart_num'] .'/'.$medication['id']?>">Edit</a></td>
   </tr>
   <tr>

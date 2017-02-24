@@ -53,6 +53,13 @@
              <input value="<?php if($medication[0]['date_due'] != null){$timestamp = strtotime($medication[0]['date_due']);$dmy = date("m/d/Y", $timestamp);echo $dmy;}?>" type="text" size="20" id="date_due" name="date_due" class="datepicker form-control" data-date-format="mm/dd/yyyy"/>
         </div>
 
+      <div class="checkbox">
+          <label>
+            <input  <?php if($medication[0]['given'] == 1 ) { ?> checked <?php } ?> value="true" type="checkbox" name="given" id="given"> Given to Animal?
+          </label>
+      </div>
+
+
      <input class="btn btn-success" type="submit" value="Edit Medication"/>
    </form>
 

@@ -44,6 +44,7 @@
                 <option value="">N/A</option>
                 <option <?php if(strtolower($vaccination[0]['type']) == strtolower("injection")){?> selected="selected" <?php } ?> value="Injection">Injection</option>
                 <option <?php if(strtolower($vaccination[0]['type']) == strtolower("nasal")){?> selected="selected" <?php } ?> value="Nasal">Nasal</option>
+               <option <?php if(strtolower($vaccination[0]['type']) == strtolower("oral")){?> selected="selected" <?php } ?> value="Oral">Oral</option>
               </select> 
       </div>
 

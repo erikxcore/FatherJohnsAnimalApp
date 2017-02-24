@@ -30,8 +30,7 @@ class DailyDogMedication extends CI_Controller {
  	$date = $this->input->get('date'); 
 
     $data['allmedications'] = $this->medication->getAllDogMedicationByDate($date);
-    //$data['overduemedications'] = $this->animal->getOverdueMedicationRequiredAll();
-    $data['overduemedications'] = null;
+    $data['overduemedications'] = $this->medication->getOverdueMedicationDogs();
 
      if($this->session->userdata('logged_in'))
    {

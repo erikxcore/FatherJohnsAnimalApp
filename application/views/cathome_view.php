@@ -73,7 +73,7 @@ $("#search_date_2").on('changeDate', function (ev) {
 
           <div style="width:100%;float:right;clear:both;">
             <div class="form-group">
-                 <a href="#" class="date_search_2">Search for medications on a specific date</a>
+                 <a href="#" class="date_search_2">Search for medications due on a specific date</a>
                  <input style="height:0px;width:0px;float:left;display:inline;background:transparent;"value="" type="text" size="20" id="search_date_2" name="search_date_2" class="datepicker form-control" data-date-format="yyyy-mm-dd"/>
             </div>
           </div> 
