@@ -228,6 +228,28 @@ function get_all_animals_paged($limit, $start) {
    return $query->result_array();
  }
 
+ function getLastAddedDogAnimals(){
+   $this -> db -> from('animals');
+   $this -> db ->limit('5');
+   $this -> db ->order_by('id', 'DESC');
+   $this -> db -> where('species', "Dog");
+   $query = $this -> db -> get();
+   return $query->result_array();
+ }
+
+
+ function getLastAddedCatAnimals(){
+   $this -> db -> from('animals');
+   $this -> db ->limit('5');
+   $this -> db ->order_by('id', 'DESC');
+   $this -> db -> where('species', "Cat");
+   $query = $this -> db -> get();
+   return $query->result_array();
+ }
+
+
+
+
 //no longer a requirement, not used in official capacity
   function getMedicationRequiredAnimals(){
    $query =    $this->db->query('SELECT animals.id,animals.name,animals.chart_num,medication.name as medication_name,medication.date_due FROM animals JOIN medication ON medication.chart_num = animals.chart_num WHERE medication.date_due < CURRENT_DATE + INTERVAL 1 DAY AND medication.date_due > CURRENT_DATE - INTERVAL 1 DAY ');

@@ -19,12 +19,12 @@ $("#search_date_2").datepicker().attr("readonly", "readonly");
 
 $("#search_date").on('changeDate', function (ev) { 
         var date = $(this).val();
-        window.location.href = "<?php echo site_url() ?>dailyvaccination?date="+date;
+        window.location.href = "<?php echo site_url() ?>dailycatvaccination?date="+date;
 });
 
 $("#search_date_2").on('changeDate', function (ev) { 
         var date = $(this).val();
-        window.location.href = "<?php echo site_url() ?>dailymedication?date="+date;
+        window.location.href = "<?php echo site_url() ?>dailycatmedication?date="+date;
 });
 
 });
@@ -33,7 +33,7 @@ $("#search_date_2").on('changeDate', function (ev) {
  
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
-         <h1>Home</h1>
+         <h1>Cat Home</h1>
          <h2>Welcome <?php echo $username; ?>!</h2>
     </div>
 
@@ -79,34 +79,9 @@ $("#search_date_2").on('changeDate', function (ev) {
           </div> 
 
         <div class="full_width" style="width:100%;float:left;clear:both;">
-              <div class="dog_vac" style="width:50%;float:left;">
-              <?php if( !empty($overduevaccinationsDogs) ){ ?>
-              <p style="font-weight:bold;color:red;font-size: 18px;">Overdue Dog Vaccinations Due</p> 
-              <?php }
-              foreach($overduevaccinationsDogs as $animal) { ?>
-              <p style="width:100%;">
-              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_given']?></br>
-              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
-              </p>
-            <?php
-              } ?>
 
 
-              <?php if( !empty($emergencyvaccinationdogs) ){ ?>
-              <p style="font-weight:bold;font-size: 18px;">Dog Vaccinations Due</p> 
-              <?php }
-              foreach($emergencyvaccinationdogs as $animal) { ?>
-              <p style="width:100%;">
-              <?=$animal['name']?> - <?=$animal['chart_num']?><br/>
-              Vaccination <?=$animal['vaccination_name']?> due on <?=$animal['date_given']?></br>
-              <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a>
-              </p>
-            <?php
-              } ?>
-              </div>
-
-              <div class="cat_vac" style="width:50%;float:right;">
+              <div class="cat_vac" style="width:50%;float:left;">
               <?php if( !empty($overduevaccinationsCats) ){ ?>
               <p style="font-weight:bold;color:red;font-size: 18px;">Overdue Cat Vaccinations Due</p>
               <?php }
@@ -136,7 +111,7 @@ $("#search_date_2").on('changeDate', function (ev) {
 
         <div class="table-responsive" style="clear:both;">  
         <table class="table table-striped">
-          <caption>Latest Additions</caption>
+          <caption>Latest Cat Additions</caption>
           <thead>
             <tr>
               <th>Name</th>
@@ -184,61 +159,6 @@ $("#search_date_2").on('changeDate', function (ev) {
         </table>
       </div>
 
-        <?php if(isset($custom_homepage_details)) {
-        $json = json_decode($custom_homepage_json[0]['sections_json'],true);
-        $i = 1;
-        $current_section_count = 1;
-        while( $i <= $custom_homepage_sections[0]['sections'] ){
-        ?>
-        <div class="custom_homepage_table_wrap">
-        <table class="custom_homepage_table section_<?=$i?>">
-          <?php   
-          foreach( $json['sections'] as $section ){
-            if( $section['section_id'] == $i ){
-              for($z = 1; $z <= $section['section_total_rows'] ; $z++ ){
-          ?>
-              <tr class="custom_homepage_row">
-                  <?php
-                  foreach( $runs as $run) {
-                    if($run['order_num'] == $current_section_count){
-                  ?>
-                  <td class="custom_homepage_cell">
-                  <span style="width:100%;display:block;background-color: #d2d2d2;color: black;font-weight: bold;text-transform: uppercase;padding: 5px;"> <?= $run['name']?></span>
-                  <?php
-                    foreach($allanimals as $animal){
-                      if($animal['run_num'] == $run['id']){
-                  ?>   
-                      <div style="<?php foreach($colorandstatus as $color){if($run['id'] == $color['animal_run_num'] && $animal['chart_num'] == $color['animal_chart_num']){ echo 'background-color:'.$color['color'].';color:white;'; }}?>">
-                        <span><?=$animal['name']?> - <a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a></span>
-                        <br/>
-                        <span>Status : <?=$animal['status']?></span>
-                        <br/>
-                        <span>Chart Number : <?=$animal['chart_num']?></span>
-                      </div>
-                  <?php
-                      }
-                    }
-
-                  ?>
-                  </td>
-                  <?php
-                      }
-                    }
-                  ?>
-              </tr>
-          <?php
-          $current_section_count++;
-                }
-              }
-            }
-          ?>
-        </table>
-      </div>
-        <?php
-        $i++;
-        }
-      }
-        ?>
        
         <!-- Cat/Other Run Addition -->
         <?php if(isset($custom_homepage_details)) { ?>

@@ -4,7 +4,7 @@
         <h1>Vaccinations due on <?php echo $date ?></h1>
     </div>
       <div class="well">
-      <a href="<?=site_url();?>">Go Back</a></br>
+      <a href="javascript:history.back();">Go Back</a></br>
       <a style="float:right;" href="#" onclick="window.print();">Print</a></br>
 
         <div class="full_width" style="width:100%;float:left;clear:both;">

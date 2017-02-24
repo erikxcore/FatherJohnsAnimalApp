@@ -15,6 +15,17 @@ Class Medication extends CI_Model
    return $query->result_array();
  }
 
+   function getAllDogMedicationByDate($date){
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,medication.name as medication_name,medication.date_due,medication.date_given FROM animals JOIN medication ON medication.chart_num = animals.chart_num WHERE medication.date_due = "'.$date.'" AND animals.status != "Adopted" AND animals.species = "Dog"');   //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();
+ }
+
+    function getAllCatMedicationByDate($date){
+   $query =    $this->db->query('SELECT animals.id,animals.species,animals.name,animals.chart_num,animals.status,medication.name as medication_name,medication.date_due,medication.date_given FROM animals JOIN medication ON medication.chart_num = animals.chart_num WHERE medication.date_due = "'.$date.'" AND animals.status != "Adopted" AND animals.species = "Cat"');   //improve to return only the unique row instead of repeat rows if an animal has multiple vaccinations due
+   //may be better to display all vacations for an animal however
+   return $query->result_array();
+ }
  function get_all_medication_paged($limit, $start, $chart_num) {
     $this -> db ->limit($limit, $start);
     $this -> db -> from('medication');
