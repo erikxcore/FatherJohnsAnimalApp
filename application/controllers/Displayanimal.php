@@ -370,16 +370,16 @@ function getcompleteinfo($chart_num){
                   }
                   foreach($vaccination_names as $vac_info){
                     if($vaccination['name'] == $vac_info['name']){
-                        if(isset($vac_info['serial_num'])){
+                        if(isset($vac_info['serial_num']) && $vac_info['serial_num'] != null && $vac_info['serial_num'] != ""){
                         $html .= " - Serial Number - " . $vac_info['serial_num'];
                         }
-                        if(isset($vac_info['brand_name'])){
+                        if(isset($vac_info['brand_name']) && $vac_info['brand_name'] != null && $vac_info['brand_name'] != ""){
                         $html .= " - Brand Name - " . $vac_info['brand_name'];
                         }
-                        if(isset($vac_info['type'])){
+                        if(isset($vac_info['type']) && $vac_info['type'] != null && $vac_info['type'] != ""){
                         $html .= " - Type - " . $vac_info['type'];
                         }
-                        if(isset($vac_info['expiration_date'])){
+                        if(isset($vac_info['expiration_date']) && $vac_info['expiration_date'] != null && $vac_info['expiration_date'] != ""){
                         $html .= " - Expiration Date - " . $vac_info['expiration_date'];
                         }
                     }

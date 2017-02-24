@@ -27,8 +27,6 @@
             <?=$adopter['id']?>
               </td>
 
-              <td><?=$adopter['is_blacklisted']?></td>
-
             <td>
             <?=$adopter['name']?>
               </td>
@@ -48,7 +46,7 @@
         </table>
    <div class="paged_links"><?php echo $links; ?></div>
 
-                <a href="<?php echo site_url('addadopter') ?>">Add an Adopter</a>
+                <a style="clear:both;display:block;"href="<?php echo site_url('addadopter') ?>">Add an Adopter</a>
 
       </div>
 
