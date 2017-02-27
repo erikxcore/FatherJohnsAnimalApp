@@ -12,7 +12,7 @@ if(!empty($adopter)){
   $this->load->model('adopter','',TRUE);
   $this -> adopter -> assignAdopter($adopter,$chart_num);
   $date_assigned =  date("Y-m-d");
-  $this -> adopter -> addAdopterHistory($adopter,$chart_num,$date_assigned);
+  $this -> adopter -> addAdopterHistory($adopter,$chart_num,$status,$date_assigned);
 }else{
   $adopter = null;
 }
@@ -142,6 +142,17 @@ $data = array(
     return $this->db->update('animals' ,$data);
 }
 
+function change_animal_run($chart_num,$run_num,$user,$user_date){
+  $data = array(
+    'run_num' => $run_num,
+    'user' => $user,
+    'user_date' => $user_date,
+  );
+
+    $this -> db -> from('animals');
+    $this -> db -> where('chart_num', $chart_num);
+    return $this->db->update('animals' ,$data);
+}
 
 
 function remove_image($chart_num){

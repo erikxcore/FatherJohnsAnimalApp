@@ -27,13 +27,126 @@ $("#search_date_2").on('changeDate', function (ev) {
         window.location.href = "<?php echo site_url() ?>dailycatmedication?date="+date;
 });
 
+    $('.drag').draggable ({
+        cursor: "move",
+        appendTo: ".custom_homepage_cell",
+        revert: "invalid",
+        opacity: 0.5
+    });
+
+    $('.drop').droppable({
+        accept: ".drag",
+        tolerance: "pointer",
+        snap: ".drop",
+        drop: function (event, ui) {
+            $(this).append(ui.draggable);
+            ui.draggable.css({top:0, left:0});
+            //$(this).css("background-color", "#DEDEDE");
+
+            block_runs();
+
+            var run_num = ui.draggable.parents('.table').find('.run_num').val();
+            var chart_num = $.trim(ui.draggable.find('.chart_num').text());
+
+            var new_run = new Object();
+            new_run.run_num = run_num;
+            new_run.chart_num = chart_num;
+
+            var data = JSON.stringify(new_run);
+
+            console.log(data);
+            
+            $.ajax({
+            url: "<?php echo site_url('cathome')?>/change_run/",
+            type: 'POST',
+            data        : {'data': data},
+            dataType:'JSON',
+            success: function (data,response) {
+              //alert(response.status);
+              //console.log(data);
+              $('.replaceable').html(data.RunHtml);
+              re_init();
+              unblock_runs();
+            },
+            error: function (error) {
+              console.log(error);
+              alert("error");
+              unblock_runs();
+            }
+
+            });
+
+        }
+    });
+
 });
+
+    function re_init(){
+      $('.drag').draggable ({
+          cursor: "move",
+          appendTo: ".custom_homepage_cell",
+          revert: "invalid",
+          opacity: 0.5
+      });
+
+      $('.drop').droppable({
+          accept: ".drag",
+          tolerance: "pointer",
+          snap: ".drop",
+          drop: function (event, ui) {
+              $(this).append(ui.draggable);
+              ui.draggable.css({top:0, left:0});
+              //$(this).css("background-color", "#DEDEDE");
+
+              block_runs();
+
+              var run_num = ui.draggable.parents('.table').find('.run_num').val();
+              var chart_num = $.trim(ui.draggable.find('.chart_num').text());
+
+              var new_run = new Object();
+                new_run.run_num = run_num;
+                new_run.chart_num = chart_num;
+              var data = JSON.stringify(new_run);
+
+              console.log(data);
+
+              $.ajax({
+              url: "<?php echo site_url('cathome')?>/change_run/",
+              type: 'POST',
+              data        : {'data': data},
+              dataType:'JSON',
+              success: function (data,response) {
+                //alert(response.status);
+                //console.log(data);
+                $('.replaceable').html(data.RunHtml);
+                re_init();
+                unblock_runs();
+              },
+              error: function (error) {
+                //console.log(error);
+                //alert("error");
+                unblock_runs();
+              }
+
+              });
+
+          }
+      });
+    }
+
+    function block_runs(){
+      jQuery(".run_overlay").fadeIn();
+    }
+
+    function unblock_runs(){
+      jQuery(".run_overlay").fadeOut();
+    }
 
 </script>
  
     <div class="container theme-showcase" role="main">
       <div class="jumbotron">
-         <h1>Cat Home</h1>
+         <h1>Home</h1>
          <h2>Welcome <?php echo $username; ?>!</h2>
     </div>
 
@@ -161,22 +274,25 @@ $("#search_date_2").on('changeDate', function (ev) {
 
        
         <!-- Cat/Other Run Addition -->
+        <div class="replaceable">
         <?php if(isset($custom_homepage_details)) { ?>
-        <div class="other_runs">
+        <div class="other_runs" style="position:relative;">
+          <div class="run_overlay" style="display:none;position:absolute;top:0;left:0;right:0;bottom:0;background-color:rgba(0, 0, 0, 0.45);background: url(data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNUmK/OAAAAATSURBVBhXY2RgYNgHxGAAYuwDAA78AjwwRoQYAAAAAElFTkSuQmCC) repeat scroll transparent\9; /* ie fallback png background image */z-index:9999;color:white;"></div> 
           <?php
             foreach( $other_runs as $run){
           ?>
           <h4><?=$run['name']?></h4>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table drop" style="min-height:20px;">
+                <input type="hidden" class="run_num" value="<?=$run['id']?>"/>
           <?php
                 foreach($allanimals as $animal){
                   if($animal['run_num'] == $run['id']){
           ?>
-                      <tr colspan="5" style="text-align:center;">
+                      <tr class="drag" colspan="5" style="text-align:center;">
                         <td colspan="2" ><?=$animal['name']?></td>
                         <td colspan="1" style="<?php foreach($colorandstatus as $color){if($run['id'] == $color['animal_run_num'] && $animal['chart_num'] == $color['animal_chart_num']){ echo 'background-color:'.$color['color'].';color:white;'; }}?>">Status : <?=$animal['status']?></td>
-                        <td colspan="1" >Chart Number : <?=$animal['chart_num']?></td>
+                        <td colspan="1" >Chart Number : <span class="chart_num"><?=$animal['chart_num']?></span></td>
                         <td colspan="1" ><a href="<?php echo site_url('displayanimal').'/'.$animal['chart_num'] ?>">View Details</a></td>
                       </tr>
           <?php 
@@ -186,6 +302,7 @@ $("#search_date_2").on('changeDate', function (ev) {
            <?php } ?>
         </div>
         <?php } ?>
+      </div>
 
       </div>
    </div>
