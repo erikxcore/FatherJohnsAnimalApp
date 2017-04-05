@@ -56,7 +56,6 @@ $("#search_date_2").on('changeDate', function (ev) {
 
             //console.log(data);
             
-
             $.ajax({
             url: "<?php echo site_url('doghome')?>/change_run/",
             type: 'POST',
